@@ -1,0 +1,19 @@
+{
+  "name": "team-04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlburks/Team-04.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlburks/Team-04/issues"
+  },
+  "homepage": "https://github.com/jlburks/Team-04#readme"
+}
