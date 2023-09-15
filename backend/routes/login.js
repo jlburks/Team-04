@@ -27,7 +27,7 @@ Route.post("/", (req, res) => {
             { expiresIn: "1h" }
           );
           console.log(token);
-          return res.status(200).json({ login: true });
+          return res.status(200).json({ login: true, token: token });
         }
         return res
           .status(500)
