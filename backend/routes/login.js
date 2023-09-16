@@ -1,3 +1,7 @@
+require("dotenv").config();
+
+const secret = process.env.jwtSecret;
+
 const bcrypt = require("bcrypt");
 const express = require("express");
 const Route = express.Router();
@@ -23,7 +27,7 @@ Route.post("/", (req, res) => {
               user_id: user[0].id,
               role: user[0].role,
             },
-            "secret",
+            secret,
             { expiresIn: "1h" }
           );
           console.log(token);
