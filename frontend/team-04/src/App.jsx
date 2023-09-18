@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <h1>Group 4</h1>
+      <h3>We will begin working on frontend soon</h3>
     </>
   );
 }
