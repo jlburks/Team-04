@@ -7,20 +7,18 @@ const adminFunc = require("./functions/verifyAdmin");
 
 const saltRounds = 10;
 
-// add middleware to only allow admin to preform this action
 Route.post("/addUser", adminFunc.verifyAdmin, (req, res) => {
-  return res.json({ mission: "sucessful" });
-  // const { username, password, role } = req.body;
-  // bcrypt.genSalt(saltRounds, (e, salt) => {
-  //   if (e) return console.log(e);
-  //   bcrypt.hash(password, salt, function (e, hash) {
-  //     if (e) return console.log("password hash operation unsuccesful");
-  //     connection.query(
-  //       `INSERT INTO users (username,password,role) VALUES ('${username}','${hash}','${role}') `
-  //     );
-  //     res.status(201).json({ status: "new user created" });
-  //   });
-  // });
+  const { username, password, role } = req.body;
+  bcrypt.genSalt(saltRounds, (e, salt) => {
+    if (e) return console.log(e);
+    bcrypt.hash(password, salt, function (e, hash) {
+      if (e) return console.log("password hash operation unsuccesful");
+      connection.query(
+        `INSERT INTO users (username,password,role) VALUES ('${username}','${hash}','${role}') `
+      );
+      res.status(201).json({ status: "new user created" });
+    });
+  });
 });
 
 module.exports = Route;
