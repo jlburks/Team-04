@@ -14,7 +14,8 @@ const saltRounds = 10;
 Route.post("/", (req, res) => {
   const { username, password } = req.body;
   connection.query(
-    `SELECT * FROM users WHERE username = '${username}'`,
+    `SELECT * FROM users WHERE username = ?`,
+    [username],
     (e, user) => {
       if (e) {
         console.log("ERROR ", e);
