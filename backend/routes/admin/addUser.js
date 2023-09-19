@@ -3,7 +3,7 @@ const Route = express.Router();
 const bcrypt = require("bcrypt");
 
 const connection = require("../../connection");
-const adminFunc = require("./functions/verifyAdmin");
+const adminFunc = require("../functions/verifyAdmin");
 
 const saltRounds = 10;
 
