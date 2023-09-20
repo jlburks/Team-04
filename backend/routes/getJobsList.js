@@ -17,7 +17,7 @@ Route.get("/", (req, res) => {
     }
     console.log(data);
     connection.query(
-      `SELECT workHours.project_id,jobs.name,jobs.description
+      `SELECT DISTINCT workHours.project_id,jobs.name,jobs.description
     FROM workHours
     INNER JOIN jobs ON workHours.project_id = jobs.id 
     WHERE user_id = ? `,
