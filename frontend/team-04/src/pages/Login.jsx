@@ -19,7 +19,7 @@ const Login = (props) => {
     axios
       .post("http://127.0.0.1:3000/login", data)
       .then((data) => {
-        console.log(data.data.token);
+        localStorage.setItem("token", data.data.token);
         props.setIsLoggedIn(data.data.login);
       })
       .catch((e) => {
