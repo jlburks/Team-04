@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const verifyAdmin = async (req, res, next) => {
   try {
     const stringToken = req.headers.authorization;
+    console.log(stringToken);
     const token = stringToken.substring(8, stringToken.length - 1);
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
@@ -29,9 +30,10 @@ const verifyUser = async (req, res, next) => {
   try {
     const stringToken = req.headers.authorization;
     const token = stringToken.substring(8, stringToken.length - 1);
+    console.log("TOKEN =>", token);
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        console.log(err);
+        console.log("ERROR ", err);
         return res.json({ error: "token verification unsuccesul" });
       }
       console.log(decoded);

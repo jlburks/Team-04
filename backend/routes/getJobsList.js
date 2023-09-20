@@ -27,7 +27,7 @@ Route.get("/", (req, res) => {
           console.log("querry problem");
           return res.json({ error: "error with query" });
         }
-        console.log(jobs);
+        console.log("Jobssss  ", jobs);
         res.json({ jobs });
       }
     );

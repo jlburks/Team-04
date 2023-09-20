@@ -30,6 +30,8 @@ const CheckInOut = () => {
           return (
             <JobCheckIn
               key={job.project_id}
+              projectID={job.project_id}
+              workHourId={job.workHourId}
               name={job.name}
               description={job.description}
             />
