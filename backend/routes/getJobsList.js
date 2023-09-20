@@ -16,7 +16,21 @@ Route.get("/", (req, res) => {
       console.log("probelm verifying", e);
     }
     console.log(data);
-    connection.query(`SELECT * FROM jobs WHERE `);
+    connection.query(
+      `SELECT workHours.project_id,jobs.name,jobs.description
+    FROM workHours
+    INNER JOIN jobs ON workHours.project_id = jobs.id 
+    WHERE user_id = ? `,
+      [data.user_id],
+      (e, jobs) => {
+        if (e) {
+          console.log("querry problem");
+          return res.json({ error: "error with query" });
+        }
+        console.log(jobs);
+        res.json({ jobs });
+      }
+    );
   });
 });
 

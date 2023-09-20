@@ -16,13 +16,30 @@ const CheckInOut = () => {
     };
     axios
       .get("http://127.0.0.1:3000/jobs", config)
-      .then((data) => {
-        console.log(data);
+      .then((response) => {
+        console.log(response);
+        setJobsArr(response.data.jobs);
       })
       .catch((e) => console.log("----", e));
   }, []);
 
-  return <>{jobsArr}</>;
+  return (
+    <>
+      {jobsArr.length > 0 ? (
+        jobsArr.map((job) => {
+          return (
+            <JobCheckIn
+              key={job.project_id}
+              name={job.name}
+              description={job.description}
+            />
+          );
+        })
+      ) : (
+        <h1>No Jobs found</h1>
+      )}
+    </>
+  );
 };
 
 export default CheckInOut;

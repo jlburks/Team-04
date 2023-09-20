@@ -12,6 +12,8 @@ const JobCheckIn = (props) => {
   };
   return (
     <>
+      <h2>{props.name}</h2>
+      <h3>{props.description}</h3>
       <button type="button" className="btn btn-success" onClick={sendStartTime}>
         Check-In
       </button>
