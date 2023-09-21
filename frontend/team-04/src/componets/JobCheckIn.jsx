@@ -18,6 +18,7 @@ const JobCheckIn = (props) => {
   };
 
   const sendStartTime = () => {
+    setCheckOutStatus(false);
     const startTime = currentTime();
     const config = {
       headers: {
@@ -75,11 +76,23 @@ const JobCheckIn = (props) => {
       });
   };
 
+  const closeAlert = () => {
+    setCheckOutStatus(false);
+  };
+
   return (
     <>
       {checkOutStatus && (
         <div className="alert alert-success" role="alert">
-          Succesfully logged hours
+          Successfully logged hours
+          <button
+            type="button"
+            className="btn btn-light"
+            onClick={closeAlert}
+            style={{ marginLeft: "10px" }}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
       )}
       <h2>{props.name}</h2>
