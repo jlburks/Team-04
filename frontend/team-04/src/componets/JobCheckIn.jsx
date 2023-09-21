@@ -4,6 +4,7 @@ import axios from "axios";
 const JobCheckIn = (props) => {
   const [checkedIn, setCheckedIn] = useState(false);
   const [workTimeId, setWorkTimeId] = useState(0);
+  const [checkOutStatus, setCheckOutStatus] = useState("");
 
   const currentTime = () => {
     const currentDate = new Date();
@@ -66,6 +67,7 @@ const JobCheckIn = (props) => {
           console.log("error with your query");
         }
         setCheckedIn(false);
+        setCheckOutStatus(true);
         console.log("response ===>>>", response);
       })
       .catch((e) => {
@@ -75,8 +77,12 @@ const JobCheckIn = (props) => {
 
   return (
     <>
+      {checkOutStatus && (
+        <div className="alert alert-success" role="alert">
+          Succesfully logged hours
+        </div>
+      )}
       <h2>{props.name}</h2>
-      <h2>{props.key}</h2>
       <h3>{props.description}</h3>
       {checkedIn === false ? (
         <button
