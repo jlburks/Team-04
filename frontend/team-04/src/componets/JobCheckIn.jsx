@@ -87,7 +87,7 @@ const JobCheckIn = (props) => {
           Check-In
         </button>
       ) : (
-        <button type="button" className="btn btn-success" onClick={sendEndTime}>
+        <button type="button" className="btn btn-danger" onClick={sendEndTime}>
           Check-Out
         </button>
       )}

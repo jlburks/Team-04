@@ -41,9 +41,12 @@ Route.post("/", (req, res) => {
 
           return res.status(200).json({ login: true, token: token });
         }
-        return res
-          .status(500)
-          .json({ login: false, message: "incorect password" });
+        console.log(result);
+        if (result == false) {
+          return res
+            .status(500)
+            .json({ login: false, error: "incorect password" });
+        }
       });
     }
   );

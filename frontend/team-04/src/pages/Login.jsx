@@ -5,6 +5,7 @@ import axios from "axios";
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -23,13 +24,22 @@ const Login = (props) => {
         props.setIsLoggedIn(data.data.login);
       })
       .catch((e) => {
-        console.log("-----", e);
+        console.log("-----", e.response.data.error);
+        if (e.response.data.error == "username not found") {
+          setError("Incorrect Username");
+        } else if (e.response.data.error == "incorect password") {
+          setError("Incorrect Password");
+        } else {
+          console.log("error while logging in");
+          return;
+        }
       });
   };
   return (
     <>
       <h1>Login</h1>
       <form>
+        {error && <div className="alert alert-danger">{error}</div>}
         <div className="mb-3">
           <label className="form-label">Username</label>
           <input className="form-control" onChange={handleUsername} />
