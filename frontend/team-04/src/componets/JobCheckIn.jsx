@@ -4,7 +4,7 @@ import axios from "axios";
 const JobCheckIn = (props) => {
   const [checkedIn, setCheckedIn] = useState(false);
   const [workTimeId, setWorkTimeId] = useState(0);
-  const [checkOutStatus, setCheckOutStatus] = useState("");
+  const [checkOutStatus, setCheckOutStatus] = useState(false);
 
   const currentTime = () => {
     const currentDate = new Date();
@@ -16,6 +16,19 @@ const JobCheckIn = (props) => {
     const second = currentDate.getSeconds();
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
   };
+
+  // Load the checked-in state and workTimeId from localStorage on component mount
+  useEffect(() => {
+    const savedCheckedIn = localStorage.getItem(`checkedIn_${props.projectID}`);
+    const savedWorkTimeId = localStorage.getItem(
+      `workTimeId_${props.projectID}`
+    );
+
+    if (savedCheckedIn === "true") {
+      setCheckedIn(true);
+      setWorkTimeId(Number(savedWorkTimeId));
+    }
+  }, [props.projectID]);
 
   const sendStartTime = () => {
     setCheckOutStatus(false);
@@ -42,6 +55,13 @@ const JobCheckIn = (props) => {
         console.log("hello");
         console.log("response ===>>>", response);
         setWorkTimeId(response.data.workHoursId);
+
+        // Save checked-in state and workTimeId to localStorage
+        localStorage.setItem(`checkedIn_${props.projectID}`, "true");
+        localStorage.setItem(
+          `workTimeId_${props.projectID}`,
+          String(response.data.workHoursId)
+        );
       })
       .catch((e) => {
         return console.log(e);
@@ -70,6 +90,10 @@ const JobCheckIn = (props) => {
         setCheckedIn(false);
         setCheckOutStatus(true);
         console.log("response ===>>>", response);
+
+        // Clear checked-in state and workTimeId from localStorage when checking out
+        localStorage.removeItem(`checkedIn_${props.projectID}`);
+        localStorage.removeItem(`workTimeId_${props.projectID}`);
       })
       .catch((e) => {
         return console.log(e);
