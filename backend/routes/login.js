@@ -29,7 +29,7 @@ Route.post("/", (req, res) => {
           .json({ login: false, error: "username not found" });
       }
       bcrypt.compare(password, user[0].password).then((result) => {
-        if (result === true) {
+        if (result) {
           const token = jwt.sign(
             {
               user_id: user[0].id,
@@ -38,11 +38,10 @@ Route.post("/", (req, res) => {
             secret,
             { expiresIn: "1h" }
           );
-
-          return res.status(200).json({ login: true, token: token });
-        }
-        console.log(result);
-        if (result == false) {
+          user[0].role === "admin"
+            ? res.status(200).json({ login: true, token: token, admin: true })
+            : res.status(200).json({ login: true, token: token, admin: false });
+        } else {
           return res
             .status(500)
             .json({ login: false, error: "incorect password" });
