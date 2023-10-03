@@ -1,9 +1,7 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import CheckInCheckOut from "./pages/CheckInOut";
 import Reports from "./pages/Reports";
@@ -17,11 +15,14 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   return (
-    <>
+    <div className="app-container">
+    <div className="sidebar">
+      <h1>TechPro Constructions</h1>
+      <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} /> {/* Pass the isLoggedIn status as a prop */}
+    </div>
+    <div className="content">
       {isLoggedIn ? (
-        <>
-          <h1>TechPro Constructions</h1>
-          <NavBar isAdmin={isAdmin} />
+        
           <Routes>
             <Route path="/" element={<CheckInCheckOut />} />
             <Route path="/reports" element={<Reports />} />
@@ -29,11 +30,11 @@ function App() {
               <Route path="/adminActions" element={<AdminActions />} />
             )}
           </Routes>
-        </>
       ) : (
         <Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} />
       )}
-    </>
+    </div>
+    </div>
   );
 }
 
