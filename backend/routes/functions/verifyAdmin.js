@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 const verifyAdmin = async (req, res, next) => {
   try {
     const stringToken = req.headers.authorization;
-    console.log(stringToken);
     const token = stringToken.substring(8, stringToken.length - 1);
+
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         console.log(err);
@@ -30,7 +30,7 @@ const verifyUser = async (req, res, next) => {
   try {
     const stringToken = req.headers.authorization;
     const token = stringToken.substring(8, stringToken.length - 1);
-    console.log("TOKEN =>", token);
+
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         console.log("ERROR ", err);
@@ -38,6 +38,7 @@ const verifyUser = async (req, res, next) => {
       }
       console.log(decoded);
       if (decoded.role === "admin" || decoded.role === "user") {
+        req.userId = decoded.user_id;
         next();
       } else {
         return res.json({ error: "access denied" });
