@@ -20,7 +20,7 @@ Route.get("/", (req, res) => {
       `SELECT DISTINCT workHours.project_id,jobs.name,jobs.description
     FROM workHours
     INNER JOIN jobs ON workHours.project_id = jobs.id 
-    WHERE user_id = ? `,
+    WHERE user_id = ? AND jobs.active = 1 `,
       [data.user_id],
       (e, jobs) => {
         if (e) {
