@@ -52,7 +52,7 @@ const JobCheckIn = (props) => {
           console.log("error with your query");
         }
         setCheckedIn(true);
-        console.log("hello");
+
         console.log("response ===>>>", response);
         setWorkTimeId(response.data.workHoursId);
 

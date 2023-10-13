@@ -26,7 +26,9 @@ WHERE
 GROUP BY
     workday,
     project_id,
-    user_id`,
+    user_id
+HAVING 
+  total_seconds > 0`,
     [userId],
     (e, times) => {
       if (e) {

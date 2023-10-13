@@ -17,7 +17,7 @@ const CheckInOut = () => {
     axios
       .get("http://127.0.0.1:3000/jobs", config)
       .then((response) => {
-        console.log(response);
+        console.log("response =>", response);
         setJobsArr(response.data.jobs);
       })
       .catch((e) => console.log("----", e));
@@ -25,6 +25,7 @@ const CheckInOut = () => {
 
   return (
     <>
+      {console.log("cl => ", jobsArr)}
       {jobsArr.length > 0 ? (
         jobsArr.map((job) => {
           return (

@@ -1,0 +1,16 @@
+.app-container {
+  display: flex;
+  flex-direction: column; /* Align vertically */
+  justify-content: flex-start; /* Start at the top of the page */
+  height: 100%; /* Adjust to the desired height */
+  width: 100%; /* Take up 70% of the screen width */
+  margin: 0 auto; /* Center horizontally */
+  background-color: #f1ebeb; /* Optional background color */
+  padding: 0rem; /* Add padding if needed */
+  text-align: -webkit-center;
+}
+
+.content {
+  /* Additional styles for your content if needed */
+  flex-grow: 1;
+}

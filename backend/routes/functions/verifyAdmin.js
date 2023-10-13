@@ -6,8 +6,24 @@ const jwt = require("jsonwebtoken");
 
 const verifyAdmin = async (req, res, next) => {
   try {
-    const stringToken = req.headers.authorization;
-    const token = stringToken.substring(8, stringToken.length - 1);
+    console.log("HEADERS =>>>", req.headers.authorization);
+    // console.log("BODY HEADERS =>>>", req.body.headers.authorization);
+    // const stringTokenPost = req.body.headers.authorization;
+    // const stringToken = req.headers.authorization;
+    // console.log("stringTokenPost =>", stringToken);
+    // console.log("STRING =>", stringToken);
+    // let caughtToken;
+    // if (stringToken) {
+    //   caughtToken = stringToken;
+    // } else {
+    //   caughtToken = stringTokenPost;
+    // }
+    // console.log("CAUGHT", caughtToken);
+    const token = req.headers.authorization.substring(
+      7,
+      req.headers.authorization.length
+    );
+    console.log("TOKEN =>", token);
 
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
@@ -28,8 +44,11 @@ const verifyAdmin = async (req, res, next) => {
 
 const verifyUser = async (req, res, next) => {
   try {
+    console.log("Headers !!!", req.headers);
     const stringToken = req.headers.authorization;
-    const token = stringToken.substring(8, stringToken.length - 1);
+    console.log(stringToken);
+    const token = stringToken.substring(7, stringToken.length);
+    console.log(token);
 
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
