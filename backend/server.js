@@ -16,6 +16,7 @@ const yearly = require("./routes/reports/yearly");
 const addJobs = require("./routes/admin/Jobs/addJobs");
 const deleteJob = require("./routes/admin/Jobs/deleteJob");
 const editJob = require("./routes/admin/Jobs/editJob");
+const deleteUser = require("./routes/admin/User/deleteUser");
 
 const PORT = 3000;
 
@@ -26,9 +27,11 @@ app.use("/login", login);
 app.use("/admin", addUser);
 app.use("/jobs", jobs);
 app.use("/users", getUsers);
+app.use("/users", deleteUser);
 app.use("/jobs", addJobs);
 app.use("/jobs", assignJob);
 app.use("/jobs", deleteJob);
+
 app.use("/jobs", editJob);
 app.use("/", checkInOut);
 app.use("/reports", daily);

@@ -26,9 +26,9 @@ const BarChart = (props) => {
       props.dailyTime.map((time) => time.workday)
     );
     setCLabels(
-      props.dailyTime.map((time) => time.workday.split("Z")[0].slice(0, -1))
+      props.dailyTime.map((time) => time.workday.split("T")[0].slice(0, -1))
     );
-    setCData(props.dailyTime.map((time) => time.total_seconds));
+    setCData(props.dailyTime.map((time) => time.total_seconds / 60));
     return;
   }, [props.dailyTime]);
 
@@ -36,7 +36,7 @@ const BarChart = (props) => {
     labels: cLables,
     datasets: [
       {
-        label: "seconds",
+        label: "Hours",
         data: cData,
         backgroundColor: "aqua",
         borderColor: "black",

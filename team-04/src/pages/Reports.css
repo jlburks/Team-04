@@ -1,0 +1,5 @@
+.reports-container {
+  max-height: 450px;
+  max-width: 800px;
+  overflow: auto;
+}

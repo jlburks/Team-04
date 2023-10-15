@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 
+import DeleteUserButton from "./DeleteUserButton";
+
 const UsersProfile = (props) => {
-  console.log("USERPROFILE PROPS userId=>>> ", props.userId);
+  console.log("PROPS =>>> ", props);
   const cardStyle = {
     maxWidth: "80%",
     textAlign: "center",
@@ -15,12 +17,7 @@ const UsersProfile = (props) => {
         >
           Assign user to Job
         </Link>
-        <Link
-          to="/deleteUser"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          Delete User
-        </Link>
+        <DeleteUserButton userId={props.userId} />
         <div className="card text-white bg-primary mb-3">
           <div className="card-header">username: {props.username}</div>
           <div className="card-body">

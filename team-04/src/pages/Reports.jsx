@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import "./Reports.css";
+
 import BarChart from "../componets/BarChart";
 
 const Reports = () => {
@@ -31,8 +33,7 @@ const Reports = () => {
   };
 
   return (
-    <div>
-      <h2>Reports</h2>
+    <div className="reports-container">
       <BarChart dailyTime={chartData} />
     </div>
   );
