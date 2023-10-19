@@ -44,22 +44,23 @@ const UserCollection = () => {
 
   return (
     <div className="container text-center">
-    <table className="table table-responsive table-hover">
+      <table className="table table-responsive table-hover">
         <thead className="table-light">
           <tr>
             <th>Username</th>
             <th>Hourly Pay</th>
             <th>Role</th>
             <th>Update</th>
+            <th>Assign Job</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
-      <div>{usersArr}</div>
-      </tbody>
-    </table>
+          <div>{usersArr}</div>
+        </tbody>
+      </table>
     </div>
-);
+  );
 };
 
 export default UserCollection;
