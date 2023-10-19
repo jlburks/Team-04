@@ -19,19 +19,17 @@ function App() {
 
   return (
     <div className="app-container">
-      <div>
+    <div className="sidebar">
+    <div className="logo-container">
+          <img
+            src="http://www.techprousa.com/wp-content/uploads/2015/08/logo.png"
+            alt="TechPro Constructions"
+          ></img>
+    </div>
+    <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} /> {/* Pass the isLoggedIn status as a prop */}
+    </div>
+      <div className="main-content">
         {isLoggedIn ? (
-          <>
-            <div>
-              <img
-                src="http://www.techprousa.com/wp-content/uploads/2015/08/logo.png"
-                alt="TechPro Constructions"
-              ></img>
-
-              <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
-            </div>
-            <nav className="navbar-light bg-light">
-              <div>
                 <Routes>
                   <Route path="/" element={<CheckInCheckOut />} />
                   <Route path="/addJob" element={<AddJob />} />
@@ -55,9 +53,6 @@ function App() {
                     />
                   )}
                 </Routes>
-              </div>
-            </nav>
-          </>
         ) : (
           <div>
             <nav className="navbar-light bg-light">

@@ -2,7 +2,7 @@ import React from "react";
 
 import axios from "axios";
 
-import DeleteIcon from "../icons/trash-2.svg";
+import DeleteIcon from "../icons/trash.svg";
 
 const DeleteJobButton = (props) => {
   const buttonStyling = {
@@ -46,7 +46,7 @@ const DeleteJobButton = (props) => {
     <>
       <button
         type="button"
-        className="badge badge-danger"
+        className="btn"
         onClick={handleDeleteRequest}
       >
         <img src={DeleteIcon} alt="Edit Job" />

@@ -46,11 +46,22 @@ const JobCollection = (props) => {
   }, []);
 
   return (
-    <>
-      <div className="container text-center">
-        <div className="row row-cols-3">{jobsArr}</div>
-      </div>
-    </>
+    <div className="container text-center">
+    <table className="table table-responsive table-hover">
+        <thead className="table-light">
+          <tr>
+            <th>Job Name</th>
+            <th>Description</th>
+            <th>Active/Inactive</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+      <div>{jobsArr}</div>
+      </tbody>
+    </table>
+    </div>
   );
 };
 

@@ -105,37 +105,38 @@ const JobCheckIn = (props) => {
   };
 
   return (
-    <>
-      {checkOutStatus && (
-        <div className="alert alert-success" role="alert">
-          Successfully logged hours
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={closeAlert}
-            style={{ marginLeft: "10px" }}
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      )}
-      <h2>{props.name}</h2>
-      <h3>{props.description}</h3>
-      {checkedIn === false ? (
+    <div class="d-flex justify-content-around">
+    {checkOutStatus && (
+      <div className="alert alert-success" role="alert">
+        Successfully logged hours
         <button
           type="button"
-          className="btn btn-success"
-          onClick={sendStartTime}
+          className="btn-close"
+          onClick={closeAlert}
         >
-          Check-In
         </button>
-      ) : (
-        <button type="button" className="btn btn-danger" onClick={sendEndTime}>
-          Check-Out
-        </button>
-      )}
-    </>
-  );
-};
-
+      </div>
+    )}
+    <div class="p-2 flex-fill">
+        <h6>{props.name}</h6>
+        <p>{props.description}</p>
+      </div>
+      <div className="column">
+        {checkedIn === false ? (
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={sendStartTime}
+          >
+            Check-In
+          </button>
+        ) : (
+          <button type="button" className="btn btn-danger" onClick={sendEndTime}>
+            Check-Out
+          </button>
+        )}
+      </div>
+      </div>
+);
+      }
 export default JobCheckIn;

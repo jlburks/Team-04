@@ -7,18 +7,6 @@ const jwt = require("jsonwebtoken");
 const verifyAdmin = async (req, res, next) => {
   try {
     console.log("HEADERS =>>>", req.headers.authorization);
-    // console.log("BODY HEADERS =>>>", req.body.headers.authorization);
-    // const stringTokenPost = req.body.headers.authorization;
-    // const stringToken = req.headers.authorization;
-    // console.log("stringTokenPost =>", stringToken);
-    // console.log("STRING =>", stringToken);
-    // let caughtToken;
-    // if (stringToken) {
-    //   caughtToken = stringToken;
-    // } else {
-    //   caughtToken = stringTokenPost;
-    // }
-    // console.log("CAUGHT", caughtToken);
     const token = req.headers.authorization.substring(
       7,
       req.headers.authorization.length

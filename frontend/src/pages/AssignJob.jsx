@@ -8,24 +8,23 @@ const AssignJob = (props) => {
   const { userId } = useParams();
   console.log("ASSIGN JOBS PARAMS====>>>", userId);
   return (
-    <>
-      <nav className="navbar-light bg-light">
         <div className="container">
+          <h3>Assign Job</h3>
           <form className="d-flex">
             <input
-              className="form-control me-2"
+              className="form-control"
               type="search"
-              placeholder="Search"
+              placeholder="Search job"
               aria-label="Search"
             />
-            <button className="btn btn-outline-success" type="submit">
+            <div className="col-auto">
+            <button className="btn btn-dark" type="submit">
               Search
             </button>
+            </div>
           </form>
           <JobCollection action="add" currentUserId={userId} />
         </div>
-      </nav>
-    </>
   );
 };
 

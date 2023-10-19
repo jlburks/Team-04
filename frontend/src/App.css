@@ -1,0 +1,98 @@
+.app-container {
+  display: flex;
+  justify-content: flex-start; 
+  min-height: 100vh; 
+  width: 100%; 
+  padding: 0r;
+  text-align: left;
+  align-items: stretch; 
+}
+
+/* nav bar */
+@media (min-width: 992px) {
+  .navbar,
+  .navbar-collapse {
+    flex-direction: column;
+  }
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: column;
+  }
+  .navbar {
+    width: 28%;
+    height: 100vh;
+    align-items: flex-start;
+  }
+  .navbar-brand {
+    margin-left: 0.5em;
+    padding-bottom: 0;
+    border-bottom: 4px solid #464646;
+  }
+  form input {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.sidebar {
+  width: 25%;
+  height: 100%;
+  font-size: 22px; 
+  background-color: lightblue;
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  padding-top: 60px; 
+  padding-left: 20px; 
+}
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+ul {
+  list-style-type: none;
+  width: 350px;
+}
+.main-content {
+  flex-grow: 1; 
+  padding: 100px; 
+  margin-left: 350px; 
+}
+
+/* Report tabs */
+.nav-tabs {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Tables */
+.table-responsive {
+  position: relative;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.table-responsive tbody {
+  position: absolute;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.table-responsive tr {
+  width: 100%;
+  table-layout: fixed;
+  display: table;
+}
+
+.table-responsive thead > tr > th {
+  border:none;
+}
+
+.hoverable-row:hover {
+  background-color: #f0f0f0; /* Change this color to your desired hover background color */
+}

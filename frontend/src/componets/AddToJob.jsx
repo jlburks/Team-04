@@ -45,7 +45,7 @@ const AddToJob = (props) => {
   return (
     <>
       <button
-        class="btn btn-primary"
+        class="btn btn-dark"
         type="submit"
         onClick={handleAddJobRequest}
       >

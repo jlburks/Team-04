@@ -152,7 +152,7 @@ const EditJob = (props) => {
           <div class="col-sm-10">
             <button
               type="submit"
-              class="btn btn-primary"
+              class="btn btn-dark"
               onClick={handleChange}
             >
               Submit

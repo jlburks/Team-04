@@ -2,7 +2,7 @@ import React from "react";
 
 import axios from "axios";
 
-import DeleteIcon from "../icons/trash-2.svg";
+import DeleteIcon from "../icons/trash.svg";
 
 const DeleteUserButton = (props) => {
   const buttonStyling = {

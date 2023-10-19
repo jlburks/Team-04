@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
-import "./Reports.css";
-
 import BarChart from "../componets/BarChart";
+import ReportTable from "../componets/Tables";
 
 const Reports = () => {
   const [chartData, setChartData] = useState([]);
@@ -33,9 +31,19 @@ const Reports = () => {
   };
 
   return (
-    <div className="reports-container">
-      <BarChart dailyTime={chartData} />
-    </div>
+    <form>
+      <div>
+      <h1>Reports</h1>
+
+        <div>
+          <ReportTable dailyTime={chartData} />
+        </div>
+        <br /><br />
+        <div>
+          <BarChart dailyTime={chartData} />
+        </div>
+      </div>
+    </form>
   );
 };
 
