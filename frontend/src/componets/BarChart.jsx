@@ -11,40 +11,60 @@ import {
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const BarChart = (props) => {
-  console.log(props);
-  const [activeTab, setActiveTab] = useState("Daily"); 
-  const [cLables, setCLabels] = useState([]);
+  const [activeTab, setActiveTab] = useState("Daily");
+  const [cLabels, setCLabels] = useState([]);
   const [cData, setCData] = useState([]);
 
   useEffect(() => {
-    console.log("BarChart", props);
-    console.log(typeof props.dailyTime[0]);
-    console.log("VVVV", props.dailyTime[0]);
-    console.log(
-      "USE EFFECT",
-      props.dailyTime.map((time) => time.workday)
-    );
     let filteredDailyTime = props.dailyTime;
+
     if (activeTab === "Daily") {
       const currentDate = new Date();
-      filteredDailyTime = filteredDailyTime.filter((time) => {
-        const workdayDate = new Date(time.workday);
-        return (
-          currentDate.getDate() === workdayDate.getDate() &&
-          currentDate.getMonth() === workdayDate.getMonth() &&
-          currentDate.getFullYear() === workdayDate.getFullYear()
-        );
-      });
+      const currentDateString = `${currentDate.getFullYear()}-${
+        currentDate.getMonth() + 1
+      }-${currentDate.getDate()}`;
+
+      const dateMap = new Map();
+      filteredDailyTime
+        .filter((time) => time.workday.split("T")[0] === currentDateString)
+        .forEach((time) => {
+          if (dateMap.has(currentDateString)) {
+            dateMap.set(
+              currentDateString,
+              dateMap.get(currentDateString) + time.total_seconds / 60
+            );
+          } else {
+            dateMap.set(currentDateString, time.total_seconds / 60);
+          }
+        });
+
+      setCLabels(Array.from(dateMap.keys()));
+      setCData(Array.from(dateMap.values()));
     } else if (activeTab === "Weekly") {
-      const desiredStartDate = new Date("2023-10-01");
-      const desiredEndDate = new Date("2023-10-17");
+      const desiredStartDate = new Date("2023-10-15");
+      const desiredEndDate = new Date("2023-10-21");
       filteredDailyTime = filteredDailyTime.filter((time) => {
         const workdayDate = new Date(time.workday);
         return workdayDate >= desiredStartDate && workdayDate <= desiredEndDate;
       });
+
+      const dateMap = new Map();
+      filteredDailyTime.forEach((time) => {
+        const workday = time.workday.split("T")[0];
+        if (dateMap.has(workday)) {
+          dateMap.set(workday, dateMap.get(workday) + time.total_seconds / 60);
+        } else {
+          dateMap.set(workday, time.total_seconds / 60);
+        }
+      });
+
+      setCLabels(Array.from(dateMap.keys()));
+      setCData(Array.from(dateMap.values()));
     } else if (activeTab === "Monthly") {
-      const desiredMonth = 10;
-      const desiredYear = 2023;
+      const currentDate = new Date();
+      const desiredMonth = currentDate.getMonth() + 1; // Add 1 because months are zero-indexed (January is 0)
+      const desiredYear = currentDate.getFullYear();
+      
       filteredDailyTime = filteredDailyTime.filter((time) => {
         const workdayDate = new Date(time.workday);
         return (
@@ -52,18 +72,46 @@ const BarChart = (props) => {
           workdayDate.getFullYear() === desiredYear
         );
       });
+
+      const dateMap = new Map();
+      filteredDailyTime.forEach((time) => {
+        const workday = time.workday.split("T")[0];
+        if (dateMap.has(workday)) {
+          dateMap.set(workday, dateMap.get(workday) + time.total_seconds / 60);
+        } else {
+          dateMap.set(workday, time.total_seconds / 60);
+        }
+      });
+
+      setCLabels(Array.from(dateMap.keys()));
+      setCData(Array.from(dateMap.values()));
+
     } else if (activeTab === "Yearly") {
-      const desiredYear = 2023;
+      const currentDate = new Date();
+      const desiredYear = currentDate.getFullYear();
+      
       filteredDailyTime = filteredDailyTime.filter((time) => {
         const workdayDate = new Date(time.workday);
+        console.log(workdayDate)
         return workdayDate.getFullYear() === desiredYear;
       });
+      const dateMap = new Map();
+      filteredDailyTime.forEach((time) => {
+        const workday = time.workday.split("T")[0];
+        if (dateMap.has(workday)) {
+          dateMap.set(workday, dateMap.get(workday) + time.total_seconds / 60);
+        } else {
+          dateMap.set(workday, time.total_seconds / 60);
+        }
+      });
+
+      setCLabels(Array.from(dateMap.keys()));
+      setCData(Array.from(dateMap.values()));
     }
-    setCLabels(filteredDailyTime.map((time) => time.workday.split("T")[0]));
-    setCData(filteredDailyTime.map((time) => time.total_seconds / 60));
   }, [props.dailyTime, activeTab]);
+
   const data = {
-    labels: cLables,
+    labels: cLabels,
     datasets: [
       {
         label: "Hours",
@@ -76,7 +124,7 @@ const BarChart = (props) => {
   };
 
   const options = {};
-  
+
   return (
     <div>
       <div className="nav nav-tabs">
@@ -108,21 +156,13 @@ const BarChart = (props) => {
         </div>
       </div>
 
-      {activeTab === "Daily" && (
-          <Bar data={data} options={options} />
-      )}
+      {activeTab === "Daily" && <Bar data={data} options={options} />}
 
-      {activeTab === "Weekly" && (
-          <Bar data={data} options={options} />
-      )}
+      {activeTab === "Weekly" && <Bar data={data} options={options} />}
 
-      {activeTab === "Monthly" && (
-          <Bar data={data} options={options} />
-      )}
+      {activeTab === "Monthly" && <Bar data={data} options={options} />}
 
-      {activeTab === "Yearly" && (
-          <Bar data={data} options={options} />
-      )}
+      {activeTab === "Yearly" && <Bar data={data} options={options} />}
     </div>
   );
 };
