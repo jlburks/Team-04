@@ -13,7 +13,7 @@ ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 const BarChart = (props) => {
   console.log("PROPS =======", props);
   const [activeTab, setActiveTab] = useState("Daily");
-  const [cLables, setCLabels] = useState([]);
+  const [cLabels, setCLabels] = useState([]);
   const [cData, setCData] = useState([]);
 
   useEffect(() => {
@@ -168,15 +168,11 @@ const BarChart = (props) => {
       </div>
 
       {activeTab === "Daily" && <Bar data={data} options={options} />}
-      {activeTab === "Daily" && <Bar data={data} options={options} />}
 
-      {activeTab === "Weekly" && <Bar data={data} options={options} />}
       {activeTab === "Weekly" && <Bar data={data} options={options} />}
 
       {activeTab === "Monthly" && <Bar data={data} options={options} />}
-      {activeTab === "Monthly" && <Bar data={data} options={options} />}
 
-      {activeTab === "Yearly" && <Bar data={data} options={options} />}
       {activeTab === "Yearly" && <Bar data={data} options={options} />}
     </div>
   );

@@ -35,7 +35,9 @@ const Reports = () => {
       <div>
         <h1>Reports</h1>
         <div>
-          {/* {Object.keys(chartData).length > 0 && <ReportTable times={chartData} />} */}
+          {/* {Object.keys(chartData).length > 0 && (
+            <ReportTable times={chartData} />
+          )} */}
         </div>
         <br />
         <br />
