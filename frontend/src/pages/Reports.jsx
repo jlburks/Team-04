@@ -4,7 +4,7 @@ import BarChart from "../componets/BarChart";
 import ReportTable from "../componets/Tables";
 
 const Reports = () => {
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState({});
 
   useEffect(() => {
     fetchData();
@@ -19,12 +19,12 @@ const Reports = () => {
         },
       };
       const response = await axios.get(
-        "http://127.0.0.1:3000/reports/daily",
+        "http://127.0.0.1:3000/reports/userTimes",
         config
       );
-      const dailyTimes = response.data.dailyTimes;
-      console.log("response =>", response.data.dailyTimes);
-      return setChartData(response.data.dailyTimes);
+      console.log("RESPONSE =>>>", response.data);
+      const dailyTimes = response.data;
+      return setChartData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -33,14 +33,14 @@ const Reports = () => {
   return (
     <form>
       <div>
-      <h1>Reports</h1>
-
+        <h1>Reports</h1>
         <div>
-          <ReportTable dailyTime={chartData} />
+          {/* {Object.keys(chartData).length > 0 && <ReportTable times={chartData} />} */}
         </div>
-        <br /><br />
+        <br />
+        <br />
         <div>
-          <BarChart dailyTime={chartData} />
+          {Object.keys(chartData).length > 0 && <BarChart times={chartData} />}
         </div>
       </div>
     </form>

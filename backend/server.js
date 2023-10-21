@@ -10,6 +10,7 @@ const addUser = require("./routes/admin/User/addUser");
 const assignJob = require("./routes/admin/User/AssignJob");
 const getUsers = require("./routes/admin/User/getUsers");
 const daily = require("./routes/reports/daily");
+const singleUserReport = require("./routes/reports/singleUserReport");
 const weekly = require("./routes/reports/weekly");
 const monthly = require("./routes/reports/monthly");
 const yearly = require("./routes/reports/yearly");
@@ -38,5 +39,6 @@ app.use("/reports", daily);
 app.use("/reports", weekly);
 app.use("/reports", monthly);
 app.use("/reports", yearly);
+app.use("/reports", singleUserReport);
 
 app.listen(PORT, () => console.log("running on port 3000"));

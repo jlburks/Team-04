@@ -46,6 +46,7 @@ const verifyUser = async (req, res, next) => {
       console.log(decoded);
       if (decoded.role === "admin" || decoded.role === "user") {
         req.userId = decoded.user_id;
+        console.log("****", req.userId);
         next();
       } else {
         return res.json({ error: "access denied" });

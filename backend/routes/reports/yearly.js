@@ -13,6 +13,7 @@ Route.get("/yearly", verifyUser, (req, res) => {
   const token = req.headers.authorization.replace("Bearer ", "").trim();
   console.log("TOKEN =>", token);
   const userId = req.userId;
+  console.log("userId ====", userId);
   connection.query(
     `SELECT
     YEAR(start_time) AS workyear,
@@ -24,7 +25,7 @@ Route.get("/yearly", verifyUser, (req, res) => {
 FROM
     workHours
 WHERE
-    user_id = 2
+    user_id = ?
 GROUP BY
     workyear,
     project_id,

@@ -15,17 +15,29 @@ Route.get("/weekly", verifyUser, (req, res) => {
   const userId = req.userId;
   connection.query(
     `SELECT
-    YEAR(start_time) AS workyear,
-    WEEK(start_time) AS workweek,
-    MIN(start_time) AS week_start_date,
-    MAX(end_time) AS week_end_date,
+    YEAR(week_start_date) AS workyear,
+    WEEK(week_start_date) AS workweek,
+    MIN(week_start_date) AS week_start_date,
+    MAX(week_end_date) AS week_end_date,
     project_id,
     user_id,
-    SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
-FROM
-    workHours
-WHERE
-    user_id = ?
+    SUM(total_seconds) AS total_seconds
+FROM (
+    SELECT
+        DATE(start_time - INTERVAL WEEKDAY(start_time) DAY) AS week_start_date,
+        DATE_ADD(DATE(start_time - INTERVAL WEEKDAY(start_time) DAY), INTERVAL 6 DAY) AS week_end_date,
+        project_id,
+        user_id,
+        SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time)))/3600 AS total_seconds
+    FROM
+        workHours
+    WHERE
+        user_id = ?
+    GROUP BY
+        week_start_date,
+        project_id,
+        user_id
+) AS subquery
 GROUP BY
     workyear,
     workweek,
