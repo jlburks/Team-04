@@ -122,7 +122,7 @@ const BarChart = (props) => {
   }, [props, activeTab]);
 
   const data = {
-    labels: cLables,
+    labels: cLabels,
     datasets: [
       {
         label: "Hours",
@@ -168,11 +168,15 @@ const BarChart = (props) => {
       </div>
 
       {activeTab === "Daily" && <Bar data={data} options={options} />}
+      {activeTab === "Daily" && <Bar data={data} options={options} />}
 
+      {activeTab === "Weekly" && <Bar data={data} options={options} />}
       {activeTab === "Weekly" && <Bar data={data} options={options} />}
 
       {activeTab === "Monthly" && <Bar data={data} options={options} />}
+      {activeTab === "Monthly" && <Bar data={data} options={options} />}
 
+      {activeTab === "Yearly" && <Bar data={data} options={options} />}
       {activeTab === "Yearly" && <Bar data={data} options={options} />}
     </div>
   );

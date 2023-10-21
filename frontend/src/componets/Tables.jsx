@@ -46,23 +46,27 @@ const ReportTable = (props) => {
               </tr>
             </thead>
             <tbody>
-                {props.dailyTime
-                .filter((time) => {
-                    const currentDate = new Date();
-                    const workdayDate = new Date(time.workday);
-                    return (
+              {props.dailyTime
+                .filter((time, index, self) => {
+                  const currentDate = new Date();
+                  const workdayDate = new Date(time.workday);
+                  return (
+                    self.findIndex(
+                      (t) =>
+                        t.workday === time.workday && t.user_id === time.user_id
+                    ) === index &&
                     currentDate.getDate() === workdayDate.getDate() &&
                     currentDate.getMonth() === workdayDate.getMonth() &&
                     currentDate.getFullYear() === workdayDate.getFullYear()
-                    );
+                  );
                 })
                 .map((time, index) => (
-                    <tr key={index}>
+                  <tr key={index}>
                     <td>{time.workday.split("T")[0]}</td>
                     <td>{time.user_id}</td>
                     <td>{time.total_seconds}</td>
                     <td>{time.project_id}</td>
-                    </tr>
+                  </tr>
                 ))}
             </tbody>
           </table>
@@ -71,104 +75,131 @@ const ReportTable = (props) => {
 
       {activeTab === "Weekly" && (
         <div>
-        <table className="table table-responsive table-hover">
-          <thead class="table-light">
-            <tr>
-              <th>Workday</th>
-              <th>User ID</th>
-              <th>Total Seconds</th>
-              <th>Project ID</th>
-            </tr>
-          </thead>
-          <tbody>
-                {props.dailyTime
-                .filter((time) => {
-                    const desiredStartDate = new Date("2023-10-01"); 
-                    const desiredEndDate = new Date("2023-10-17");  
-
-                    const workdayDate = new Date(time.workday);
-                    return workdayDate >= desiredStartDate && workdayDate <= desiredEndDate;
+          <table className="table table-responsive table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Workday</th>
+                <th>User ID</th>
+                <th>Total Seconds</th>
+                <th>Project ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.dailyTime
+                .filter((time, index, self) => {
+                  const currentDate = new Date();
+                  const workdayDate = new Date(time.workday);
+                  const weekStartDate = getWeekStartDate(currentDate);
+                  const weekEndDate = getWeekEndDate(currentDate);
+                  return (
+                    self.findIndex(
+                      (t) =>
+                        t.workday === time.workday && t.user_id === time.user_id
+                    ) === index &&
+                    workdayDate >= weekStartDate &&
+                    workdayDate <= weekEndDate
+                  );
                 })
                 .map((time, index) => (
-                    <tr key={index}>
+                  <tr key={index}>
                     <td>{time.workday.split("T")[0]}</td>
                     <td>{time.user_id}</td>
                     <td>{time.total_seconds}</td>
                     <td>{time.project_id}</td>
-                    </tr>
+                  </tr>
                 ))}
             </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
       )}
 
-    {activeTab === "Monthly" && (
-    <div>
-        <table className="table table-responsive table-hover">
-          <thead class="table-light">
-            <tr>
-              <th>Workday</th>
-              <th>User ID</th>
-              <th>Total Seconds</th>
-              <th>Project ID</th>
-            </tr>
-          </thead>
-          <tbody>
-                {props.dailyTime
-                .filter((time) => {
-                    const desiredMonth = 10; 
-                    const desiredYear = 2023; 
-
-                    const workdayDate = new Date(time.workday);
-                    return workdayDate.getMonth() + 1 === desiredMonth && workdayDate.getFullYear() === desiredYear;
+      {activeTab === "Monthly" && (
+        <div>
+          <table className="table table-responsive table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Workday</th>
+                <th>User ID</th>
+                <th>Total Seconds</th>
+                <th>Project ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.dailyTime
+                .filter((time, index, self) => {
+                  const currentDate = new Date();
+                  const workdayDate = new Date(time.workday);
+                  return (
+                    self.findIndex(
+                      (t) =>
+                        t.workday === time.workday && t.user_id === time.user_id
+                    ) === index &&
+                    currentDate.getMonth() === workdayDate.getMonth() &&
+                    currentDate.getFullYear() === workdayDate.getFullYear()
+                  );
                 })
                 .map((time, index) => (
-                    <tr key={index}>
+                  <tr key={index}>
                     <td>{time.workday.split("T")[0]}</td>
                     <td>{time.user_id}</td>
                     <td>{time.total_seconds}</td>
                     <td>{time.project_id}</td>
-                    </tr>
+                  </tr>
                 ))}
             </tbody>
-        </table>
-      </div>
+          </table>
+        </div>
       )}
 
-    {activeTab === "Yearly" && (
-    <div>
-    <table className="table table-responsive table-hover">
-      <thead class="table-light">
-        <tr>
-          <th>Workday</th>
-          <th>User ID</th>
-          <th>Total Seconds</th>
-          <th>Project ID</th>
-        </tr>
-      </thead>
-      <tbody>
-        {props.dailyTime
-          .filter((time) => {
-            const desiredYear = 2023; 
-            const workdayDate = new Date(time.workday);
-            return workdayDate.getFullYear() === desiredYear;
-          })
-          .map((time, index) => (
-            <tr key={index}>
-              <td>{time.workday.split("T")[0]}</td>
-              <td>{time.user_id}</td>
-              <td>{time.total_seconds}</td>
-              <td>{time.project_id}</td>
-            </tr>
-          ))}
-      </tbody>
-    </table>
-  </div>
+      {activeTab === "Yearly" && (
+        <div>
+          <table className="table table-responsive table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>Workday</th>
+                <th>User ID</th>
+                <th>Total Seconds</th>
+                <th>Project ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.dailyTime
+                .filter((time, index, self) => {
+                  const currentDate = new Date();
+                  const workdayDate = new Date(time.workday);
+                  return (
+                    self.findIndex(
+                      (t) =>
+                        t.workday === time.workday && t.user_id === time.user_id
+                    ) === index &&
+                    currentDate.getFullYear() === workdayDate.getFullYear()
+                  );
+                })
+                .map((time, index) => (
+                  <tr key={index}>
+                    <td>{time.workday.split("T")[0]}</td>
+                    <td>{time.user_id}</td>
+                    <td>{time.total_seconds}</td>
+                    <td>{time.project_id}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       )}
-
     </div>
-
   );
 };
+
+function getWeekStartDate(date) {
+  const day = date.getDay();
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(date.setDate(diff));
+}
+
+function getWeekEndDate(date) {
+  const weekStartDate = getWeekStartDate(date);
+  return new Date(weekStartDate.setDate(weekStartDate.getDate() + 6));
+}
 
 export default ReportTable;
