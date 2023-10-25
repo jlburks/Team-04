@@ -7,13 +7,11 @@ const EditUser = (props) => {
   const { userId } = useParams();
 
   const [dUsername, setDUserName] = useState("");
-  const [dPassword, setDPassword] = useState("");
   const [dHourlyPay, setDHourlyPay] = useState("");
   const [dRole, setDRole] = useState("");
 
   console.log("EDIT USER PROPS =>", userId);
   const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
   const [hourly_pay, setHourlyPay] = useState("");
   const [role, setRole] = useState("");
 
@@ -48,13 +46,25 @@ const EditUser = (props) => {
   };
 
   const handleAdmin = (e) => {
-    return;
+    setDRole(e.target.value);
   };
   const handleUser = (e) => {
-    return;
+    setDRole(e.target.value);
   };
-  const addUserRequest = (e) => {
-    return;
+  const editUserRequest = (e) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    };
+    const data = {
+      username: dUsername,
+      hourly_pay: dHourlyPay,
+      role: dRole,
+    };
+    console.log(data);
+    axios.put(`http://127.0.0.1:3000/users/editUser/${userId}`, data, config);
   };
 
   return (
@@ -108,8 +118,8 @@ const EditUser = (props) => {
         </div>
       </div>
       <div class="text-center">
-        <button class="btn btn-dark btn-block mb-4" onClick={addUserRequest}>
-          Add User
+        <button class="btn btn-dark btn-block mb-4" onClick={editUserRequest}>
+          Edit User
         </button>
       </div>
     </>

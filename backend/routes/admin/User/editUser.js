@@ -7,11 +7,14 @@ const adminFunc = require("../../functions/verifyAdmin");
 
 const saltRounds = 10;
 
-Route.post("/editUser", adminFunc.verifyAdmin, (req, res) => {
-  const { username, password, hourly_pay, role, currentUserId } = req.body;
+Route.put("/editUser/:userId", adminFunc.verifyAdmin, (req, res) => {
+  const userId = req.params.userId;
+  console.log("BODY +====", req.body);
+  const { username, hourly_pay, role } = req.body;
+  console.log("USERNAME =>>>", username);
   connection.query(
-    `INSERT INTO users (username, password,hourly_pay, role) VALUES (?, ?, ?, ?) WHERE id = ?`,
-    [username, hash, hourly_pay, role, currentUserId],
+    `UPDATE users SET username = ?, hourly_pay = ?, role = ? WHERE id = ?`,
+    [username, hourly_pay, role, userId],
     (e) => {
       if (e) {
         console.log("Error adding user:", e);
