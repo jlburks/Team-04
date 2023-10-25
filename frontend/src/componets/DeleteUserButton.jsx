@@ -11,6 +11,13 @@ const DeleteUserButton = (props) => {
   };
 
   const handleDeleteRequest = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job?"
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
     try {
       const config = {
         headers: {

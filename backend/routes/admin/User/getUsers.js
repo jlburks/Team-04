@@ -17,4 +17,28 @@ Route.get("/allUsers", adminFunc.verifyAdmin, (req, res) => {
   });
 });
 
+Route.get("/getUser/:userId", adminFunc.verifyAdmin, (req, res) => {
+  const userId = req.params.userId;
+
+  connection.query(`SELECT * FROM users WHERE id = ?`, [userId], (e, data) => {
+    if (e) {
+      console.log(e);
+    }
+
+    return res.json({ user: data });
+  });
+});
+
+Route.put("/getUser/:userId", adminFunc.verifyAdmin, (req, res) => {
+  const userId = req.params.userId;
+
+  connection.query(`SELECT * FROM users WHERE id = ?`, [userId], (e, data) => {
+    if (e) {
+      console.log(e);
+    }
+
+    return res.json({ user: data });
+  });
+});
+
 module.exports = Route;

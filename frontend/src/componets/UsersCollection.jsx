@@ -51,6 +51,7 @@ const UserCollection = () => {
             <th>Hourly Pay</th>
             <th>Role</th>
             <th>Update</th>
+            <th>Password Reset</th>
             <th>Assign Job</th>
             <th>Delete</th>
           </tr>

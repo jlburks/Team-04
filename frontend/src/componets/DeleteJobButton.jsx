@@ -11,6 +11,13 @@ const DeleteJobButton = (props) => {
   };
 
   const handleDeleteRequest = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this job?"
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
     try {
       const config = {
         headers: {
@@ -44,11 +51,7 @@ const DeleteJobButton = (props) => {
 
   return (
     <>
-      <button
-        type="button"
-        className="btn"
-        onClick={handleDeleteRequest}
-      >
+      <button type="button" className="btn" onClick={handleDeleteRequest}>
         <img src={DeleteIcon} alt="Edit Job" />
       </button>
     </>

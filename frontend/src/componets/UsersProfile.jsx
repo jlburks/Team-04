@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 import PlusIcon from "../icons/plus-square.svg";
+import ChangePass from "../icons/arrow-repeat.svg";
+import DeleteUserButton from "./DeleteUserButton";
 
 const UsersProfile = (props) => {
   console.log("PROPS userId=>>> ", props.userId);
@@ -12,25 +14,28 @@ const UsersProfile = (props) => {
         <td>{props.hourly_pay}</td>
         <td>{props.role}</td>
         <td>
-          <Link to={`/admin/assignJob/${props.userId}`}>
+          <Link to={`/users/editUser/${props.userId}`}>
             <button type="button" class="btn">
               <img src={EditIcon} alt="Edit User" />
             </button>
           </Link>
         </td>
         <td>
-          <Link to="/addJob">
+          <Link to={`/users/editUserPass/${props.userId}`}>
+            <button type="button" class="btn">
+              <img src={ChangePass} alt="Edit User" />
+            </button>
+          </Link>
+        </td>
+        <td>
+          <Link to={`/admin/assignJob/${props.userId}`}>
             <button type="button" class="btn">
               <img src={PlusIcon} alt="+" />
             </button>
           </Link>
         </td>
         <td>
-          <Link to="/deleteUser">
-            <button type="button" class="btn">
-              <img src={TrashIcon} alt="Delete User" />
-            </button>
-          </Link>
+          <DeleteUserButton userId={props.userId} />
         </td>
       </tr>
     </div>
