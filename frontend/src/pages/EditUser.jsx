@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const EditUser = (props) => {
+  console.log("PROPS", props);
   const { userId } = useParams();
 
   const [dUsername, setDUserName] = useState("");
   const [dPassword, setDPassword] = useState("");
   const [dHourlyPay, setDHourlyPay] = useState("");
+  const [dRole, setDRole] = useState("");
 
   console.log("EDIT USER PROPS =>", userId);
   const [username, setUserName] = useState("");
@@ -29,40 +31,39 @@ const EditUser = (props) => {
         const userInfo = data.data.user[0];
         setDUserName(userInfo.username);
         setDHourlyPay(userInfo.hourly_pay);
+        console.log("ROLE ===>", userInfo.role);
+        setDRole(userInfo.role);
       })
       .catch((e) => {
         console.log(e);
       });
   }, []);
 
-  const handleUsername = () => {
-    return;
-  };
-  const handlePassword = () => {
-    return;
+  const handleUsername = (e) => {
+    setDUserName(e.target.value);
   };
 
-  const handleHourlyPay = () => {
-    return;
+  const handleHourlyPay = (e) => {
+    setDHourlyPay(e.target.value);
   };
 
-  const handleAdmin = () => {
+  const handleAdmin = (e) => {
     return;
   };
-  const handleUser = () => {
+  const handleUser = (e) => {
     return;
   };
-  const addUserRequest = () => {
+  const addUserRequest = (e) => {
     return;
   };
 
   return (
     <>
-      <h3>Add New User</h3>
+      <h3>Edit User</h3>
       <div class="form-outline mb-4">
         <input
           class="form-control"
-          placeholder={dUsername}
+          value={dUsername}
           onChange={handleUsername}
         />
       </div>
@@ -70,15 +71,7 @@ const EditUser = (props) => {
       <div class="form-outline mb-4">
         <input
           class="form-control"
-          placeholder={dPassword}
-          onChange={handlePassword}
-        />
-      </div>
-
-      <div class="form-outline mb-4">
-        <input
-          class="form-control"
-          placeholder={dHourlyPay}
+          value={dHourlyPay}
           onChange={handleHourlyPay}
         />
       </div>
@@ -92,7 +85,7 @@ const EditUser = (props) => {
                 type="radio"
                 value="admin"
                 name="userType"
-                checked={role === "admin"} // Check if 'admin' is selected
+                checked={dRole === "admin"} // Check if 'admin' is selected
                 onChange={handleAdmin}
               />
               admin
@@ -106,7 +99,7 @@ const EditUser = (props) => {
                 type="radio"
                 value="user"
                 name="userType"
-                checked={role === "user"}
+                checked={dRole === "user"}
                 onChange={handleUser}
               />
               user
