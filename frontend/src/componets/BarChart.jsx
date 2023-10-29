@@ -19,6 +19,21 @@ const BarChart = (props) => {
   const [yearFilter, setYearFilter] = useState(2023);
   const [monthFilter, setMonthFilter] = useState(10);
 
+  const monthlyNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   useEffect(() => {
     let filteredDailyTime;
     console.log("BarChart ==>", props);
@@ -343,7 +358,7 @@ const BarChart = (props) => {
         <div>
           <h2>
             {activeTab === "Weekly" || activeTab === "Daily" ? (
-              <h2>{`${monthFilter} ${yearFilter}`}</h2>
+              <h2>{`${monthlyNames[monthFilter - 1]} ${yearFilter}`}</h2>
             ) : null}
             {activeTab === "Monthly" && <h2>{`${yearFilter}`}</h2>}
           </h2>
