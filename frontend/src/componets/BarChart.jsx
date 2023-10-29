@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
+import Tables from "./Tables";
 import {
   Chart as ChartJs,
   BarElement,
@@ -367,6 +368,15 @@ const BarChart = (props) => {
         {activeTab === "Weekly" && <Bar data={data} options={options} />}
         {activeTab === "Monthly" && <Bar data={data} options={options} />}
         {activeTab === "Yearly" && <Bar data={data} options={options} />}
+      </div>
+      <div>
+        <Tables
+          data={props.times}
+          activeTab={activeTab}
+          yearFilter={yearFilter}
+          monthFilter={monthFilter}
+          monthName={monthlyNames[monthFilter - 1]}
+        />
       </div>
     </div>
   );
