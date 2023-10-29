@@ -28,7 +28,9 @@ GROUP BY
     project_id,
     user_id
 HAVING 
-  total_seconds > 0`,
+  total_seconds > 0
+  ORDER BY
+    workday;`,
     [userId],
     (e, dTimes) => {
       if (e) {

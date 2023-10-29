@@ -16,6 +16,9 @@ const BarChart = (props) => {
   const [cLabels, setCLabels] = useState([]);
   const [cData, setCData] = useState([]);
 
+  const [yearFilter, setYearFilter] = useState(2023);
+  const [monthFilter, setMonthFilter] = useState(10);
+
   useEffect(() => {
     let filteredDailyTime;
     console.log("BarChart ==>", props);
@@ -119,7 +122,7 @@ const BarChart = (props) => {
       setCLabels(Object.keys(existingData));
       setCData(Object.values(existingData));
     }
-  }, [props, activeTab]);
+  }, [props, activeTab, yearFilter, monthFilter]);
 
   const data = {
     labels: cLabels,
@@ -167,13 +170,181 @@ const BarChart = (props) => {
         </div>
       </div>
 
-      {activeTab === "Daily" && <Bar data={data} options={options} />}
+      <div>
+        {(activeTab === "Monthly" || activeTab === "Weekly") && (
+          <div>
+            <h7>Year Filter:</h7>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setYearFilter(2021);
+                setMonthFilter("");
+              }}
+            >
+              2021
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setYearFilter(2022);
+                setMonthFilter("");
+              }}
+            >
+              2022
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setYearFilter(2023);
+                setMonthFilter("");
+              }}
+            >
+              2023
+            </button>
+          </div>
+        )}
+        {(activeTab === "Daily" || activeTab === "Weekly") && (
+          <div>
+            <h7>Month Filter:</h7>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(1);
+              }}
+            >
+              January
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(2);
+              }}
+            >
+              February
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(3);
+              }}
+            >
+              March
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(4);
+              }}
+            >
+              April
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(5);
+              }}
+            >
+              May
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(6);
+              }}
+            >
+              June
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(7);
+              }}
+            >
+              July
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(8);
+              }}
+            >
+              August
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(9);
+              }}
+            >
+              September
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(10);
+              }}
+            >
+              October
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(11);
+              }}
+            >
+              November
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setMonthFilter(12);
+              }}
+            >
+              December
+            </button>
 
-      {activeTab === "Weekly" && <Bar data={data} options={options} />}
-
-      {activeTab === "Monthly" && <Bar data={data} options={options} />}
-
-      {activeTab === "Yearly" && <Bar data={data} options={options} />}
+            <div>
+              <h7>Year Filter:</h7>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setYearFilter(2021);
+                }}
+              >
+                2021
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setYearFilter(2022);
+                }}
+              >
+                2022
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setYearFilter(2023);
+                }}
+              >
+                2023
+              </button>
+            </div>
+          </div>
+        )}
+        <div>
+          <h2>
+            {activeTab === "Weekly" || activeTab === "Daily" ? (
+              <h2>{`${monthFilter} ${yearFilter}`}</h2>
+            ) : null}
+            {activeTab === "Monthly" && <h2>{`${yearFilter}`}</h2>}
+          </h2>
+        </div>
+        {activeTab === "Daily" && <Bar data={data} options={options} />}
+        {activeTab === "Weekly" && <Bar data={data} options={options} />}
+        {activeTab === "Monthly" && <Bar data={data} options={options} />}
+        {activeTab === "Yearly" && <Bar data={data} options={options} />}
+      </div>
     </div>
   );
 };

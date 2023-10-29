@@ -8,7 +8,7 @@ const Users = () => {
       <div class="d-flex align-items-center">
         <div className="col">
           <div class="input-group">
-            <input
+            {/* <input
               className="form-control"
               type="search"
               placeholder="Username"
@@ -18,7 +18,7 @@ const Users = () => {
               <button type="button" class="btn btn-dark">
                 Search
               </button>
-            </div>
+            </div> */}
 
             <div className="col-auto ms-2">
               <Link to="/addUser">

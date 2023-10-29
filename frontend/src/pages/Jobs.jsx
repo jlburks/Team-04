@@ -8,9 +8,9 @@ const Jobs = () => {
     <form>
       <h1>Jobs</h1>
       <div class="d-flex align-items-center">
-      <div className="col">
-        <div class="input-group">
-        <input
+        <div className="col">
+          <div class="input-group">
+            {/* <input
           className="form-control"
           type="search"
           placeholder="Job name"
@@ -20,18 +20,17 @@ const Jobs = () => {
         <div className="col-auto">
         <button type="button" class="btn btn-dark">Search
         </button>
-        </div>
+        </div> */}
 
-
-        <div className="col-auto ms-2">
-        <Link to="/addJob">
-          <button type="button" class="btn btn-dark">
-            Add new Job
-          </button>
-        </Link>
+            <div className="col-auto ms-2">
+              <Link to="/addJob">
+                <button type="button" class="btn btn-dark">
+                  Add new Job
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
       </div>
 
       <JobCollection action="delete" />
