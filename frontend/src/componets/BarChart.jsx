@@ -28,12 +28,15 @@ const BarChart = (props) => {
       const existingData = {}; // Create an object to store existing data by date
 
       // Iterate through the existing data and update the total_seconds
+
       filteredTimes.dailyTimes.forEach((time) => {
-        const date = time.workday.split("T")[0];
-        if (existingData[date]) {
-          existingData[date] += time.total_seconds / 3600;
-        } else {
-          existingData[date] = time.total_seconds / 3600;
+        if (time.workyear === yearFilter && time.workmonth === monthFilter) {
+          const date = time.workday.split("T")[0];
+          if (existingData[date]) {
+            existingData[date] += time.total_seconds / 3600;
+          } else {
+            existingData[date] = time.total_seconds / 3600;
+          }
         }
       });
 
@@ -46,19 +49,21 @@ const BarChart = (props) => {
       // Iterate through the existing data and update the total_seconds
       console.log("WEEKLY TIMES ===> ", filteredTimes.weeklyTimes);
       filteredTimes.weeklyTimes.forEach((time) => {
-        if (time.workyear !== null) {
-          const weekKey =
-            time.week_start_date.split("T")[0] +
-            " - " +
-            time.week_end_date.split("T")[0];
-          if (existingData[weekKey]) {
-            existingData[weekKey].total_seconds += time.total_seconds;
-          } else {
-            existingData[weekKey] = {
-              start_date: time.week_start_date.split("T")[0],
-              end_date: time.week_end_date.split("T")[0],
-              total_seconds: time.total_seconds,
-            };
+        if (time.workyear === yearFilter && time.workmonth === monthFilter) {
+          if (time.workyear !== null) {
+            const weekKey =
+              time.week_start_date.split("T")[0] +
+              " - " +
+              time.week_end_date.split("T")[0];
+            if (existingData[weekKey]) {
+              existingData[weekKey].total_seconds += time.total_seconds;
+            } else {
+              existingData[weekKey] = {
+                start_date: time.week_start_date.split("T")[0],
+                end_date: time.week_end_date.split("T")[0],
+                total_seconds: time.total_seconds,
+              };
+            }
           }
         }
       });
@@ -89,15 +94,17 @@ const BarChart = (props) => {
 
       // Iterate through the existing data and update the total_seconds
       filteredTimes.monthlyTimes.forEach((time) => {
-        const month = time.workmonth;
+        if (time.workyear === yearFilter) {
+          const month = time.workmonth;
 
-        // Ignore months with a value of 0
-        if (month !== 0) {
-          const monthName = monthNames[month];
-          if (existingData[monthName]) {
-            existingData[monthName] += time.total_seconds / 3600;
-          } else {
-            existingData[monthName] = time.total_seconds / 3600;
+          // Ignore months with a value of 0
+          if (month !== 0) {
+            const monthName = monthNames[month];
+            if (existingData[monthName]) {
+              existingData[monthName] += time.total_seconds / 3600;
+            } else {
+              existingData[monthName] = time.total_seconds / 3600;
+            }
           }
         }
       });
