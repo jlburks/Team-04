@@ -16,6 +16,8 @@ Route.get("/userTimes", verifyUser, (req, res) => {
   connection.query(
     `SELECT
     DATE(start_time) AS workday,
+    MONTH(start_time) AS workmonth, 
+    YEAR(start_time) AS workyear,
     project_id,
     user_id,
     SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
@@ -25,12 +27,14 @@ WHERE
     user_id = ?
 GROUP BY
     workday,
+    workmonth, -- Add workmonth to GROUP BY
     project_id,
     user_id
 HAVING 
-  total_seconds > 0
-  ORDER BY
-    workday;`,
+    total_seconds > 0
+ORDER BY
+    workday;
+`,
     [userId],
     (e, dTimes) => {
       if (e) {
@@ -43,6 +47,7 @@ HAVING
         `SELECT
         YEAR(week_start_date) AS workyear,
         WEEK(week_start_date) AS workweek,
+        MONTH(subquery.start_time) AS workmonth,
         MIN(week_start_date) AS week_start_date,
         MAX(week_end_date) AS week_end_date,
         project_id,
@@ -54,6 +59,7 @@ HAVING
             DATE_ADD(DATE(start_time - INTERVAL WEEKDAY(start_time) DAY), INTERVAL 6 DAY) AS week_end_date,
             project_id,
             user_id,
+            start_time,  -- Include start_time in the subquery result
             SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time)))/3600 AS total_seconds
         FROM
             workHours
@@ -68,7 +74,8 @@ HAVING
         workyear,
         workweek,
         project_id,
-        user_id`,
+        user_id
+    `,
         [userId],
         (e, wTimes) => {
           if (e) {

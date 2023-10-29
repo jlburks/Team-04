@@ -44,6 +44,7 @@ const BarChart = (props) => {
       const existingData = {};
 
       // Iterate through the existing data and update the total_seconds
+      console.log("WEEKLY TIMES ===> ", filteredTimes.weeklyTimes);
       filteredTimes.weeklyTimes.forEach((time) => {
         if (time.workyear !== null) {
           const weekKey =
