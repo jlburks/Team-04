@@ -17,8 +17,8 @@ const BarChart = (props) => {
   const [cLabels, setCLabels] = useState([]);
   const [cData, setCData] = useState([]);
 
-  const [yearFilter, setYearFilter] = useState(2023);
-  const [monthFilter, setMonthFilter] = useState(10);
+  const [yearFilter, setYearFilter] = useState("");
+  const [monthFilter, setMonthFilter] = useState("");
 
   const monthlyNames = [
     "January",
@@ -36,6 +36,17 @@ const BarChart = (props) => {
   ];
 
   useEffect(() => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (monthFilter == "" && yearFilter == "") {
+      setMonthFilter(currentMonth);
+      setYearFilter(currentYear);
+    }
+
+    console.log("MONTH ==>", currentMonth);
+    console.log("YEAR ==>", currentYear);
     let filteredDailyTime;
     console.log("BarChart ==>", props);
     let filteredTimes = props.times;
@@ -245,38 +256,43 @@ const BarChart = (props) => {
                 e.preventDefault();
                 setMonthFilter(1);
               }}
+              className="btn btn-primary"
             >
-              January
+              Jan
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(2);
               }}
+              className="btn btn-primary"
             >
-              February
+              Feb
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(3);
               }}
+              className="btn btn-primary"
             >
-              March
+              Mar
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(4);
               }}
+              className="btn btn-primary"
             >
-              April
+              Apr
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(5);
               }}
+              className="btn btn-primary"
             >
               May
             </button>
@@ -285,56 +301,63 @@ const BarChart = (props) => {
                 e.preventDefault();
                 setMonthFilter(6);
               }}
+              className="btn btn-primary"
             >
-              June
+              Jun
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(7);
               }}
+              className="btn btn-primary"
             >
-              July
+              Jul
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(8);
               }}
+              className="btn btn-primary"
             >
-              August
+              Aug
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(9);
               }}
+              className="btn btn-primary"
             >
-              September
+              Sep
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(10);
               }}
+              className="btn btn-primary"
             >
-              October
+              Oct
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(11);
               }}
+              className="btn btn-primary"
             >
-              November
+              Nov
             </button>
             <button
               onClick={(e) => {
                 e.preventDefault();
                 setMonthFilter(12);
               }}
+              className="btn btn-primary"
             >
-              December
+              Dec
             </button>
 
             <div>
@@ -344,6 +367,7 @@ const BarChart = (props) => {
                   e.preventDefault();
                   setYearFilter(2021);
                 }}
+                className="btn btn-primary"
               >
                 2021
               </button>
@@ -352,6 +376,7 @@ const BarChart = (props) => {
                   e.preventDefault();
                   setYearFilter(2022);
                 }}
+                className="btn btn-primary"
               >
                 2022
               </button>
@@ -360,6 +385,7 @@ const BarChart = (props) => {
                   e.preventDefault();
                   setYearFilter(2023);
                 }}
+                className="btn btn-primary"
               >
                 2023
               </button>
@@ -370,8 +396,9 @@ const BarChart = (props) => {
           <h2>
             {activeTab === "Weekly" || activeTab === "Daily" ? (
               <h2>{`${monthlyNames[monthFilter - 1]} ${yearFilter}`}</h2>
+            ) : activeTab === "Monthly" ? (
+              <h2>{`${yearFilter}`}</h2>
             ) : null}
-            {activeTab === "Monthly" && <h2>{`${yearFilter}`}</h2>}
           </h2>
         </div>
         {activeTab === "Daily" && <Bar data={data} options={options} />}

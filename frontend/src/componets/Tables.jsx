@@ -129,9 +129,9 @@ const ReportTable = (props) => {
 
   return (
     <>
-      <h1>{props.activeTab}</h1>
+      {/* <h1>{props.activeTab}</h1>
       <h1>{props.yearFilter}</h1>
-      <h1>{props.monthName}</h1>
+      <h1>{props.monthName}</h1> */}
       <table className="table table-striped">
         <thead>
           <tr>{tableHeaders}</tr>
