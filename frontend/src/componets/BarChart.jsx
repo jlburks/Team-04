@@ -72,12 +72,18 @@ const BarChart = (props) => {
               " - " +
               time.week_end_date.split("T")[0];
             if (existingData[weekKey]) {
-              existingData[weekKey].total_seconds += time.total_seconds;
+              console.log(
+                "MATCH NOW ADD",
+                Number(existingData[weekKey].total_seconds) +
+                  Number(time.total_seconds)
+              );
+              existingData[weekKey].total_seconds += Number(time.total_seconds);
             } else {
+              console.log("TIEMPOOO", time.total_seconds);
               existingData[weekKey] = {
                 start_date: time.week_start_date.split("T")[0],
                 end_date: time.week_end_date.split("T")[0],
-                total_seconds: time.total_seconds,
+                total_seconds: Number(time.total_seconds),
               };
             }
           }
@@ -85,7 +91,11 @@ const BarChart = (props) => {
       });
 
       const labels = Object.keys(existingData);
-      const data = labels.map((key) => existingData[key].total_seconds);
+      console.log("LABELSSSS ===>", labels);
+      const data = labels.map((key) => {
+        console.log("TOTAL SECONDS => ", existingData[key].total_seconds);
+        return existingData[key].total_seconds / 3600;
+      });
 
       setCLabels(labels);
       setCData(data);

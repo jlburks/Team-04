@@ -60,7 +60,7 @@ ORDER BY
             project_id,
             user_id,
             start_time,  -- Include start_time in the subquery result
-            SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time)))/3600 AS total_seconds
+            SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
         FROM
             workHours
         WHERE
