@@ -216,7 +216,7 @@ const BarChart = (props) => {
       </div>
 
       <div>
-        {(activeTab === "Monthly" || activeTab === "Weekly") && (
+        {activeTab === "Monthly" && (
           <div>
             <h7>Year Filter:</h7>
             <button
@@ -225,6 +225,7 @@ const BarChart = (props) => {
                 setYearFilter(2021);
                 setMonthFilter("");
               }}
+              className="btn btn-primary"
             >
               2021
             </button>
@@ -234,6 +235,7 @@ const BarChart = (props) => {
                 setYearFilter(2022);
                 setMonthFilter("");
               }}
+              className="btn btn-primary"
             >
               2022
             </button>
@@ -243,6 +245,7 @@ const BarChart = (props) => {
                 setYearFilter(2023);
                 setMonthFilter("");
               }}
+              className="btn btn-primary"
             >
               2023
             </button>

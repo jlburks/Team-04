@@ -34,11 +34,7 @@ const Reports = () => {
     <form>
       <div>
         <h1>Reports</h1>
-        <div>
-          {/* {Object.keys(chartData).length > 0 && (
-            <ReportTable times={chartData} />
-          )} */}
-        </div>
+        <div></div>
         <br />
         <br />
         <div>

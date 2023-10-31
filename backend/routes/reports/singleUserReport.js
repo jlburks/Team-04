@@ -15,25 +15,32 @@ Route.get("/userTimes", verifyUser, (req, res) => {
   const userId = req.userId;
   connection.query(
     `SELECT
-    DATE(start_time) AS workday,
-    MONTH(start_time) AS workmonth, 
-    YEAR(start_time) AS workyear,
-    project_id,
-    user_id,
-    SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
+    DATE(w.start_time) AS workday,
+    MONTH(w.start_time) AS workmonth, 
+    YEAR(w.start_time) AS workyear,
+    w.project_id,
+    w.user_id,
+    SUM(TIME_TO_SEC(TIMEDIFF(w.end_time, w.start_time))) AS total_seconds,
+    j.name AS jobName
 FROM
-    workHours
+    workHours w
+JOIN
+    jobs j
+ON
+    w.project_id = j.id
 WHERE
-    user_id = ?
+    w.user_id = ?
 GROUP BY
     workday,
-    workmonth, -- Add workmonth to GROUP BY
-    project_id,
-    user_id
+    workmonth,
+    workyear,
+    w.project_id,
+    w.user_id,
+    j.name
 HAVING 
     total_seconds > 0
 ORDER BY
-    workday;
+    workday;;
 `,
     [userId],
     (e, dTimes) => {
@@ -52,29 +59,35 @@ ORDER BY
         MAX(week_end_date) AS week_end_date,
         project_id,
         user_id,
-        SUM(total_seconds) AS total_seconds
+        SUM(total_seconds) AS total_seconds,
+        subquery.name AS jobName
     FROM (
         SELECT
             DATE(start_time - INTERVAL WEEKDAY(start_time) DAY) AS week_start_date,
             DATE_ADD(DATE(start_time - INTERVAL WEEKDAY(start_time) DAY), INTERVAL 6 DAY) AS week_end_date,
-            project_id,
-            user_id,
-            start_time,  -- Include start_time in the subquery result
-            SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
+            w.project_id,
+            w.user_id,
+            start_time,
+            SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds,
+            j.name
         FROM
-            workHours
+            workHours w
+        JOIN
+            jobs j
+        ON
+            w.project_id = j.id
         WHERE
-            user_id = ?
+            w.user_id = ?
         GROUP BY
             week_start_date,
-            project_id,
-            user_id
+            w.project_id,
+            w.user_id, start_time, j.name
     ) AS subquery
     GROUP BY
         workyear,
         workweek,
         project_id,
-        user_id
+        user_id;
     `,
         [userId],
         (e, wTimes) => {
@@ -86,22 +99,30 @@ ORDER BY
           }
           connection.query(
             `SELECT
-            YEAR(start_time) AS workyear,
-            MONTH(start_time) AS workmonth,
-            MIN(start_time) AS month_start_date,
-            MAX(end_time) AS month_end_date,
-            project_id,
-            user_id,
-            SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
+            YEAR(w.start_time) AS workyear,
+            MONTH(w.start_time) AS workmonth,
+            MIN(w.start_time) AS month_start_date,
+            MAX(w.end_time) AS month_end_date,
+            w.project_id,
+            w.user_id,
+            SUM(TIME_TO_SEC(TIMEDIFF(w.end_time, w.start_time))) AS total_seconds,
+            j.name AS jobName
         FROM
-            workHours
+            workHours w
+        JOIN
+            jobs j
+        ON
+            w.project_id = j.id
         WHERE
-            user_id = ?
+            w.user_id = ?
         GROUP BY
             workyear,
             workmonth,
-            project_id,
-            user_id`,
+            w.project_id,
+            w.user_id,
+            j.name
+        ORDER BY
+            workyear, workmonth;`,
             [userId],
             (e, mTimes) => {
               if (e) {
@@ -112,20 +133,28 @@ ORDER BY
               }
               connection.query(
                 `SELECT
-                YEAR(start_time) AS workyear,
-                MIN(start_time) AS year_start_date,
-                MAX(end_time) AS year_end_date,
-                project_id,
-                user_id,
-                SUM(TIME_TO_SEC(TIMEDIFF(end_time, start_time))) AS total_seconds
+                YEAR(w.start_time) AS workyear,
+                MIN(w.start_time) AS year_start_date,
+                MAX(w.end_time) AS year_end_date,
+                w.project_id,
+                w.user_id,
+                SUM(TIME_TO_SEC(TIMEDIFF(w.end_time, w.start_time))) AS total_seconds,
+                j.name AS jobName
             FROM
-                workHours
+                workHours w
+            JOIN
+                jobs j
+            ON
+                w.project_id = j.id
             WHERE
-                user_id = ?
+                w.user_id = ?
             GROUP BY
                 workyear,
-                project_id,
-                user_id`,
+                w.project_id,
+                w.user_id,
+                j.name
+            ORDER BY
+                workyear;`,
                 [userId],
                 (e, yTimes) => {
                   if (e) {
