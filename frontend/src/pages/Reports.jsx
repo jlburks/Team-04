@@ -3,7 +3,7 @@ import axios from "axios";
 import BarChart from "../componets/BarChart";
 import ReportTable from "../componets/Tables";
 
-const Reports = () => {
+const Reports = (props) => {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
@@ -38,6 +38,9 @@ const Reports = () => {
         <br />
         <br />
         <div>
+          {/* {props.isAdmin && 
+
+          } */}
           {Object.keys(chartData).length > 0 && <BarChart times={chartData} />}
         </div>
       </div>

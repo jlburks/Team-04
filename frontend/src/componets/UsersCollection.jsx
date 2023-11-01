@@ -6,6 +6,11 @@ import UsersProfile from "./UsersProfile";
 
 const UserCollection = () => {
   const [usersArr, setUsersArr] = useState([]);
+  const [deleted, setDeleted] = useState(0);
+
+  const isUserDeleted = () => {
+    setDeleted(deleted + 1);
+  };
 
   useEffect(() => {
     const config = {
@@ -30,6 +35,7 @@ const UserCollection = () => {
                 hourly_pay={user.hourly_pay}
                 role={user.role}
                 userId={user.id}
+                isUserDeleted={isUserDeleted}
               />
             </div>
           );
@@ -40,7 +46,7 @@ const UserCollection = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [deleted]);
 
   return (
     <div className="container text-center">

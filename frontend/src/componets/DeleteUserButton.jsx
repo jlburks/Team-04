@@ -29,8 +29,10 @@ const DeleteUserButton = (props) => {
         `http://127.0.0.1:3000/users/deleteUser/${props.userId}`,
         config
       );
+      console.log("ENTERED>>");
       if (response.status === 200 || response.status === 204) {
         console.log("Deletion Successful");
+        return props.isUserDeleted();
       } else {
         console.error("Unexpected response:", response);
       }

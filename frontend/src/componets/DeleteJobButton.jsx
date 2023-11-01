@@ -31,6 +31,7 @@ const DeleteJobButton = (props) => {
       );
       if (response.status === 200 || response.status === 204) {
         console.log("Deletion Successful");
+        return props.isJobDeleted();
       } else {
         console.error("Unexpected response:", response);
       }

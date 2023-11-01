@@ -11,7 +11,7 @@ const UsersProfile = (props) => {
     <div>
       <tr className="hoverable-row">
         <td>{props.username}</td>
-        <td>{props.hourly_pay}</td>
+        <td>${props.hourly_pay}</td>
         <td>{props.role}</td>
         <td>
           <Link to={`/users/editUser/${props.userId}`}>
@@ -35,7 +35,10 @@ const UsersProfile = (props) => {
           </Link>
         </td>
         <td>
-          <DeleteUserButton userId={props.userId} />
+          <DeleteUserButton
+            userId={props.userId}
+            isUserDeleted={props.isUserDeleted}
+          />
         </td>
       </tr>
     </div>

@@ -12,27 +12,32 @@ const JobProfile = (props) => {
 
   return (
     <div>
-    <tr className="hoverable-row">
-    <td>{props.jobName}</td>
-    <td>{props.jobDescription}</td>
-    <td>{props.active == 1 ? "ACTIVE" : "INACTIVE"}</td>
-    <td>
-      {props.action === "delete" && (
-        <Link to={`/admin/editJob/${props.jobId}`}>
-        <button type="button" class="btn">
-        <img src={EditIcon} alt="Edit Job" />          
-        </button>
-        </Link>
-      )}
-    </td>
-    <td>
-      {props.action === "delete" && <DeleteJobButton jobId={props.jobId} />}
-      {props.action === "add" && (
-        <AddToJob jobId={props.jobId} userId={props.currentUserId} />
-      )}
-    </td>
-    </tr>
-  </div>
+      <tr className="hoverable-row">
+        <td>{props.jobName}</td>
+        <td>{props.jobDescription}</td>
+        <td>{props.active == 1 ? "ACTIVE" : "INACTIVE"}</td>
+        <td>
+          {props.action === "delete" && (
+            <Link to={`/admin/editJob/${props.jobId}`}>
+              <button type="button" class="btn">
+                <img src={EditIcon} alt="Edit Job" />
+              </button>
+            </Link>
+          )}
+        </td>
+        <td>
+          {props.action === "delete" && (
+            <DeleteJobButton
+              jobId={props.jobId}
+              isJobDeleted={props.isJobDeleted}
+            />
+          )}
+          {props.action === "add" && (
+            <AddToJob jobId={props.jobId} userId={props.currentUserId} />
+          )}
+        </td>
+      </tr>
+    </div>
   );
 };
 

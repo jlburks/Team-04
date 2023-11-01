@@ -6,6 +6,11 @@ import JobProfile from "./JobProfile";
 
 const JobCollection = (props) => {
   const [jobsArr, setJobsArr] = useState([]);
+  const [deleted, setDeleted] = useState(0);
+
+  const isJobDeleted = () => {
+    setDeleted(deleted + 1);
+  };
 
   useEffect(() => {
     const config = {
@@ -32,6 +37,7 @@ const JobCollection = (props) => {
                   jobId={job.id}
                   action={props.action}
                   currentUserId={props.currentUserId}
+                  isJobDeleted={isJobDeleted}
                 />
               </div>
             </div>
@@ -43,11 +49,11 @@ const JobCollection = (props) => {
       }
     };
     fetchJobs();
-  }, []);
+  }, [deleted]);
 
   return (
     <div className="container text-center">
-    <table className="table table-responsive table-hover">
+      <table className="table table-responsive table-hover">
         <thead className="table-light">
           <tr>
             <th>Job Name</th>
@@ -58,9 +64,9 @@ const JobCollection = (props) => {
           </tr>
         </thead>
         <tbody>
-      <div>{jobsArr}</div>
-      </tbody>
-    </table>
+          <div>{jobsArr}</div>
+        </tbody>
+      </table>
     </div>
   );
 };

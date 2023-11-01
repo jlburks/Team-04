@@ -37,7 +37,7 @@ function App() {
             <Route path="/" element={<CheckInCheckOut />} />
             <Route path="/addJob" element={<AddJob />} />
             <Route path="/addUser" element={<AddUser />} />
-            <Route path="/reports" element={<Reports />} />
+            <Route path="/reports" element={<Reports isAdmin={isAdmin} />} />
             {isAdmin && <Route path="/admin/Jobs" element={<Jobs />} />}
             {isAdmin && <Route path="/admin/Users" element={<Users />} />}
             {isAdmin && (

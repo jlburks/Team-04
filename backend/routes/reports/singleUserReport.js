@@ -13,6 +13,7 @@ Route.get("/userTimes", verifyUser, (req, res) => {
   const token = req.headers.authorization.replace("Bearer ", "").trim();
   console.log("TOKEN =>", token);
   const userId = req.userId;
+  console.log("User Id", userId);
   connection.query(
     `SELECT
     DATE(w.start_time) AS workday,
