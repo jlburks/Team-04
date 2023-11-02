@@ -126,7 +126,7 @@ const BarChart = (props) => {
       setCData(data);
     } else if (activeTab === "Monthly") {
       const monthNames = [
-        "", // Empty string to align with month numbers (January is at index 1)
+        "",
         "January",
         "February",
         "March",
@@ -141,14 +141,12 @@ const BarChart = (props) => {
         "December",
       ];
 
-      const existingData = {}; // Create an object to store existing data by month
+      const existingData = {};
 
-      // Iterate through the existing data and update the total_seconds
       filteredTimes.monthlyTimes.forEach((time) => {
         if (time.workyear === yearFilter) {
           const month = time.workmonth;
 
-          // Ignore months with a value of 0
           if (month !== 0) {
             const monthName = monthNames[month];
             if (existingData[monthName]) {
@@ -160,7 +158,6 @@ const BarChart = (props) => {
         }
       });
 
-      // Convert the object back to arrays for CLabels and CData
       setCLabels(Object.keys(existingData));
       setCData(Object.values(existingData));
     } else if (activeTab === "Yearly") {
@@ -169,12 +166,10 @@ const BarChart = (props) => {
       filteredTimes.yearlyTimes.forEach((time) => {
         const year = time.workyear;
 
-        // Create an entry for each year and initialize the total seconds to 0
         if (!existingData[year]) {
           existingData[year] = 0;
         }
 
-        // Add the total seconds to the respective year
         existingData[year] += time.total_seconds / 3600;
       });
       setCLabels(Object.keys(existingData));
@@ -183,11 +178,11 @@ const BarChart = (props) => {
   }, [props, activeTab, yearFilter, monthFilter]);
 
   const handleYearChange = (event) => {
-    setYearFilter(parseInt(event.target.value)); // Convert to integer
+    setYearFilter(parseInt(event.target.value));
   };
 
   const handleMonthChange = (event) => {
-    setMonthFilter(parseInt(event.target.value)); // Convert to integer
+    setMonthFilter(parseInt(event.target.value)); //
   };
 
   const data = {
@@ -207,6 +202,7 @@ const BarChart = (props) => {
 
   return (
     <div>
+      <h1>{props.selectedUser}</h1>
       <div className="nav nav-tabs">
         <div
           className={`nav-link ${activeTab === "Daily" ? "active" : ""}`}

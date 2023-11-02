@@ -39,7 +39,14 @@ Route.post("/", (req, res) => {
             { expiresIn: "2h" }
           );
           user[0].role === "admin"
-            ? res.status(200).json({ login: true, token: token, admin: true })
+            ? res
+                .status(200)
+                .json({
+                  login: true,
+                  token: token,
+                  admin: true,
+                  user_id: user[0].id,
+                })
             : res.status(200).json({ login: true, token: token, admin: false });
         } else {
           return res

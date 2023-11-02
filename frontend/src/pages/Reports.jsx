@@ -2,26 +2,36 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import BarChart from "../componets/BarChart";
 import ReportTable from "../componets/Tables";
+import UserDropDown from "../componets/UserDropDown";
 
 const Reports = (props) => {
+  console.log("REPORT PROPS", props);
   const [chartData, setChartData] = useState({});
-  console.log("props from report", props);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const getSelectedUser = (sUser, sUserId) => {
+    setSelectedUser(sUser);
+  };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [selectedUser]);
 
   const fetchData = async () => {
     try {
+      const requestData = {
+        selectedUser: selectedUser,
+      };
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        selectedUser: 11,
+        selectedUser: selectedUser,
       };
-      const response = await axios.get(
+      const response = await axios.post(
         "http://127.0.0.1:3000/reports/userTimes",
+        requestData,
         config
       );
       console.log("RESPONSE =>>>", response.data);
@@ -36,14 +46,14 @@ const Reports = (props) => {
     <form>
       <div>
         <h1>Reports</h1>
-        <div></div>
-        <br />
         <br />
         <div>
-          {/* {props.isAdmin && 
-
-          } */}
-          {Object.keys(chartData).length > 0 && <BarChart times={chartData} />}
+          {props.isAdmin && (
+            <UserDropDown setUser={setSelectedUser} adminId={props.adminId} />
+          )}
+          {Object.keys(chartData).length > 0 && (
+            <BarChart times={chartData} selectedUser={selectedUser} />
+          )}
         </div>
       </div>
     </form>

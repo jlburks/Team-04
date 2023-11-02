@@ -23,6 +23,7 @@ const Login = (props) => {
         localStorage.setItem("token", data.data.token);
         props.setIsLoggedIn(data.data.login);
         props.setIsAdmin(data.data.admin);
+        props.setAdminId(data.data.user_id);
       })
       .catch((e) => {
         console.log("-----", e.response.data.error);
@@ -37,7 +38,7 @@ const Login = (props) => {
       });
   };
   return (
-    <form style={{ backgroundColor: 'white' }}>
+    <form style={{ backgroundColor: "white" }}>
       <h1>Login</h1>
       {error && <div className="alert alert-danger">{error}</div>}
       <div className="mb-3">
@@ -53,16 +54,11 @@ const Login = (props) => {
         />
       </div>
 
-      <button
-        type="submit"
-        className="btn btn-dark"
-        onClick={loginRequest}
-      >
+      <button type="submit" className="btn btn-dark" onClick={loginRequest}>
         Submit
       </button>
     </form>
-);
+  );
 };
 
 export default Login;
-

@@ -18,6 +18,7 @@ import AssignJob from "./pages/AssignJob";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [adminId, setAdminId] = useState(0);
 
   return (
     <div className="app-container">
@@ -36,7 +37,10 @@ function App() {
             <Route path="/" element={<CheckInCheckOut />} />
             <Route path="/addJob" element={<AddJob />} />
             <Route path="/addUser" element={<AddUser />} />
-            <Route path="/reports" element={<Reports isAdmin={isAdmin} />} />
+            <Route
+              path="/reports"
+              element={<Reports isAdmin={isAdmin} adminId={adminId} />}
+            />
             {isAdmin && <Route path="/admin/Jobs" element={<Jobs />} />}
             {isAdmin && <Route path="/admin/Users" element={<Users />} />}
             {isAdmin && (
@@ -64,7 +68,11 @@ function App() {
         ) : (
           <div>
             <nav className="navbar-light bg-light">
-              <Login setIsLoggedIn={setIsLoggedIn} setIsAdmin={setIsAdmin} />
+              <Login
+                setIsLoggedIn={setIsLoggedIn}
+                setIsAdmin={setIsAdmin}
+                setAdminId={setAdminId}
+              />
             </nav>
           </div>
         )}
