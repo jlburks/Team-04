@@ -143,7 +143,7 @@ const ReportTable = (props) => {
 
       return (
         <tr key={index}>
-          <td>{`${monthlyNames[rowData.workmonth]}`}</td>
+          <td>{`${monthlyNames[rowData.workmonth - 1]}`}</td>
           <td>{rowData.jobName}</td>
           <td>{formattedTime}</td>
         </tr>

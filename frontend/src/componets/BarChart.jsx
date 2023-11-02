@@ -14,7 +14,6 @@ import {
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const BarChart = (props) => {
-  console.log("PROPS =======", props);
   const [activeTab, setActiveTab] = useState("Daily");
   const [cLabels, setCLabels] = useState([]);
   const [cData, setCData] = useState([]);
@@ -46,7 +45,6 @@ const BarChart = (props) => {
   ];
 
   useEffect(() => {
-    console.log("C DATA ===>>", cData);
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
@@ -67,7 +65,10 @@ const BarChart = (props) => {
 
       filteredTimes.dailyTimes.forEach((time) => {
         if (time.workyear === yearFilter && time.workmonth === monthFilter) {
-          const date = new Date(time.workday.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+          const date = new Date(time.workday.split("T")[0]).toLocaleDateString(
+            "en-US",
+            { year: "numeric", month: "2-digit", day: "2-digit" }
+          );
           if (existingData[date]) {
             existingData[date] += time.total_seconds / 3600;
           } else {
@@ -83,22 +84,28 @@ const BarChart = (props) => {
       const existingData = {};
 
       // Iterate through the existing data and update the total_seconds
-      console.log("WEEKLY TIMES ===> ", filteredTimes.weeklyTimes);
+
       filteredTimes.weeklyTimes.forEach((time) => {
         if (time.workyear === yearFilter && time.workmonth === monthFilter) {
           if (time.workyear !== null) {
-            const startDate = new Date(time.week_start_date.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
-            const endDate = new Date(time.week_end_date.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const startDate = new Date(
+              time.week_start_date.split("T")[0]
+            ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            });
+            const endDate = new Date(
+              time.week_end_date.split("T")[0]
+            ).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            });
             const weekKey = `${startDate} - ${endDate}`;
             if (existingData[weekKey]) {
-              console.log(
-                "MATCH NOW ADD",
-                Number(existingData[weekKey].total_seconds) +
-                  Number(time.total_seconds)
-              );
               existingData[weekKey].total_seconds += Number(time.total_seconds);
             } else {
-              console.log("TIEMPOOO", time.total_seconds);
               existingData[weekKey] = {
                 start_date: startDate,
                 end_date: endDate,
@@ -110,9 +117,8 @@ const BarChart = (props) => {
       });
 
       const labels = Object.keys(existingData);
-      console.log("LABELSSSS ===>", labels);
+
       const data = labels.map((key) => {
-        console.log("TOTAL SECONDS => ", existingData[key].total_seconds);
         return existingData[key].total_seconds / 3600;
       });
 
@@ -230,21 +236,29 @@ const BarChart = (props) => {
         </div>
       </div>
       <div>
-        {(activeTab === "Monthly") && (
+        {activeTab === "Monthly" && (
           <div>
             <h6>Year Filter:</h6>
-          <select value={yearFilter} onChange={handleYearChange} className="form-select">
-            <option value="">Select Year</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-          </select>
+            <select
+              value={yearFilter}
+              onChange={handleYearChange}
+              className="form-select"
+            >
+              <option value="">Select Year</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+            </select>
           </div>
         )}
         {(activeTab === "Daily" || activeTab === "Weekly") && (
           <div>
             <h6>Month Filter:</h6>
-            <select value={monthFilter} onChange={handleMonthChange} className="form-select">
+            <select
+              value={monthFilter}
+              onChange={handleMonthChange}
+              className="form-select"
+            >
               <option value="">Select Month</option>
               <option value="1">January</option>
               <option value="2">February</option>
@@ -262,7 +276,11 @@ const BarChart = (props) => {
 
             <div>
               <h6>Year Filter:</h6>
-              <select value={yearFilter} onChange={handleYearChange} className="form-select">
+              <select
+                value={yearFilter}
+                onChange={handleYearChange}
+                className="form-select"
+              >
                 <option value="">Select Year</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
@@ -280,7 +298,6 @@ const BarChart = (props) => {
         </div>
 
         <>
-          {console.log("DATA ===>>", data.labels)}
           {data.labels.length > 0 ? (
             <>
               {activeTab === "Daily" && <Bar data={data} options={options} />}
