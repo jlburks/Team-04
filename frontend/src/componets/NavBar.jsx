@@ -10,6 +10,11 @@ const NavBar = (props) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bs-side-navbar">
       <ul className="navbar-nav">
+      <li><img
+            className="logo"
+            src="http://www.techprousa.com/wp-content/uploads/2015/08/logo.png"
+            alt="TechPro Constructions"
+          ></img></li>
         {props.isLoggedIn && (
           <>
             <li className="nav-item">

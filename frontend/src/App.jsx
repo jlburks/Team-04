@@ -24,10 +24,6 @@ function App() {
     <div className="app-container">
       <div className="sidebar">
         <div className="logo-container">
-          <img
-            src="http://www.techprousa.com/wp-content/uploads/2015/08/logo.png"
-            alt="TechPro Constructions"
-          ></img>
         </div>
         <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} />{" "}
       </div>
