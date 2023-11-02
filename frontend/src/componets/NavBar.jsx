@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
   const navbarClasses = props.isLoggedIn ? "navbar" : "navbar expanded-navbar";
+  const Logout = () => {
+    window.location.reload();
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bs-side-navbar">
@@ -36,6 +39,11 @@ const NavBar = (props) => {
           </li>
         )}
       </ul>
+      {props.isLoggedIn && (
+        <button onClick={Logout} class="btn btn-danger">
+          Logout
+        </button>
+      )}
     </nav>
   );
 };

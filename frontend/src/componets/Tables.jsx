@@ -32,7 +32,11 @@ const ReportTable = (props) => {
 
   const formatISODate = (isoDate) => {
     const date = new Date(isoDate);
-    const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+    const formattedDate = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
     return formattedDate;
   };
   console.log("REPORT TABLE TIMES ===>", props.data);
