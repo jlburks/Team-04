@@ -7,9 +7,7 @@ const Jobs = () => {
   return (
     <form>
       <h1>Jobs</h1>
-      <div class="d-flex align-items-center">
-        <div className="col">
-          <div class="input-group">
+      <div class="d-flex flex-column align-items-center">
             {/* <input
           className="form-control"
           type="search"
@@ -21,20 +19,16 @@ const Jobs = () => {
         <button type="button" class="btn btn-dark">Search
         </button>
         </div> */}
-
-            <div className="col-auto ms-2">
-              <Link to="/addJob">
-                <button type="button" class="btn btn-dark">
-                  Add new Job
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <JobCollection action="delete" />
-    </form>
+      <div class="mt-3">
+        <Link to="/addJob">
+          <button type="button" class="btn btn-dark mt-3">
+            Add new Job
+          </button>
+        </Link>
+      </div>
+    </div>
+</form>
   );
 };
 

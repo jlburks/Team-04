@@ -67,7 +67,7 @@ const BarChart = (props) => {
 
       filteredTimes.dailyTimes.forEach((time) => {
         if (time.workyear === yearFilter && time.workmonth === monthFilter) {
-          const date = time.workday.split("T")[0];
+          const date = new Date(time.workday.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
           if (existingData[date]) {
             existingData[date] += time.total_seconds / 3600;
           } else {
@@ -87,10 +87,9 @@ const BarChart = (props) => {
       filteredTimes.weeklyTimes.forEach((time) => {
         if (time.workyear === yearFilter && time.workmonth === monthFilter) {
           if (time.workyear !== null) {
-            const weekKey =
-              time.week_start_date.split("T")[0] +
-              " - " +
-              time.week_end_date.split("T")[0];
+            const startDate = new Date(time.week_start_date.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const endDate = new Date(time.week_end_date.split("T")[0]).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const weekKey = `${startDate} - ${endDate}`;
             if (existingData[weekKey]) {
               console.log(
                 "MATCH NOW ADD",
@@ -101,8 +100,8 @@ const BarChart = (props) => {
             } else {
               console.log("TIEMPOOO", time.total_seconds);
               existingData[weekKey] = {
-                start_date: time.week_start_date.split("T")[0],
-                end_date: time.week_end_date.split("T")[0],
+                start_date: startDate,
+                end_date: endDate,
                 total_seconds: Number(time.total_seconds),
               };
             }
@@ -164,19 +163,26 @@ const BarChart = (props) => {
       filteredTimes.yearlyTimes.forEach((time) => {
         const year = time.workyear;
 
-        // Ignore entries with a value of 0
-        if (year !== 0) {
-          if (existingData[year]) {
-            existingData[year] += time.total_seconds / 3600;
-          } else {
-            existingData[year] = time.total_seconds / 3600;
-          }
+        // Create an entry for each year and initialize the total seconds to 0
+        if (!existingData[year]) {
+          existingData[year] = 0;
         }
+
+        // Add the total seconds to the respective year
+        existingData[year] += time.total_seconds / 3600;
       });
       setCLabels(Object.keys(existingData));
       setCData(Object.values(existingData));
     }
   }, [props, activeTab, yearFilter, monthFilter]);
+
+  const handleYearChange = (event) => {
+    setYearFilter(parseInt(event.target.value)); // Convert to integer
+  };
+
+  const handleMonthChange = (event) => {
+    setMonthFilter(parseInt(event.target.value)); // Convert to integer
+  };
 
   const data = {
     labels: cLabels,
@@ -224,182 +230,44 @@ const BarChart = (props) => {
         </div>
       </div>
       <div>
-        {activeTab === "Monthly" && (
+        {(activeTab === "Monthly") && (
           <div>
-            <h7>Year Filter:</h7>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setYearFilter(2021);
-                setMonthFilter("");
-              }}
-              className="btn btn-primary"
-            >
-              2021
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setYearFilter(2022);
-                setMonthFilter("");
-              }}
-              className="btn btn-primary"
-            >
-              2022
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setYearFilter(2023);
-                setMonthFilter("");
-              }}
-              className="btn btn-primary"
-            >
-              2023
-            </button>
+            <h6>Year Filter:</h6>
+          <select value={yearFilter} onChange={handleYearChange} className="form-select">
+            <option value="">Select Year</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+          </select>
           </div>
         )}
         {(activeTab === "Daily" || activeTab === "Weekly") && (
           <div>
-            <h7>Month Filter:</h7>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(1);
-              }}
-              className="btn btn-primary"
-            >
-              Jan
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(2);
-              }}
-              className="btn btn-primary"
-            >
-              Feb
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(3);
-              }}
-              className="btn btn-primary"
-            >
-              Mar
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(4);
-              }}
-              className="btn btn-primary"
-            >
-              Apr
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(5);
-              }}
-              className="btn btn-primary"
-            >
-              May
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(6);
-              }}
-              className="btn btn-primary"
-            >
-              Jun
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(7);
-              }}
-              className="btn btn-primary"
-            >
-              Jul
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(8);
-              }}
-              className="btn btn-primary"
-            >
-              Aug
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(9);
-              }}
-              className="btn btn-primary"
-            >
-              Sep
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(10);
-              }}
-              className="btn btn-primary"
-            >
-              Oct
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(11);
-              }}
-              className="btn btn-primary"
-            >
-              Nov
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                setMonthFilter(12);
-              }}
-              className="btn btn-primary"
-            >
-              Dec
-            </button>
+            <h6>Month Filter:</h6>
+            <select value={monthFilter} onChange={handleMonthChange} className="form-select">
+              <option value="">Select Month</option>
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
 
             <div>
-              <h7>Year Filter:</h7>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setYearFilter(2021);
-                }}
-                className="btn btn-primary"
-              >
-                2021
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setYearFilter(2022);
-                }}
-                className="btn btn-primary"
-              >
-                2022
-              </button>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  setYearFilter(2023);
-                }}
-                className="btn btn-primary"
-              >
-                2023
-              </button>
+              <h6>Year Filter:</h6>
+              <select value={yearFilter} onChange={handleYearChange} className="form-select">
+                <option value="">Select Year</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+              </select>
             </div>
           </div>
         )}

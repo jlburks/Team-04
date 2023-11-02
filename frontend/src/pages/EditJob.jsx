@@ -148,8 +148,8 @@ const EditJob = (props) => {
           </div>
         </fieldset>
 
-        <div class="form-check form-check-inline">
-          <div class="col-sm-10">
+        <div class="form-check form-check-inline  d-flex justify-content-center">
+          <div class="col-sm-10 d-flex justify-content-center">
             <button
               type="submit"
               class="btn btn-dark"
