@@ -5,6 +5,7 @@ import ReportTable from "../componets/Tables";
 
 const Reports = (props) => {
   const [chartData, setChartData] = useState({});
+  console.log("props from report", props);
 
   useEffect(() => {
     fetchData();
@@ -17,6 +18,7 @@ const Reports = (props) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
+        selectedUser: 11,
       };
       const response = await axios.get(
         "http://127.0.0.1:3000/reports/userTimes",

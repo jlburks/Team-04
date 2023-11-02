@@ -1,6 +1,18 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { CSVLink } from "react-csv";
 
 const ReportTable = (props) => {
+  const [requestedData, setRequestedData] = useState([]);
+
+  const formatCSVTime = (totalHours) => {
+    const hours = Math.floor(totalHours / 3600);
+    const minutes = Math.floor((totalHours % 3600) / 60);
+    const seconds = Math.floor(totalHours % 60);
+    const formattedTime = `${hours} hr ${minutes} min ${seconds} sec`;
+    return formattedTime;
+  };
+
   const monthlyNames = [
     "January",
     "February",
@@ -24,6 +36,7 @@ const ReportTable = (props) => {
   console.log("REPORT TABLE TIMES ===>", props.data);
 
   let tableHeaders;
+  let tableRows;
 
   if (props.activeTab === "Daily") {
     tableHeaders = (
@@ -59,8 +72,6 @@ const ReportTable = (props) => {
     );
   }
 
-  let tableRows;
-
   if (props.activeTab === "Daily") {
     const filteredData = props.data.dailyTimes.filter((rowData) => {
       return (
@@ -68,6 +79,7 @@ const ReportTable = (props) => {
         rowData.workyear === props.yearFilter
       );
     });
+    console.log("$$$$DAILY ==>", filteredData);
 
     tableRows = filteredData.map((rowData, index) => {
       const hours = Math.floor(rowData.total_seconds / 3600);
@@ -92,6 +104,7 @@ const ReportTable = (props) => {
         rowData.workyear === props.yearFilter
       );
     });
+    // setRequestedData(filteredData);
 
     tableRows = filteredData.map((rowData, index) => {
       const hours = Math.floor(rowData.total_seconds / 3600);
@@ -113,6 +126,7 @@ const ReportTable = (props) => {
     const filteredData = props.data.monthlyTimes.filter((rowData) => {
       return rowData.workyear === props.yearFilter;
     });
+    // setRequestedData(filteredData);
 
     tableRows = filteredData.map((rowData, index) => {
       const hours = Math.floor(rowData.total_seconds / 3600);
@@ -156,12 +170,39 @@ const ReportTable = (props) => {
 
   return (
     <>
-      <table className="table table-striped">
-        <thead>
-          <tr>{tableHeaders}</tr>
-        </thead>
-        <tbody>{tableRows}</tbody>
-      </table>
+      <div>
+        <table className="table table-striped">
+          <thead>
+            {console.log("Headers ===>>>>>", tableHeaders)}
+            {console.log("Rows ===>>>>>", tableRows)}
+            <tr>{tableHeaders}</tr>
+          </thead>
+          <tbody>{tableRows}</tbody>
+        </table>
+      </div>
+      {props.activeTab === "Daily" && (
+        <>
+          <CSVLink
+            data={props.data.dailyTimes
+              .filter((rowData) => {
+                return (
+                  rowData.workmonth === props.monthFilter &&
+                  rowData.workyear === props.yearFilter
+                );
+              })
+              .map((rowData) => {
+                return {
+                  workday: formatISODate(rowData.workday),
+                  total_hours: formatCSVTime(rowData.total_seconds),
+                  job_name: rowData.jobName,
+                };
+              })}
+            filename="userReports.csv"
+          >
+            Download CSV
+          </CSVLink>
+        </>
+      )}
     </>
   );
 };

@@ -3,6 +3,7 @@ import EditIcon from "../icons/edit.svg";
 import TrashIcon from "../icons/trash.svg";
 import PlusIcon from "../icons/plus-square.svg";
 import ChangePass from "../icons/arrow-repeat.svg";
+import ReportIcon from "../icons/newspaper.svg";
 import DeleteUserButton from "./DeleteUserButton";
 
 const UsersProfile = (props) => {
@@ -34,6 +35,7 @@ const UsersProfile = (props) => {
             </button>
           </Link>
         </td>
+
         <td>
           <DeleteUserButton
             userId={props.userId}

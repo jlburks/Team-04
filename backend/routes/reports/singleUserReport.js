@@ -10,6 +10,7 @@ const connection = require("../../connection");
 const { verifyUser, verifyAdmin } = require("../functions/verifyAdmin");
 
 Route.get("/userTimes", verifyUser, (req, res) => {
+  console.log("selectedHeaders ==>", req.body);
   const token = req.headers.authorization.replace("Bearer ", "").trim();
   console.log("TOKEN =>", token);
   const userId = req.userId;

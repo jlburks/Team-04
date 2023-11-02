@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import Tables from "./Tables";
+import NoRecords from "../icons/36e3bf06671120139042d74c7f3bca73.png";
+
 import {
   Chart as ChartJs,
   BarElement,
@@ -20,6 +22,14 @@ const BarChart = (props) => {
   const [yearFilter, setYearFilter] = useState("");
   const [monthFilter, setMonthFilter] = useState("");
 
+  const divStyle = {
+    textAlign: "center",
+  };
+
+  const noRecordsStyle = {
+    color: "red",
+  };
+
   const monthlyNames = [
     "January",
     "February",
@@ -36,6 +46,7 @@ const BarChart = (props) => {
   ];
 
   useEffect(() => {
+    console.log("C DATA ===>>", cData);
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
@@ -45,10 +56,8 @@ const BarChart = (props) => {
       setYearFilter(currentYear);
     }
 
-    console.log("MONTH ==>", currentMonth);
-    console.log("YEAR ==>", currentYear);
     let filteredDailyTime;
-    console.log("BarChart ==>", props);
+
     let filteredTimes = props.times;
 
     if (activeTab === "Daily") {
@@ -214,7 +223,6 @@ const BarChart = (props) => {
           <h4>Yearly</h4>
         </div>
       </div>
-
       <div>
         {activeTab === "Monthly" && (
           <div>
@@ -396,18 +404,30 @@ const BarChart = (props) => {
           </div>
         )}
         <div>
-          <h2>
-            {activeTab === "Weekly" || activeTab === "Daily" ? (
-              <h2>{`${monthlyNames[monthFilter - 1]} ${yearFilter}`}</h2>
-            ) : activeTab === "Monthly" ? (
-              <h2>{`${yearFilter}`}</h2>
-            ) : null}
-          </h2>
+          {activeTab === "Weekly" || activeTab === "Daily" ? (
+            <h2>{`${monthlyNames[monthFilter - 1]} ${yearFilter}`}</h2>
+          ) : activeTab === "Monthly" ? (
+            <h2>{`${yearFilter}`}</h2>
+          ) : null}
         </div>
-        {activeTab === "Daily" && <Bar data={data} options={options} />}
-        {activeTab === "Weekly" && <Bar data={data} options={options} />}
-        {activeTab === "Monthly" && <Bar data={data} options={options} />}
-        {activeTab === "Yearly" && <Bar data={data} options={options} />}
+
+        <>
+          {console.log("DATA ===>>", data.labels)}
+          {data.labels.length > 0 ? (
+            <>
+              {activeTab === "Daily" && <Bar data={data} options={options} />}
+              {activeTab === "Weekly" && <Bar data={data} options={options} />}
+              {activeTab === "Monthly" && <Bar data={data} options={options} />}
+              {activeTab === "Yearly" && <Bar data={data} options={options} />}
+            </>
+          ) : (
+            <div style={divStyle}>
+              <img src={NoRecords} alt="no records" />
+              <h4 style={noRecordsStyle}>No records Found</h4>
+              <h6 style={noRecordsStyle}>Change search filters</h6>
+            </div>
+          )}
+        </>
       </div>
       <div>
         <Tables
