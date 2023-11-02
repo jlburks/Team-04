@@ -5,10 +5,8 @@ const Users = () => {
   return (
     <form>
       <h1>Users</h1>
-      <div class="d-flex align-items-center">
-        <div className="col">
-          <div class="input-group">
-            <input
+      <div class="d-flex flex-column align-items-center">
+            {/* <input
               className="form-control"
               type="search"
               placeholder="Username"
@@ -18,9 +16,9 @@ const Users = () => {
               <button type="button" class="btn btn-dark">
                 Search
               </button>
-            </div>
-
-            <div className="col-auto ms-2">
+            </div> */}
+            <UsersCollection />
+            <div className="mt-5">
               <Link to="/addUser">
                 <button type="button" class="btn btn-dark">
                   Add User
@@ -28,9 +26,6 @@ const Users = () => {
               </Link>
             </div>
           </div>
-        </div>
-      </div>
-      <UsersCollection />
     </form>
   );
 };

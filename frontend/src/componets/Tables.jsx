@@ -32,7 +32,7 @@ const ReportTable = (props) => {
 
   const formatISODate = (isoDate) => {
     const date = new Date(isoDate);
-    const formattedDate = date.toISOString().split("T")[0];
+    const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
     return formattedDate;
   };
   console.log("REPORT TABLE TIMES ===>", props.data);
@@ -43,33 +43,33 @@ const ReportTable = (props) => {
   if (props.activeTab === "Daily") {
     tableHeaders = (
       <>
-        <th scope="col">day</th>
-        <th scope="col">project</th>
-        <th scope="col">total hours</th>
+        <th scope="col">Day</th>
+        <th scope="col">Project</th>
+        <th scope="col">Total Hours</th>
       </>
     );
   } else if (props.activeTab === "Weekly") {
     tableHeaders = (
       <>
-        <th scope="col">week</th>
-        <th scope="col">project</th>
-        <th scope="col">total hours</th>
+        <th scope="col">Week</th>
+        <th scope="col">Project</th>
+        <th scope="col">Total Hours</th>
       </>
     );
   } else if (props.activeTab === "Monthly") {
     tableHeaders = (
       <>
-        <th scope="col">month</th>
-        <th scope="col">project</th>
-        <th scope="col">total hours</th>
+        <th scope="col">Month</th>
+        <th scope="col">Project</th>
+        <th scope="col">Total Hours</th>
       </>
     );
   } else if (props.activeTab === "Yearly") {
     tableHeaders = (
       <>
-        <th scope="col">year</th>
-        <th scope="col">project</th>
-        <th scope="col">total hours</th>
+        <th scope="col">Year</th>
+        <th scope="col">Project</th>
+        <th scope="col">Total Hours</th>
       </>
     );
   }
