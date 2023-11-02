@@ -19,6 +19,10 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  const Logout = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="app-container">
       <div className="sidebar">
@@ -29,7 +33,13 @@ function App() {
           ></img>
         </div>
         <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} />{" "}
-        {/* Pass the isLoggedIn status as a prop */}
+        {isLoggedIn && (
+          <>
+            <button onClick={Logout} class="btn btn-danger">
+              Logout
+            </button>
+          </>
+        )}
       </div>
       <div className="main-content">
         {isLoggedIn ? (

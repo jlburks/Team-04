@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 
+import DownloadIcons from "../icons/box-arrow-down.svg";
+
 const ReportTable = (props) => {
   const [requestedData, setRequestedData] = useState([]);
 
@@ -199,7 +201,69 @@ const ReportTable = (props) => {
               })}
             filename="userReports.csv"
           >
-            Download CSV
+            <img src={DownloadIcons} alt="download" /> download
+          </CSVLink>
+        </>
+      )}
+      {props.activeTab === "Weekly" && (
+        <>
+          <CSVLink
+            data={props.data.weeklyTimes
+              .filter((rowData) => {
+                return (
+                  rowData.workmonth === props.monthFilter &&
+                  rowData.workyear === props.yearFilter
+                );
+              })
+              .map((rowData) => {
+                return {
+                  week: `${formatISODate(
+                    rowData.week_start_date
+                  )} - ${formatISODate(rowData.week_end_date)}`,
+                  total_hours: formatCSVTime(rowData.total_seconds),
+                  job_name: rowData.jobName,
+                };
+              })}
+            filename="userReports.csv"
+          >
+            <img src={DownloadIcons} alt="download" /> download
+          </CSVLink>
+        </>
+      )}
+      {props.activeTab === "Monthly" && (
+        <>
+          <CSVLink
+            data={props.data.monthlyTimes
+              .filter((rowData) => {
+                return rowData.workyear === props.yearFilter;
+              })
+              .map((rowData) => {
+                return {
+                  year: rowData.workyear,
+                  month: monthlyNames[rowData.workmonth - 1],
+                  total_hours: formatCSVTime(rowData.total_seconds),
+                  job_name: rowData.jobName,
+                };
+              })}
+            filename="userReports.csv"
+          >
+            <img src={DownloadIcons} alt="download" /> download
+          </CSVLink>
+        </>
+      )}
+      {props.activeTab === "Yearly" && (
+        <>
+          <CSVLink
+            data={props.data.yearlyTimes.map((rowData) => {
+              return {
+                year: rowData.workyear,
+                total_hours: formatCSVTime(rowData.total_seconds),
+                job_name: rowData.jobName,
+              };
+            })}
+            filename="userReports.csv"
+          >
+            <img src={DownloadIcons} alt="download" /> download
           </CSVLink>
         </>
       )}
