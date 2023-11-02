@@ -186,9 +186,12 @@ Route.post("/userTimes", verifyUser, (req, res) => {
   let userId;
   console.log("Found IT", req.body.selectedUser);
 
-  if (req.body.selectedUser != -1) {
+  if (req.body.selectedUser) {
+    console.log("if");
     userId = req.body.selectedUser;
   } else {
+    // userId = req.userId;
+    console.log("else");
     userId = req.userId;
   }
 
