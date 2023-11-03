@@ -84,6 +84,8 @@ ORDER BY
             week_start_date,
             w.project_id,
             w.user_id, start_time, j.name
+        HAVING
+            total_seconds > 0
     ) AS subquery
     GROUP BY
         workyear,
@@ -123,6 +125,8 @@ ORDER BY
             w.project_id,
             w.user_id,
             j.name
+        HAVING 
+            total_seconds > 0
         ORDER BY
             workyear, workmonth;`,
             [userId],
@@ -155,6 +159,8 @@ ORDER BY
                 w.project_id,
                 w.user_id,
                 j.name
+            HAVING
+                total_seconds > 0
             ORDER BY
                 workyear;`,
                 [userId],
@@ -265,6 +271,8 @@ ORDER BY
             week_start_date,
             w.project_id,
             w.user_id, start_time, j.name
+		HAVING
+			total_seconds > 0
     ) AS subquery
     GROUP BY
         workyear,
@@ -304,6 +312,8 @@ ORDER BY
             w.project_id,
             w.user_id,
             j.name
+        HAVING
+            total_seconds > 0
         ORDER BY
             workyear, workmonth;`,
             [userId],
@@ -336,6 +346,8 @@ ORDER BY
                 w.project_id,
                 w.user_id,
                 j.name
+            HAVING
+                total_seconds > 0
             ORDER BY
                 workyear;`,
                 [userId],
