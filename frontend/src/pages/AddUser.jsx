@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [hourly_pay, setHourlyPay] = useState("");
   const [role, setRole] = useState("");
+
+  const navigate = useNavigate();
 
   const addUserRequest = (e) => {
     e.preventDefault();
@@ -24,7 +27,10 @@ const AddUser = () => {
         { username, password, hourly_pay, role },
         config
       )
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        navigate("/admin/Users");
+      })
       .catch((e) => {
         console.log(e);
       });
@@ -55,65 +61,66 @@ const AddUser = () => {
   return (
     <>
       <h3>Add New User</h3>
-          <div class="form-outline mb-4">
-            <input 
-              class="form-control" 
-              placeholder="Username" 
-              onChange={handleUsername} />
+      <div class="form-outline mb-4">
+        <input
+          class="form-control"
+          placeholder="Username"
+          onChange={handleUsername}
+        />
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          class="form-control"
+          placeholder="Password"
+          onChange={handlePassword}
+        />
+      </div>
+
+      <div class="form-outline mb-4">
+        <input
+          class="form-control"
+          placeholder="Hourly Pay"
+          onChange={handleHourlyPay}
+        />
+      </div>
+
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+          <div class="form-check form-check-inline">
+            <label class="form-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="admin"
+                name="userType"
+                checked={role === "admin"} // Check if 'admin' is selected
+                onChange={handleAdmin}
+              />
+              admin
+            </label>
           </div>
 
-          <div class="form-outline mb-4">
-            <input 
-              class="form-control" 
-              placeholder="Password" 
-              onChange={handlePassword} />
-          </div>
-
-          <div class="form-outline mb-4">
-            <input 
-              class="form-control"
-              placeholder="Hourly Pay" 
-              onChange={handleHourlyPay} />
-          </div>
-
-          <div class="row mb-4">
-            <div class="col d-flex justify-content-center">
-              <div class="form-check form-check-inline">
-              <label class="form-label">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  value="admin"
-                  name="userType"
-                  checked={role === "admin"} // Check if 'admin' is selected
-                  onChange={handleAdmin}
-                />
-                admin
-              </label>
-            </div>
-
-            <div class="form-check form-check-inline">
-              <label class="form-check-label">
-                <input
-                  class="form-check-input"
-                  type="radio"
-                  value="user"
-                  name="userType"
-                  checked={role === "user"} 
-                  onChange={handleUser}
-                />
-                user
-              </label>
-              </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
+              <input
+                class="form-check-input"
+                type="radio"
+                value="user"
+                name="userType"
+                checked={role === "user"}
+                onChange={handleUser}
+              />
+              user
+            </label>
           </div>
         </div>
-        <div class="text-center">
-          <button 
-            class="btn btn-dark btn-block mb-4"
-            onClick={addUserRequest}>
-            Add User
-          </button>
-        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-dark btn-block mb-4" onClick={addUserRequest}>
+          Add User
+        </button>
+      </div>
     </>
   );
 };

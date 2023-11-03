@@ -89,6 +89,7 @@ const JobCheckIn = (props) => {
         }
         setCheckedIn(false);
         setCheckOutStatus(true);
+
         console.log("response ===>>>", response);
 
         // Clear checked-in state and workTimeId from localStorage when checking out
@@ -106,18 +107,17 @@ const JobCheckIn = (props) => {
 
   return (
     <div class="d-flex justify-content-around">
-    {checkOutStatus && (
-      <div className="alert alert-success" role="alert">
-        Successfully logged hours
-        <button
-          type="button"
-          className="btn-close"
-          onClick={closeAlert}
-        >
-        </button>
-      </div>
-    )}
-    <div class="p-2 flex-fill">
+      {checkOutStatus && (
+        <div className="alert alert-success" role="alert">
+          Successfully logged hours
+          <button
+            type="button"
+            className="btn-close"
+            onClick={closeAlert}
+          ></button>
+        </div>
+      )}
+      <div class="p-2 flex-fill">
         <h6>{props.name}</h6>
         <p>{props.description}</p>
       </div>
@@ -131,12 +131,16 @@ const JobCheckIn = (props) => {
             Check-In
           </button>
         ) : (
-          <button type="button" className="btn btn-danger" onClick={sendEndTime}>
+          <button
+            type="button"
+            className="btn btn-danger"
+            onClick={sendEndTime}
+          >
             Check-Out
           </button>
         )}
       </div>
-      </div>
-);
-      }
+    </div>
+  );
+};
 export default JobCheckIn;

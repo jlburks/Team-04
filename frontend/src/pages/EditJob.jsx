@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const EditJob = (props) => {
   const { jobId } = useParams();
+  const navigate = useNavigate();
 
   const [curName, setcurName] = useState("");
   const [curDescription, setCurDescription] = useState("");
@@ -59,6 +60,7 @@ const EditJob = (props) => {
         { name: editedName, description: editedDescription, active, jobId },
         config
       );
+      navigate("/admin/Jobs");
 
       console.log("response =>", response);
     } catch (e) {
@@ -150,11 +152,7 @@ const EditJob = (props) => {
 
         <div class="form-check form-check-inline  d-flex justify-content-center">
           <div class="col-sm-10 d-flex justify-content-center">
-            <button
-              type="submit"
-              class="btn btn-dark"
-              onClick={handleChange}
-            >
+            <button type="submit" class="btn btn-dark" onClick={handleChange}>
               Submit
             </button>
           </div>

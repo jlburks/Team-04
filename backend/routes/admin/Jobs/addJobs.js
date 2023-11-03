@@ -22,7 +22,8 @@ Route.post("/addJob", verifyAdmin, (req, res) => {
         console.log(e);
         return res.json({ errMessage: e });
       }
-      return console.log(result);
+      console.log(result);
+      res.json({ userAdded: "complete" });
     }
   );
 });

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditUser = (props) => {
   console.log("PROPS", props);
@@ -9,6 +9,8 @@ const EditUser = (props) => {
   const [dUsername, setDUserName] = useState("");
   const [dHourlyPay, setDHourlyPay] = useState("");
   const [dRole, setDRole] = useState("");
+
+  const navigate = useNavigate();
 
   console.log("EDIT USER PROPS =>", userId);
   const [username, setUserName] = useState("");
@@ -64,7 +66,14 @@ const EditUser = (props) => {
       role: dRole,
     };
     console.log(data);
-    axios.put(`http://127.0.0.1:3000/users/editUser/${userId}`, data, config);
+    axios
+      .put(`http://127.0.0.1:3000/users/editUser/${userId}`, data, config)
+      .then((res) => {
+        navigate("/admin/Users");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

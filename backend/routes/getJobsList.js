@@ -45,14 +45,18 @@ Route.get("/allJobs", verifyAdmin, (req, res) => {
       console.log("probelm verifying", e);
     }
     console.log(data);
-    connection.query(`SELECT * from jobs `, (e, jobs) => {
-      if (e) {
-        console.log("querry problem");
-        return res.json({ error: "error with query" });
+    connection.query(
+      `SELECT * FROM jobs
+    ORDER BY name ASC; `,
+      (e, jobs) => {
+        if (e) {
+          console.log("querry problem");
+          return res.json({ error: "error with query" });
+        }
+        console.log("Jobssss  ", jobs);
+        res.json({ jobs });
       }
-      console.log("Jobssss  ", jobs);
-      res.json({ jobs });
-    });
+    );
   });
 });
 

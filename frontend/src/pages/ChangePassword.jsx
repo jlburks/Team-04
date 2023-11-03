@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const EditUser = (props) => {
   const { userId } = useParams();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   console.log("EDIT USER PROPS =>", userId);
 
@@ -27,6 +28,7 @@ const EditUser = (props) => {
       .put(`http://127.0.0.1:3000/users/editPassword/${userId}`, data, config)
       .then((data) => {
         console.log(data);
+        navigate("/admin/Users");
       })
       .catch((e) => {
         console.log(e);
