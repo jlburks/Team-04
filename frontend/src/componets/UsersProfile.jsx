@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import EditIcon from "../icons/edit.svg";
-import TrashIcon from "../icons/trash.svg";
+// import TrashIcon from "../icons/trash.svg";
 import PlusIcon from "../icons/plus-square.svg";
 import ChangePass from "../icons/arrow-repeat.svg";
 import ReportIcon from "../icons/newspaper.svg";

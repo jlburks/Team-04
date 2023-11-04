@@ -53,11 +53,7 @@ const DeleteUserButton = (props) => {
 
   return (
     <>
-      <button
-        type="button"
-        className="badge badge-danger"
-        onClick={handleDeleteRequest}
-      >
+      <button type="button" className="btn" onClick={handleDeleteRequest}>
         <img src={DeleteIcon} alt="Edit Job" />
       </button>
     </>
