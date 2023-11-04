@@ -42,13 +42,15 @@ const EditUser = (props) => {
       <div class="form-outline mb-4">
         <input
           class="form-control"
-          placeholder="new password"
+          placeholder="type new password.."
           onChange={handlePassword}
         />
       </div>
+      <div class="text-center">
       <button class="btn btn-dark btn-block mb-4" onClick={changePassword}>
         Change Password
       </button>
+      </div>
     </>
   );
 };

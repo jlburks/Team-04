@@ -188,6 +188,7 @@ const ReportTable = (props) => {
       </div>
       {props.activeTab === "Daily" && (
         <>
+          <div class="text-center">
           <CSVLink
             data={props.data.dailyTimes
               .filter((rowData) => {
@@ -205,12 +206,15 @@ const ReportTable = (props) => {
               })}
             filename="userReports.csv"
           >
-            <img src={DownloadIcons} alt="download" /> download
-          </CSVLink>
+            <button type="button" class="btn btn-dark btn-floating">
+              <i class="fa fa-download"></i> Download
+            </button>
+          </CSVLink></div>
         </>
       )}
       {props.activeTab === "Weekly" && (
         <>
+        <div class="text-center">
           <CSVLink
             data={props.data.weeklyTimes
               .filter((rowData) => {
@@ -230,12 +234,15 @@ const ReportTable = (props) => {
               })}
             filename="userReports.csv"
           >
-            <img src={DownloadIcons} alt="download" /> download
-          </CSVLink>
+            <button type="button" class="btn btn-dark btn-floating">
+              <i class="fa fa-download"></i> Download
+            </button>          
+            </CSVLink></div>
         </>
       )}
       {props.activeTab === "Monthly" && (
         <>
+        <div class="text-center">
           <CSVLink
             data={props.data.monthlyTimes
               .filter((rowData) => {
@@ -251,12 +258,15 @@ const ReportTable = (props) => {
               })}
             filename="userReports.csv"
           >
-            <img src={DownloadIcons} alt="download" /> download
-          </CSVLink>
+            <button type="button" class="btn btn-dark btn-floating">
+              <i class="fa fa-download"></i> Download
+            </button>          
+            </CSVLink></div>
         </>
       )}
       {props.activeTab === "Yearly" && (
         <>
+        <div class="text-center">
           <CSVLink
             data={props.data.yearlyTimes.map((rowData) => {
               return {
@@ -267,8 +277,10 @@ const ReportTable = (props) => {
             })}
             filename="userReports.csv"
           >
-            <img src={DownloadIcons} alt="download" /> download
-          </CSVLink>
+            <button type="button" class="btn btn-dark btn-floating">
+              <i class="fa fa-download"></i> Download
+            </button>          
+            </CSVLink></div>
         </>
       )}
     </>

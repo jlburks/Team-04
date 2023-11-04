@@ -90,7 +90,7 @@ const EditJob = (props) => {
       <h1>Edit Information</h1>
 
       <form>
-        <div class="form-group row">
+        <div class="form-outline mb-4">
           <label for="inputEmail3" class="col-sm-2 col-form-label">
             Name
           </label>
@@ -102,7 +102,7 @@ const EditJob = (props) => {
             />
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-outline mb-4">
           <label for="inputPassword3" class="col-sm-2 col-form-label">
             Description
           </label>
@@ -146,8 +146,8 @@ const EditJob = (props) => {
                   Inactive
                 </label>
               </div>
+              </div>
             </div>
-          </div>
         </fieldset>
 
         <div class="form-check form-check-inline  d-flex justify-content-center">
