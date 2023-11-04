@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const JobCheckIn = (props) => {
+  // console.log(props.projectID);
   const [checkedIn, setCheckedIn] = useState(false);
   const [workTimeId, setWorkTimeId] = useState(0);
   const [checkOutStatus, setCheckOutStatus] = useState(false);
@@ -16,6 +17,7 @@ const JobCheckIn = (props) => {
     const second = currentDate.getSeconds();
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
   };
+  let test = true;
 
   // Load the checked-in state and workTimeId from localStorage on component mount
   useEffect(() => {
@@ -31,6 +33,7 @@ const JobCheckIn = (props) => {
   }, [props.projectID]);
 
   const sendStartTime = () => {
+    props.changeJobProgressStatus(props.projectID);
     setCheckOutStatus(false);
     const startTime = currentTime();
     const config = {
@@ -69,6 +72,7 @@ const JobCheckIn = (props) => {
   };
 
   const sendEndTime = () => {
+    props.changeJobProgressStatus(0);
     const endTime = currentTime();
     const config = {
       headers: {
@@ -104,6 +108,16 @@ const JobCheckIn = (props) => {
   const closeAlert = () => {
     setCheckOutStatus(false);
   };
+  const determineStatus = () => {
+    // props.projectID == props.inProgress || props.inProgress && props.inProgress == 0
+    if (props.inProgress == 0) {
+      return false;
+    } else if (props.projectID == props.inProgress) {
+      return false;
+    } else if (props.projectID != props.inProgress) {
+      return true;
+    }
+  };
 
   return (
     <div class="d-flex justify-content-around">
@@ -127,6 +141,7 @@ const JobCheckIn = (props) => {
             type="button"
             className="btn btn-success"
             onClick={sendStartTime}
+            disabled={determineStatus()}
           >
             Check-In
           </button>

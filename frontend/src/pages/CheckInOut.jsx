@@ -6,11 +6,7 @@ import JobCheckIn from "../componets/JobCheckIn";
 
 const CheckInOut = () => {
   const [jobsArr, setJobsArr] = useState([]);
-  const [jobInProgress, setJobInProgress] = useState(false);
-
-  const changeJobProgressStatus = (tof) => {
-    setJobInProgress(tof);
-  };
+  const [jobInProgress, setJobInProgress] = useState(0);
 
   useEffect(() => {
     const config = {
@@ -30,7 +26,7 @@ const CheckInOut = () => {
 
   return (
     <>
-      {console.log("cl => ", jobsArr)}
+      {console.log("Job Currently Working On => ", jobInProgress)}
       {jobsArr.length > 0 ? (
         jobsArr.map((job) => {
           return (
@@ -40,7 +36,8 @@ const CheckInOut = () => {
               workHourId={job.workHourId}
               name={job.name}
               description={job.description}
-              changeJobProgressStatus={changeJobProgressStatus}
+              changeJobProgressStatus={setJobInProgress}
+              inProgress={jobInProgress}
             />
           );
         })
