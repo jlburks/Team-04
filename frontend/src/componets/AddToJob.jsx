@@ -1,6 +1,9 @@
 import axios from "axios";
+import { useState } from "react";
 
 const AddToJob = (props) => {
+  const [responseMessage, setResponseMessage] = useState("");
+
   console.log("TOKEN", localStorage.getItem("token"));
 
   console.log("ADDJOB =>>>", props);
@@ -25,8 +28,10 @@ const AddToJob = (props) => {
       console.log(response);
       if (response.status === 200 || response.status === 204) {
         console.log("job added to user");
+        setResponseMessage("job added to user");
       } else {
         console.error("Unexpected response:", response);
+        setResponseMessage("job not to user");
       }
     } catch (error) {
       if (error.response) {
@@ -43,15 +48,16 @@ const AddToJob = (props) => {
     }
   };
   return (
-    <>
-      <button
-        class="btn btn-dark"
-        type="submit"
-        onClick={handleAddJobRequest}
-      >
+    <div>
+      <button class="btn btn-dark" type="submit" onClick={handleAddJobRequest}>
         +
       </button>
-    </>
+      <div>
+        {responseMessage != "" && (
+          <span class="badge rounded-pill bg-success">{responseMessage}</span>
+        )}
+      </div>
+    </div>
   );
 };
 

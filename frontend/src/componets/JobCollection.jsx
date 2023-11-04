@@ -59,7 +59,7 @@ const JobCollection = (props) => {
             <th>Job Name</th>
             <th>Description</th>
             <th>Active/Inactive</th>
-            <th>Update</th>
+            {props.action !== "add" && <th>Update</th>}
             <th>Delete</th>
           </tr>
         </thead>

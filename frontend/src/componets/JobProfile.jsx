@@ -16,15 +16,15 @@ const JobProfile = (props) => {
         <td>{props.jobName}</td>
         <td>{props.jobDescription}</td>
         <td>{props.active == 1 ? "ACTIVE" : "INACTIVE"}</td>
-        <td>
-          {props.action === "delete" && (
+        {props.action === "delete" && (
+          <td>
             <Link to={`/admin/editJob/${props.jobId}`}>
               <button type="button" class="btn">
                 <img src={EditIcon} alt="Edit Job" />
               </button>
             </Link>
-          )}
-        </td>
+          </td>
+        )}
         <td>
           {props.action === "delete" && (
             <DeleteJobButton

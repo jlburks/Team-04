@@ -13,9 +13,12 @@ Route.post("/addJob/:jobId/:userId", (req, res) => {
   connection.query(
     `INSERT INTO workHours (user_id, start_time, end_time, project_id)
   VALUES (?, '0000-00-00 00:00:00', '0000-00-00 00:00:00', ?)`,
-    [req.params.userId, req.params.jobId]
+    [req.params.userId, req.params.jobId],
+    (err, data) => {
+      if (err) res.json({ addJob: false });
+      res.json({ addJob: true });
+    }
   );
-  return;
 });
 
 module.exports = Route;
