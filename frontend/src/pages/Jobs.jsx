@@ -23,7 +23,7 @@ const Jobs = () => {
       <div class="mt-3">
         <Link to="/addJob">
           <button type="button" class="btn btn-dark mt-3">
-            Add new Job
+            Add New Job
           </button>
         </Link>
       </div>
