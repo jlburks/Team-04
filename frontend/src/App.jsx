@@ -14,6 +14,7 @@ import NavBar from "./componets/NavBar";
 import EditJob from "./pages/EditJob";
 import DeleteJobButton from "./componets/DeleteJobButton";
 import AssignJob from "./pages/AssignJob";
+import ChangeUserTime from "./pages/ChangeUserTime";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -46,6 +47,12 @@ function App() {
             )}
             {isAdmin && (
               <Route path="/users/editUser/:userId" element={<EditUser />} />
+            )}
+            {isAdmin && (
+              <Route
+                path="/users/changeTimes/:userId/:workDay/:project_id"
+                element={<ChangeUserTime />}
+              />
             )}
             {isAdmin && (
               <Route

@@ -202,7 +202,6 @@ const BarChart = (props) => {
 
   return (
     <div>
-      <h1>{props.selectedUser}</h1>
       <div className="nav nav-tabs">
         <div
           className={`nav-link ${activeTab === "Daily" ? "active" : ""}`}
@@ -317,6 +316,8 @@ const BarChart = (props) => {
           yearFilter={yearFilter}
           monthFilter={monthFilter}
           monthName={monthlyNames[monthFilter - 1]}
+          isAdmin={props.isAdmin}
+          setUser={props.setUser}
         />
       </div>
     </div>

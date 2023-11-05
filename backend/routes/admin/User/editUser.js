@@ -55,4 +55,15 @@ Route.put("/editPassword/:userId", adminFunc.verifyAdmin, (req, res) => {
   });
 });
 
+Route.put(
+  "/editTime/:userId/:startTime/:endTime",
+  adminFunc.verifyAdmin,
+  (req, res) => {
+    // const userId = req.params.userId;
+    // console.log("USERID ==>", userId);
+    console.log("reached endpoint");
+    res.json({ status: "success" });
+  }
+);
+
 module.exports = Route;

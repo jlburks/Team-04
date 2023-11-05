@@ -1,10 +1,14 @@
 import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
+import { Link } from "react-router-dom";
 
 import DownloadIcons from "../icons/box-arrow-down.svg";
+import EditIcons from "../icons/edit.svg";
 
 const ReportTable = (props) => {
+  console.log("PROPS FOUND IN REPORT TABLE", props);
   const [requestedData, setRequestedData] = useState([]);
 
   const formatCSVTime = (totalHours) => {
@@ -30,6 +34,18 @@ const ReportTable = (props) => {
     "December",
   ];
 
+  const openEditTimes = (data) => {
+    console.log(data);
+    axios
+      .put(`http://127.0.0.1:3000/users/editTime/10`)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   const formatISODate = (isoDate) => {
     const date = new Date(isoDate);
     const formattedDate = date.toLocaleDateString("en-US", {
@@ -50,6 +66,7 @@ const ReportTable = (props) => {
         <th scope="col">Day</th>
         <th scope="col">Project</th>
         <th scope="col">Total Hours</th>
+        {props.isAdmin && <th scope="col">Change Times</th>}
       </>
     );
   } else if (props.activeTab === "Weekly") {
@@ -92,13 +109,22 @@ const ReportTable = (props) => {
       const minutes = Math.floor((rowData.total_seconds % 3600) / 60);
       const seconds = Math.floor(rowData.total_seconds % 60);
       const formattedTime = `${hours} hr ${minutes} min ${seconds} sec`;
-      console.log("ROWDATA", rowData);
+      console.log("ROWDATAAA", rowData);
 
       return (
         <tr key={index}>
           <td>{formatISODate(rowData.workday)}</td>
           <td>{rowData.jobName}</td>
           <td>{formattedTime}</td>
+          {props.isAdmin && (
+            <td>
+              <Link
+                to={`/users/changeTimes/${rowData.user_id}/${rowData.workday}/${rowData.project_id}`}
+              >
+                <img src={EditIcons} alt="+" />
+              </Link>
+            </td>
+          )}
         </tr>
       );
     });
@@ -189,98 +215,102 @@ const ReportTable = (props) => {
       {props.activeTab === "Daily" && (
         <>
           <div class="text-center">
-          <CSVLink
-            data={props.data.dailyTimes
-              .filter((rowData) => {
-                return (
-                  rowData.workmonth === props.monthFilter &&
-                  rowData.workyear === props.yearFilter
-                );
-              })
-              .map((rowData) => {
-                return {
-                  workday: formatISODate(rowData.workday),
-                  total_hours: formatCSVTime(rowData.total_seconds),
-                  job_name: rowData.jobName,
-                };
-              })}
-            filename="userReports.csv"
-          >
-            <button type="button" class="btn btn-dark btn-floating">
-              <i class="fa fa-download"></i> Download
-            </button>
-          </CSVLink></div>
+            <CSVLink
+              data={props.data.dailyTimes
+                .filter((rowData) => {
+                  return (
+                    rowData.workmonth === props.monthFilter &&
+                    rowData.workyear === props.yearFilter
+                  );
+                })
+                .map((rowData) => {
+                  return {
+                    workday: formatISODate(rowData.workday),
+                    total_hours: formatCSVTime(rowData.total_seconds),
+                    job_name: rowData.jobName,
+                  };
+                })}
+              filename="userReports.csv"
+            >
+              <button type="button" class="btn btn-dark btn-floating">
+                <i class="fa fa-download"></i> Download
+              </button>
+            </CSVLink>
+          </div>
         </>
       )}
       {props.activeTab === "Weekly" && (
         <>
-        <div class="text-center">
-          <CSVLink
-            data={props.data.weeklyTimes
-              .filter((rowData) => {
-                return (
-                  rowData.workmonth === props.monthFilter &&
-                  rowData.workyear === props.yearFilter
-                );
-              })
-              .map((rowData) => {
-                return {
-                  week: `${formatISODate(
-                    rowData.week_start_date
-                  )} - ${formatISODate(rowData.week_end_date)}`,
-                  total_hours: formatCSVTime(rowData.total_seconds),
-                  job_name: rowData.jobName,
-                };
-              })}
-            filename="userReports.csv"
-          >
-            <button type="button" class="btn btn-dark btn-floating">
-              <i class="fa fa-download"></i> Download
-            </button>          
-            </CSVLink></div>
+          <div class="text-center">
+            <CSVLink
+              data={props.data.weeklyTimes
+                .filter((rowData) => {
+                  return (
+                    rowData.workmonth === props.monthFilter &&
+                    rowData.workyear === props.yearFilter
+                  );
+                })
+                .map((rowData) => {
+                  return {
+                    week: `${formatISODate(
+                      rowData.week_start_date
+                    )} - ${formatISODate(rowData.week_end_date)}`,
+                    total_hours: formatCSVTime(rowData.total_seconds),
+                    job_name: rowData.jobName,
+                  };
+                })}
+              filename="userReports.csv"
+            >
+              <button type="button" class="btn btn-dark btn-floating">
+                <i class="fa fa-download"></i> Download
+              </button>
+            </CSVLink>
+          </div>
         </>
       )}
       {props.activeTab === "Monthly" && (
         <>
-        <div class="text-center">
-          <CSVLink
-            data={props.data.monthlyTimes
-              .filter((rowData) => {
-                return rowData.workyear === props.yearFilter;
-              })
-              .map((rowData) => {
-                return {
-                  year: rowData.workyear,
-                  month: monthlyNames[rowData.workmonth - 1],
-                  total_hours: formatCSVTime(rowData.total_seconds),
-                  job_name: rowData.jobName,
-                };
-              })}
-            filename="userReports.csv"
-          >
-            <button type="button" class="btn btn-dark btn-floating">
-              <i class="fa fa-download"></i> Download
-            </button>          
-            </CSVLink></div>
+          <div class="text-center">
+            <CSVLink
+              data={props.data.monthlyTimes
+                .filter((rowData) => {
+                  return rowData.workyear === props.yearFilter;
+                })
+                .map((rowData) => {
+                  return {
+                    year: rowData.workyear,
+                    month: monthlyNames[rowData.workmonth - 1],
+                    total_hours: formatCSVTime(rowData.total_seconds),
+                    job_name: rowData.jobName,
+                  };
+                })}
+              filename="userReports.csv"
+            >
+              <button type="button" class="btn btn-dark btn-floating">
+                <i class="fa fa-download"></i> Download
+              </button>
+            </CSVLink>
+          </div>
         </>
       )}
       {props.activeTab === "Yearly" && (
         <>
-        <div class="text-center">
-          <CSVLink
-            data={props.data.yearlyTimes.map((rowData) => {
-              return {
-                year: rowData.workyear,
-                total_hours: formatCSVTime(rowData.total_seconds),
-                job_name: rowData.jobName,
-              };
-            })}
-            filename="userReports.csv"
-          >
-            <button type="button" class="btn btn-dark btn-floating">
-              <i class="fa fa-download"></i> Download
-            </button>          
-            </CSVLink></div>
+          <div class="text-center">
+            <CSVLink
+              data={props.data.yearlyTimes.map((rowData) => {
+                return {
+                  year: rowData.workyear,
+                  total_hours: formatCSVTime(rowData.total_seconds),
+                  job_name: rowData.jobName,
+                };
+              })}
+              filename="userReports.csv"
+            >
+              <button type="button" class="btn btn-dark btn-floating">
+                <i class="fa fa-download"></i> Download
+              </button>
+            </CSVLink>
+          </div>
         </>
       )}
     </>

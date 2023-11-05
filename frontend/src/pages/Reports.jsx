@@ -52,7 +52,12 @@ const Reports = (props) => {
             <UserDropDown setUser={setSelectedUser} adminId={props.adminId} />
           )}
           {Object.keys(chartData).length > 0 && (
-            <BarChart times={chartData} selectedUser={selectedUser} />
+            <BarChart
+              times={chartData}
+              selectedUser={selectedUser}
+              isAdmin={props.isAdmin}
+              setUser={selectedUser}
+            />
           )}
         </div>
       </div>
