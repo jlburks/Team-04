@@ -19,10 +19,9 @@ body {
   left: 0;
   padding: 58px 0 0; /* Height of navbar */
   padding-top: 90px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  /* box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%); */
   width: 300px;
   z-index: 600;
-
 }
 /* top Sidebar */
 .bg-lightblue {
@@ -33,11 +32,11 @@ body {
 @media (max-width: 991.98px) {
   .main-content {
     padding-top: 100px;
-    padding-left: 20px;
+    padding-left: 25%;
     padding-right: 20px;
   }
   .sidebar {
-    width: 100%;
+    width: 25%;
   }
   /*
   .bg-shortlightblue{
@@ -45,8 +44,9 @@ body {
   }*/
 }
 .sidebar .active {
-  border-radius: 5px;
-  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  border-radius: 0px;
+  box-shadow: 0 0px 0px 0 rgba(255, 255, 255, 0),
+    0 0px 0px 0 rgba(255, 255, 255, 255);
 }
 
 .sidebar-sticky {
@@ -87,7 +87,7 @@ body {
 }
 
 .table-responsive thead > tr > th {
-  border:none;
+  border: none;
 }
 
 .hoverable-row:hover {

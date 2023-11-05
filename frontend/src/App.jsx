@@ -23,9 +23,8 @@ function App() {
   return (
     <div className="app-container">
       <div className="sidebar">
-        <div className="logo-container">
-        </div>
-        <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} />{" "}
+        {/* <div className="logo-container"></div> */}
+        <NavBar isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
       </div>
       <div className="main-content">
         {isLoggedIn ? (

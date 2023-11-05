@@ -18,7 +18,9 @@ const NavBar = (props) => {
       {/* Sidebar */}
       <nav
         id="sidebarMenu"
-        className={`collapse d-lg-block sidebar collapse bg-lightblue ${sidebarOpen ? 'show' : ''}`}
+        className={`collapse d-lg-block sidebar collapse bg-lightblue ${
+          sidebarOpen ? "show" : ""
+        }`}
       >
         <div className="position-sticky">
           <ul className="list-group list-group-flush mx-3 mt-4">
@@ -74,19 +76,17 @@ const NavBar = (props) => {
           type="button"
           onClick={handleToggleSidebar}
         >
-        <i className="fa fa-bars"></i>
+          <i className="fa fa-bars"></i>
         </button>
         <li className="list-group-item">
-              <img
-                className="logo"
-                src="http://www.techprousa.com/wp-content/uploads/2015/08/logo.png"
-                alt="TechPro Constructions"
-              ></img>
-            </li>
-        <Link className="navbar-brand" to="#">
           <img
-
-          />
+            className="logo"
+            src="http://www.techprousa.com/wp-content/uploads/2015/08/logo.png"
+            alt="TechPro Constructions"
+          ></img>
+        </li>
+        <Link className="navbar-brand" to="#">
+          <img />
         </Link>
 
         <ul className="navbar-nav ms-auto d-flex flex-row">

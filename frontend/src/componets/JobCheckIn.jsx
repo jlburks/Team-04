@@ -33,76 +33,86 @@ const JobCheckIn = (props) => {
   }, [props.projectID]);
 
   const sendStartTime = () => {
-    props.changeJobProgressStatus(props.projectID);
-    setCheckOutStatus(false);
-    const startTime = currentTime();
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    };
+    const confirmed = window.confirm("Begin work period?");
+    if (confirmed) {
+      props.changeJobProgressStatus(props.projectID);
+      setCheckOutStatus(false);
+      const startTime = currentTime();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-    axios
-      .post(
-        "http://127.0.0.1:3000/checkIn",
-        { startTime: startTime, pId: props.projectID },
-        config
-      )
-      .then((response) => {
-        console.log(response.data.added);
-        if (response.data.added === false) {
-          console.log("error with your query");
-        }
-        setCheckedIn(true);
+      axios
+        .post(
+          "http://127.0.0.1:3000/checkIn",
+          { startTime: startTime, pId: props.projectID },
+          config
+        )
+        .then((response) => {
+          console.log(response.data.added);
+          if (response.data.added === false) {
+            console.log("error with your query");
+          }
+          setCheckedIn(true);
 
-        console.log("response ===>>>", response);
-        setWorkTimeId(response.data.workHoursId);
+          console.log("response ===>>>", response);
+          setWorkTimeId(response.data.workHoursId);
 
-        // Save checked-in state and workTimeId to localStorage
-        localStorage.setItem(`checkedIn_${props.projectID}`, "true");
-        localStorage.setItem(
-          `workTimeId_${props.projectID}`,
-          String(response.data.workHoursId)
-        );
-      })
-      .catch((e) => {
-        return console.log(e);
-      });
+          // Save checked-in state and workTimeId to localStorage
+          localStorage.setItem(`checkedIn_${props.projectID}`, "true");
+          localStorage.setItem(
+            `workTimeId_${props.projectID}`,
+            String(response.data.workHoursId)
+          );
+        })
+        .catch((e) => {
+          return console.log(e);
+        });
+    } else {
+      return;
+    }
   };
 
   const sendEndTime = () => {
-    props.changeJobProgressStatus(0);
-    const endTime = currentTime();
-    const config = {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    };
+    const confirmed = window.confirm("End work period?");
+    if (confirmed) {
+      props.changeJobProgressStatus(0);
+      const endTime = currentTime();
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-    axios
-      .post(
-        "http://127.0.0.1:3000/checkOut",
-        { endTime: endTime, wTimeId: workTimeId },
-        config
-      )
-      .then((response) => {
-        if (response.data.added === false) {
-          console.log("error with your query");
-        }
-        setCheckedIn(false);
-        setCheckOutStatus(true);
+      axios
+        .post(
+          "http://127.0.0.1:3000/checkOut",
+          { endTime: endTime, wTimeId: workTimeId },
+          config
+        )
+        .then((response) => {
+          if (response.data.added === false) {
+            console.log("error with your query");
+          }
+          setCheckedIn(false);
+          setCheckOutStatus(true);
 
-        console.log("response ===>>>", response);
+          console.log("response ===>>>", response);
 
-        // Clear checked-in state and workTimeId from localStorage when checking out
-        localStorage.removeItem(`checkedIn_${props.projectID}`);
-        localStorage.removeItem(`workTimeId_${props.projectID}`);
-      })
-      .catch((e) => {
-        return console.log(e);
-      });
+          // Clear checked-in state and workTimeId from localStorage when checking out
+          localStorage.removeItem(`checkedIn_${props.projectID}`);
+          localStorage.removeItem(`workTimeId_${props.projectID}`);
+        })
+        .catch((e) => {
+          return console.log(e);
+        });
+    } else {
+      return;
+    }
   };
 
   const closeAlert = () => {
