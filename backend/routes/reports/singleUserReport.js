@@ -205,8 +205,8 @@ Route.post("/userTimes", verifyUser, (req, res) => {
   connection.query(
     `SELECT
     w.start_time AS workday,
-    DATE_FORMAT(w.start_time, '%Y-%m-%d %H:%i:%s') AS dateSting,
-    DATE_FORMAT(w.end_time, '%Y-%m-%d %H:%i:%s') AS dateStingEnd,
+    DATE_FORMAT(w.start_time, '%Y-%m-%d %H:%i:%s') AS dateString,
+    DATE_FORMAT(w.end_time, '%Y-%m-%d %H:%i:%s') AS dateStringEnd,
     MONTH(w.start_time) AS workmonth, 
     YEAR(w.start_time) AS workyear,
     w.project_id,

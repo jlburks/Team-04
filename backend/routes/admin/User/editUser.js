@@ -85,4 +85,22 @@ Route.put("/editTime/:userId/:start/:projectId", (req, res) => {
   );
 });
 
+// /users/
+Route.put("/insertNewTime/:recordId/:start/:finish", (req, res) => {
+  const { recordId, start, finish } = req.params;
+  console.log("LOOKING => ", recordId, start, finish);
+  connection.query(
+    `UPDATE workHours
+  SET start_time = ?, end_time = ?
+  WHERE workhour_id = ?;`,
+    [start, finish, recordId],
+    (err, data) => {
+      if (err) {
+        res.json({ err: "error storing new Times" });
+      }
+      res.json({ newTimesInserted: true });
+    }
+  );
+});
+
 module.exports = Route;

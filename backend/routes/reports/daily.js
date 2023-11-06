@@ -42,4 +42,10 @@ HAVING
   );
 });
 
+//reports/
+// Route.get("/day/:id", (req, res) => {
+//   const { id } = req.params;
+//   return console.log("ok");
+// });
+
 module.exports = Route;
