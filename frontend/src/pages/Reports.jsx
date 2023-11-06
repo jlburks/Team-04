@@ -34,7 +34,7 @@ const Reports = (props) => {
         requestData,
         config
       );
-      console.log("RESPONSE =>>>", response.data);
+      console.log("RESPONSE.DATA =>>>", response.data);
       const dailyTimes = response.data;
       return setChartData(response.data);
     } catch (error) {

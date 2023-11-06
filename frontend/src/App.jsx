@@ -50,7 +50,7 @@ function App() {
             )}
             {isAdmin && (
               <Route
-                path="/users/changeTimes/:userId/:workDay/:project_id"
+                path="/users/changeTimes/:userId/:workday/:project_id"
                 element={<ChangeUserTime />}
               />
             )}

@@ -55,15 +55,25 @@ Route.put("/editPassword/:userId", adminFunc.verifyAdmin, (req, res) => {
   });
 });
 
-Route.put(
-  "/editTime/:userId/:startTime/:endTime",
-  adminFunc.verifyAdmin,
-  (req, res) => {
-    // const userId = req.params.userId;
-    // console.log("USERID ==>", userId);
-    console.log("reached endpoint");
-    res.json({ status: "success" });
-  }
-);
+Route.put("/editTime/:userId/:start/:projectId", (req, res) => {
+  const { userId, start, projectId } = req.params;
+  const statingTime = start.slice(0, -1).replace("T", " ");
+  // console.log(userId, statingTime, projectId);
+  console.log(
+    "SQL STATEMENT =>",
+    `SELECT * FROM workHours WHERE user_id = ${userId} AND start_time LIKE ${statingTime} AND project_id = ${projectId}`
+  );
+  connection.query(
+    `SELECT * FROM workHours WHERE user_id = ? AND start_time LIKE ? AND project_id = ?`,
+    [userId, statingTime, projectId],
+    (err, result) => {
+      if (err) {
+        res.json({ staus: unsuccesful });
+      }
+      console.log(result);
+      res.json({ status: "success" });
+    }
+  );
+});
 
 module.exports = Route;

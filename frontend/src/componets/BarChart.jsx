@@ -65,14 +65,13 @@ const BarChart = (props) => {
 
       filteredTimes.dailyTimes.forEach((time) => {
         if (time.workyear === yearFilter && time.workmonth === monthFilter) {
-          const date = new Date(time.workday.split("T")[0]).toLocaleDateString(
-            "en-US",
-            { year: "numeric", month: "2-digit", day: "2-digit" }
-          );
-          if (existingData[date]) {
-            existingData[date] += time.total_seconds / 3600;
+          console.log("--OG---", time.workday.split("T")[0]);
+          if (existingData[time.workday.split("T")[0]]) {
+            existingData[time.workday.split("T")[0]] +=
+              time.total_seconds / 3600;
           } else {
-            existingData[date] = time.total_seconds / 3600;
+            existingData[time.workday.split("T")[0]] =
+              time.total_seconds / 3600;
           }
         }
       });
