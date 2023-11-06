@@ -64,14 +64,25 @@ const BarChart = (props) => {
       // Iterate through the existing data and update the total_seconds
 
       filteredTimes.dailyTimes.forEach((time) => {
+        console.log(
+          "----------",
+          time.workday.split("T")[0],
+          "----------",
+          time.workday
+        );
         if (time.workyear === yearFilter && time.workmonth === monthFilter) {
-          console.log("--OG---", time.workday.split("T")[0]);
-          if (existingData[time.workday.split("T")[0]]) {
-            existingData[time.workday.split("T")[0]] +=
-              time.total_seconds / 3600;
+          const workdayDate = new Date(time.workday); // Convert the workday string to a Date object
+          console.log(workdayDate);
+          const formattedDate = workdayDate.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
+
+          if (existingData[formattedDate]) {
+            existingData[formattedDate] += time.total_seconds / 3600;
           } else {
-            existingData[time.workday.split("T")[0]] =
-              time.total_seconds / 3600;
+            existingData[formattedDate] = time.total_seconds / 3600;
           }
         }
       });

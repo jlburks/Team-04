@@ -119,7 +119,7 @@ const ReportTable = (props) => {
           {props.isAdmin && (
             <td>
               <Link
-                to={`/users/changeTimes/${rowData.user_id}/${rowData.workday}/${rowData.project_id}`}
+                to={`/users/changeTimes/${rowData.user_id}/${rowData.dateSting}/${rowData.project_id}`}
               >
                 <img src={EditIcons} alt="+" />
               </Link>

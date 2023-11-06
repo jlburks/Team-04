@@ -38,6 +38,7 @@ const JobCheckIn = (props) => {
       props.changeJobProgressStatus(props.projectID);
       setCheckOutStatus(false);
       const startTime = currentTime();
+      console.log("STARTTIME === ", startTime);
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -81,6 +82,8 @@ const JobCheckIn = (props) => {
     if (confirmed) {
       props.changeJobProgressStatus(0);
       const endTime = currentTime();
+      console.log("ENDTIME ===>", endTime);
+      console.log(endTime);
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

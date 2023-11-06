@@ -12,6 +12,7 @@ const { verifyUser } = require("./functions/verifyAdmin");
 Route.post("/checkIn", (req, res) => {
   console.log(req.body);
   const { pId, startTime } = req.body;
+  console.log(`pId = ${pId} startTime = ${startTime}`);
   const token = req.headers.authorization.replace("Bearer ", "").trim();
   jwt.verify(token, secret, (e, data) => {
     if (e) {
@@ -36,6 +37,7 @@ Route.post("/checkIn", (req, res) => {
 
 Route.post("/checkOut", (req, res) => {
   const { endTime, wTimeId } = req.body;
+  console.log(`WTId = ${wTimeId} startTime = ${endTime}`);
   const token = req.headers.authorization.replace("Bearer ", "").trim();
   jwt.verify(token, secret, (e, data) => {
     if (e) {

@@ -42,7 +42,7 @@ const CheckInOut = () => {
           );
         })
       ) : (
-        <h1>No Jobs found</h1>
+        <h1>No Active Jobs</h1>
       )}
     </>
   );

@@ -42,7 +42,7 @@ GROUP BY
 HAVING 
     total_seconds > 0
 ORDER BY
-    workday;;
+    workday;
 `,
     [userId],
     (e, dTimes) => {
@@ -204,7 +204,9 @@ Route.post("/userTimes", verifyUser, (req, res) => {
   // const userId = req.userId;
   connection.query(
     `SELECT
-    DATE(w.start_time) AS workday,
+    w.start_time AS workday,
+    DATE_FORMAT(w.start_time, '%Y-%m-%d %H:%i:%s') AS dateSting,
+    DATE_FORMAT(w.end_time, '%Y-%m-%d %H:%i:%s') AS dateStingEnd,
     MONTH(w.start_time) AS workmonth, 
     YEAR(w.start_time) AS workyear,
     w.project_id,
@@ -229,7 +231,7 @@ GROUP BY
 HAVING 
     total_seconds > 0
 ORDER BY
-    workday;;
+    workday;
 `,
     [userId],
     (e, dTimes) => {

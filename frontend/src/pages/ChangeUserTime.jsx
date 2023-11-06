@@ -29,6 +29,34 @@ const ChangeUserTime = () => {
       <h1>{userId}</h1>
       <h1>{project_id}</h1>
       <button onClick={callApi}>ring</button>
+      <div>
+        <h1>Start Time</h1>
+        <input type="text" placeholder="YYYY" maxLength="4" />
+        <span>:</span>
+        <input type="text" placeholder="MM" maxLength="2" />
+        <span>:</span>
+        <input type="text" placeholder="DD" maxLength="2" />
+        <span> </span>
+        <input type="text" placeholder="HH" maxLength="2" />
+        <span>:</span>
+        <input type="text" placeholder="MM" maxLength="2" />
+        <span>:</span>
+        <input type="text" placeholder="SS" maxLength="2" />
+      </div>
+      <div>
+        <h1>End Time</h1>
+        <input type="text" placeholder="YYYY" maxLength="4" />
+        <span>:</span>
+        <input type="text" placeholder="MM" maxLength="2" />
+        <span>:</span>
+        <input type="text" placeholder="DD" maxLength="2" />
+        <span> </span>
+        <input type="text" placeholder="HH" maxLength="2" />
+        <span>:</span>
+        <input type="text" placeholder="MM" maxLength="2" />
+        <span>:</span>
+        <input type="text" placeholder="SS" maxLength="2" />
+      </div>
     </>
   );
 };

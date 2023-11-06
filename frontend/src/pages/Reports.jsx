@@ -36,6 +36,7 @@ const Reports = (props) => {
       );
       console.log("RESPONSE.DATA =>>>", response.data);
       const dailyTimes = response.data;
+      console.log("Here lies dailyTimes ==>", dailyTimes);
       return setChartData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

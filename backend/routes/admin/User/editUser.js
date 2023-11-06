@@ -57,21 +57,30 @@ Route.put("/editPassword/:userId", adminFunc.verifyAdmin, (req, res) => {
 
 Route.put("/editTime/:userId/:start/:projectId", (req, res) => {
   const { userId, start, projectId } = req.params;
-  const statingTime = start.slice(0, -1).replace("T", " ");
-  // console.log(userId, statingTime, projectId);
+  console.log(start);
+  // const startDateTime = start.slice(0, -1).replace("T", " ");
   console.log(
     "SQL STATEMENT =>",
-    `SELECT * FROM workHours WHERE user_id = ${userId} AND start_time LIKE ${statingTime} AND project_id = ${projectId}`
+    `SELECT * FROM workHours WHERE user_id = ${userId} AND start_time LIKE "${start}" AND project_id = ${projectId}`
   );
+
   connection.query(
     `SELECT * FROM workHours WHERE user_id = ? AND start_time LIKE ? AND project_id = ?`,
-    [userId, statingTime, projectId],
+    [userId, start, projectId],
     (err, result) => {
       if (err) {
-        res.json({ staus: unsuccesful });
+        console.log(err);
+        res.json({ status: "unsuccessful" });
+      } else {
+        if (result.length > 0) {
+          console.log(result);
+          console.log(result[0].workhour_id);
+          res.json({ workHourId: result[0].workhour_id });
+        } else {
+          console.log("No matching records found");
+          res.json({ status: "no records found" });
+        }
       }
-      console.log(result);
-      res.json({ status: "success" });
     }
   );
 });
