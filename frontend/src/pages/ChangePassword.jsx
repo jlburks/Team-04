@@ -28,7 +28,7 @@ const EditUser = (props) => {
       .put(`http://127.0.0.1:3000/users/editPassword/${userId}`, data, config)
       .then((data) => {
         console.log(data);
-        navigate("/admin/Users");
+        navigate("/reports");
       })
       .catch((e) => {
         console.log(e);
@@ -47,9 +47,9 @@ const EditUser = (props) => {
         />
       </div>
       <div class="text-center">
-      <button class="btn btn-dark btn-block mb-4" onClick={changePassword}>
-        Change Password
-      </button>
+        <button class="btn btn-dark btn-block mb-4" onClick={changePassword}>
+          Change Password
+        </button>
       </div>
     </>
   );

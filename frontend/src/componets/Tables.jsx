@@ -66,6 +66,7 @@ const ReportTable = (props) => {
         <th scope="col">Day</th>
         <th scope="col">Project</th>
         <th scope="col">Total Hours</th>
+        <th scope="col">Income</th>
         {props.isAdmin && <th scope="col">Change Times</th>}
       </>
     );
@@ -75,6 +76,7 @@ const ReportTable = (props) => {
         <th scope="col">Week</th>
         <th scope="col">Project</th>
         <th scope="col">Total Hours</th>
+        <th scope="col">Income</th>
       </>
     );
   } else if (props.activeTab === "Monthly") {
@@ -83,6 +85,7 @@ const ReportTable = (props) => {
         <th scope="col">Month</th>
         <th scope="col">Project</th>
         <th scope="col">Total Hours</th>
+        <th scope="col">Income</th>
       </>
     );
   } else if (props.activeTab === "Yearly") {
@@ -91,6 +94,7 @@ const ReportTable = (props) => {
         <th scope="col">Year</th>
         <th scope="col">Project</th>
         <th scope="col">Total Hours</th>
+        <th scope="col">Income</th>
       </>
     );
   }
@@ -110,12 +114,20 @@ const ReportTable = (props) => {
       const seconds = Math.floor(rowData.total_seconds % 60);
       const formattedTime = `${hours} hr ${minutes} min ${seconds} sec`;
       console.log("ROWDATAAA", rowData);
+      console.log("$$$$$$$$", props.data.payRate[0].hourly_pay);
 
       return (
         <tr key={index}>
           <td>{formatISODate(rowData.workday)}</td>
           <td>{rowData.jobName}</td>
           <td>{formattedTime}</td>
+          <td>
+            $
+            {(
+              parseFloat(props.data.payRate[0].hourly_pay) *
+              (parseFloat(rowData.total_seconds) / 3600)
+            ).toFixed(2)}
+          </td>
           {props.isAdmin && (
             <td>
               <Link
@@ -151,6 +163,13 @@ const ReportTable = (props) => {
           )}`}</td>
           <td>{rowData.jobName}</td>
           <td>{formattedTime}</td>
+          <td>
+            $
+            {(
+              parseFloat(props.data.payRate[0].hourly_pay) *
+              (parseFloat(rowData.total_seconds) / 3600)
+            ).toFixed(2)}
+          </td>
         </tr>
       );
     });
@@ -172,6 +191,13 @@ const ReportTable = (props) => {
           <td>{`${monthlyNames[rowData.workmonth - 1]}`}</td>
           <td>{rowData.jobName}</td>
           <td>{formattedTime}</td>
+          <td>
+            $
+            {(
+              parseFloat(props.data.payRate[0].hourly_pay) *
+              (parseFloat(rowData.total_seconds) / 3600)
+            ).toFixed(2)}
+          </td>
         </tr>
       );
     });
@@ -189,6 +215,13 @@ const ReportTable = (props) => {
           <td>{rowData.workyear}</td>
           <td>{rowData.jobName}</td>
           <td>{formattedTime}</td>
+          <td>
+            $
+            {(
+              parseFloat(props.data.payRate[0].hourly_pay) *
+              (parseFloat(rowData.total_seconds) / 3600)
+            ).toFixed(2)}
+          </td>
         </tr>
       );
     });

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -6,6 +6,7 @@ const ChangeUserTime = () => {
   const { workday, userId, project_id, workEndDay } = useParams();
 
   // console.log("enddate ==>", workEndDay);
+  const navigate = useNavigate();
 
   const [workHourRecord, setWorkHourRecord] = useState(0);
 
@@ -144,6 +145,7 @@ const ChangeUserTime = () => {
       )
       .then((data) => {
         console.log(data);
+        navigate("/admin/Users");
       })
       .catch((e) => {
         console.log(e);
@@ -162,14 +164,14 @@ const ChangeUserTime = () => {
           defaultValue={sYear}
           onChange={handleSYear}
         />
-        <span>:</span>
+        <span>-</span>
         <input
           type="text"
           maxLength="2"
           defaultValue={sMonth}
           onChange={handleSMonth}
         />
-        <span>:</span>
+        <span>-</span>
         <input
           type="text"
           maxLength="2"
@@ -206,14 +208,14 @@ const ChangeUserTime = () => {
           defaultValue={eYear}
           onChange={handleEYear}
         />
-        <span>:</span>
+        <span>-</span>
         <input
           type="text"
           maxLength="2"
           defaultValue={eMonth}
           onChange={handleEMonth}
         />
-        <span>:</span>
+        <span>-</span>
         <input
           type="text"
           maxLength="2"

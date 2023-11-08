@@ -360,12 +360,23 @@ ORDER BY
                         "ISSUE RUNNING QUERY SELECT * FROM workHours WHERE user_id",
                     });
                   }
-                  res.json({
-                    dailyTimes: dTimes,
-                    weeklyTimes: wTimes,
-                    monthlyTimes: mTimes,
-                    yearlyTimes: yTimes,
-                  });
+                  connection.query(
+                    "SELECT hourly_pay FROM UserManagementDB.users WHERE id = ?",
+                    [userId],
+                    (err, payRate) => {
+                      if (err) {
+                        res.json({ allUsers: false });
+                      }
+                      console.log("Find me", payRate);
+                      res.json({
+                        dailyTimes: dTimes,
+                        weeklyTimes: wTimes,
+                        monthlyTimes: mTimes,
+                        yearlyTimes: yTimes,
+                        payRate: payRate,
+                      });
+                    }
+                  );
                 }
               );
             }

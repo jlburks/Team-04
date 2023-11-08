@@ -204,6 +204,7 @@ const BarChart = (props) => {
         backgroundColor: "silver",
         borderColor: "black",
         borderWidth: 1,
+        customData: ["Info 1", "Info 2"],
       },
     ],
   };
