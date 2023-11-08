@@ -14,6 +14,7 @@ import {
 ChartJs.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const BarChart = (props) => {
+  console.log("&*&*&*", props.times.payRate[0].hourly_pay);
   const [activeTab, setActiveTab] = useState("Daily");
   const [cLabels, setCLabels] = useState([]);
   const [cData, setCData] = useState([]);
@@ -27,6 +28,17 @@ const BarChart = (props) => {
 
   const noRecordsStyle = {
     color: "red",
+  };
+
+  const fromatHours = (hours) => {
+    const totalSeconds = Math.round(hours * 3600); // Convert hours to seconds
+    const hoursValue = Math.floor(totalSeconds / 3600);
+    const minutesValue = Math.floor((totalSeconds % 3600) / 60);
+    const secondsValue = totalSeconds % 60;
+
+    const formattedTime = `${hoursValue} hr ${minutesValue} min ${secondsValue} sec`;
+
+    return formattedTime;
   };
 
   const monthlyNames = [
@@ -306,10 +318,110 @@ const BarChart = (props) => {
         <>
           {data.labels.length > 0 ? (
             <>
-              {activeTab === "Daily" && <Bar data={data} options={options} />}
-              {activeTab === "Weekly" && <Bar data={data} options={options} />}
-              {activeTab === "Monthly" && <Bar data={data} options={options} />}
-              {activeTab === "Yearly" && <Bar data={data} options={options} />}
+              {activeTab === "Daily" && (
+                <div>
+                  <Bar data={data} options={options} />
+
+                  <div>
+                    <h2>
+                      Total Hours:
+                      {fromatHours(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        )
+                      )}
+                    </h2>
+                    <h2>
+                      Total Income: $
+                      {(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        ) * props.times.payRate[0].hourly_pay
+                      ).toFixed(2)}
+                    </h2>
+                  </div>
+                </div>
+              )}
+              {activeTab === "Weekly" && (
+                <div>
+                  <Bar data={data} options={options} />
+
+                  <div>
+                    <h2>
+                      Total Hours:
+                      {fromatHours(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        )
+                      )}
+                    </h2>
+                    <h2>
+                      Total Income: $
+                      {(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        ) * props.times.payRate[0].hourly_pay
+                      ).toFixed(2)}
+                    </h2>
+                  </div>
+                </div>
+              )}
+              {activeTab === "Monthly" && (
+                <div>
+                  <Bar data={data} options={options} />
+
+                  <div>
+                    <h2>
+                      Total Hours:
+                      {fromatHours(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        )
+                      )}
+                    </h2>
+                    <h2>
+                      Total Income: $
+                      {(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        ) * props.times.payRate[0].hourly_pay
+                      ).toFixed(2)}
+                    </h2>
+                  </div>
+                </div>
+              )}
+              {activeTab === "Yearly" && (
+                <div>
+                  <Bar data={data} options={options} />
+
+                  <div>
+                    <h2>
+                      Total Hours:
+                      {fromatHours(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        )
+                      )}
+                    </h2>
+                    <h2>
+                      Total Income: $
+                      {(
+                        data.datasets[0].data.reduce(
+                          (acc, value) => acc + value,
+                          0
+                        ) * props.times.payRate[0].hourly_pay
+                      ).toFixed(2)}
+                    </h2>
+                  </div>
+                </div>
+              )}
             </>
           ) : (
             <div style={divStyle}>

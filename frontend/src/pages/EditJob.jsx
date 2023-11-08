@@ -10,7 +10,7 @@ const EditJob = (props) => {
 
   const [curName, setcurName] = useState("");
   const [curDescription, setCurDescription] = useState("");
-  const [curActive, setCurActive] = useState(0);
+  const [curActive, setCurActive] = useState(3);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -33,9 +33,12 @@ const EditJob = (props) => {
         const userCurrentInfo = currJobInfo.data.data[0];
         setcurName(userCurrentInfo.name);
         setCurDescription(userCurrentInfo.description);
-        console.log("---", userCurrentInfo.active);
+        console.log("CURR---", userCurrentInfo.active);
         setCurActive(userCurrentInfo.active);
-      } catch (e) {}
+        setActive(userCurrentInfo.active);
+      } catch (e) {
+        console.log(e);
+      }
     };
     getInfo();
   }, []);
@@ -61,24 +64,27 @@ const EditJob = (props) => {
         config
       );
       navigate("/admin/Jobs");
-
-      console.log("response =>", response);
     } catch (e) {
       console.log(e);
     }
   };
 
   const handleActive = (e) => {
-    console.log(e);
     console.log("active!!!", e.target.value);
-    return setActive(e.target.value);
+    setActive(parseInt(e.target.value));
   };
+
+  const handleInActive = (e) => {
+    console.log("Inactive!!!", e.target.value);
+    setActive(parseInt(e.target.value));
+  };
+
   const handleDescription = (e) => {
     console.log(e.target.value);
-    return setDescription(e.target.value);
+    return setDescription("Inserted   ", e.target.value);
   };
   const handleName = (e) => {
-    console.log(e.target.value);
+    console.log("Inserted  ", e.target.value);
     return setName(e.target.value);
   };
 
@@ -88,7 +94,6 @@ const EditJob = (props) => {
   return (
     <>
       <h1>Edit Information</h1>
-
       <form>
         <div class="form-outline mb-4">
           <label for="inputEmail3" class="col-sm-2 col-form-label">
@@ -116,7 +121,7 @@ const EditJob = (props) => {
         </div>
         <fieldset class="form-group">
           <div class="row">
-            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+            <legend class="col-form-label col-sm-2 pt-0">Status:</legend>
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input
@@ -125,8 +130,8 @@ const EditJob = (props) => {
                   name="gridRadios"
                   id="gridRadios1"
                   value={1}
-                  onClick={handleActive}
-                  required
+                  checked={active == 1}
+                  onChange={handleActive}
                 />
                 <label class="form-check-label" for="gridRadios1">
                   Active
@@ -138,16 +143,16 @@ const EditJob = (props) => {
                   type="radio"
                   name="gridRadios"
                   id="gridRadios2"
+                  checked={active == 0}
                   value={0}
-                  onClick={handleActive}
-                  required
+                  onChange={handleInActive}
                 />
                 <label class="form-check-label" for="gridRadios2">
                   Inactive
                 </label>
               </div>
-              </div>
             </div>
+          </div>
         </fieldset>
 
         <div class="form-check form-check-inline  d-flex justify-content-center">

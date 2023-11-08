@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 import { Link } from "react-router-dom";
 
+import IncomeUser from "./IncomeUser";
 import DownloadIcons from "../icons/box-arrow-down.svg";
 import EditIcons from "../icons/edit.svg";
 
 const ReportTable = (props) => {
   console.log("PROPS FOUND IN REPORT TABLE", props);
   const [requestedData, setRequestedData] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const formatCSVTime = (totalHours) => {
     const hours = Math.floor(totalHours / 3600);
@@ -133,7 +135,7 @@ const ReportTable = (props) => {
               <Link
                 to={`/users/changeTimes/${rowData.user_id}/${rowData.dateString}/${rowData.dateStringEnd}/${rowData.project_id}`}
               >
-                <img src={EditIcons} alt="+" />
+                <img src={EditIcons} alt="edit" />
               </Link>
             </td>
           )}
@@ -238,11 +240,10 @@ const ReportTable = (props) => {
       <div>
         <table className="table table-striped">
           <thead>
-            {console.log("Headers ===>>>>>", tableHeaders)}
-            {console.log("Rows ===>>>>>", tableRows)}
             <tr>{tableHeaders}</tr>
           </thead>
           <tbody>{tableRows}</tbody>
+          <h1></h1>
         </table>
       </div>
       {props.activeTab === "Daily" && (
@@ -261,6 +262,10 @@ const ReportTable = (props) => {
                     workday: formatISODate(rowData.workday),
                     total_hours: formatCSVTime(rowData.total_seconds),
                     job_name: rowData.jobName,
+                    total_pay: (
+                      parseFloat(props.data.payRate[0].hourly_pay) *
+                      (parseFloat(rowData.total_seconds) / 3600)
+                    ).toFixed(2),
                   };
                 })}
               filename="userReports.csv"
