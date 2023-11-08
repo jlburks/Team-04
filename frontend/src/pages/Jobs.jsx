@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 const Jobs = () => {
   return (
     <form>
-      <h1>Jobs</h1>
+      <h1 style={{ textAlign: "center" }}>Jobs</h1>
       <div class="d-flex flex-column align-items-center">
-            {/* <input
+        {/* <input
           className="form-control"
           type="search"
           placeholder="Job name"
@@ -19,16 +19,16 @@ const Jobs = () => {
         <button type="button" class="btn btn-dark">Search
         </button>
         </div> */}
-      <JobCollection action="delete" />
-      <div class="mt-3">
-        <Link to="/addJob">
-          <button type="button" class="btn btn-dark mt-3">
-            Add New Job
-          </button>
-        </Link>
+        <JobCollection action="delete" />
+        <div class="mt-3">
+          <Link to="/addJob">
+            <button type="button" class="btn btn-dark mt-3">
+              Add New Job
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
-</form>
+    </form>
   );
 };
 

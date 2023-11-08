@@ -131,7 +131,11 @@ const ReportTable = (props) => {
             ).toFixed(2)}
           </td>
           {props.isAdmin && (
-            <td>
+            <td
+              style={{
+                paddingLeft: "7%",
+              }}
+            >
               <Link
                 to={`/users/changeTimes/${rowData.user_id}/${rowData.dateString}/${rowData.dateStringEnd}/${rowData.project_id}`}
               >

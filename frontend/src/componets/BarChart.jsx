@@ -322,8 +322,14 @@ const BarChart = (props) => {
                 <div>
                   <Bar data={data} options={options} />
 
-                  <div>
-                    <h2>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: "8%",
+                      marginBottom: "8%",
+                    }}
+                  >
+                    <h3>
                       Total Hours:
                       {fromatHours(
                         data.datasets[0].data.reduce(
@@ -331,8 +337,8 @@ const BarChart = (props) => {
                           0
                         )
                       )}
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                       Total Income: $
                       {(
                         data.datasets[0].data.reduce(
@@ -340,7 +346,7 @@ const BarChart = (props) => {
                           0
                         ) * props.times.payRate[0].hourly_pay
                       ).toFixed(2)}
-                    </h2>
+                    </h3>
                   </div>
                 </div>
               )}
@@ -348,7 +354,7 @@ const BarChart = (props) => {
                 <div>
                   <Bar data={data} options={options} />
 
-                  <div>
+                  <div style={{ textAlign: "center" }}>
                     <h2>
                       Total Hours:
                       {fromatHours(
@@ -371,7 +377,7 @@ const BarChart = (props) => {
                 </div>
               )}
               {activeTab === "Monthly" && (
-                <div>
+                <div style={{ textAlign: "center" }}>
                   <Bar data={data} options={options} />
 
                   <div>
@@ -400,8 +406,8 @@ const BarChart = (props) => {
                 <div>
                   <Bar data={data} options={options} />
 
-                  <div>
-                    <h2>
+                  <div style={{ textAlign: "center" }}>
+                    <h3>
                       Total Hours:
                       {fromatHours(
                         data.datasets[0].data.reduce(
@@ -409,8 +415,8 @@ const BarChart = (props) => {
                           0
                         )
                       )}
-                    </h2>
-                    <h2>
+                    </h3>
+                    <h3>
                       Total Income: $
                       {(
                         data.datasets[0].data.reduce(
@@ -418,7 +424,7 @@ const BarChart = (props) => {
                           0
                         ) * props.times.payRate[0].hourly_pay
                       ).toFixed(2)}
-                    </h2>
+                    </h3>
                   </div>
                 </div>
               )}

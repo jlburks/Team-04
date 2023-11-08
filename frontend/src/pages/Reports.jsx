@@ -46,7 +46,7 @@ const Reports = (props) => {
   return (
     <form>
       <div>
-        <h1>Reports</h1>
+        <h1 style={{ textAlign: "center" }}>Reports</h1>
         <br />
         <div>
           {props.isAdmin && (

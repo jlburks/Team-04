@@ -4,9 +4,9 @@ import UsersCollection from "../componets/UsersCollection.jsx";
 const Users = () => {
   return (
     <form>
-      <h1>Users</h1>
+      <h1 style={{ textAlign: "center" }}>Users</h1>
       <div class="d-flex flex-column align-items-center">
-            {/* <input
+        {/* <input
               className="form-control"
               type="search"
               placeholder="Username"
@@ -17,15 +17,15 @@ const Users = () => {
                 Search
               </button>
             </div> */}
-            <UsersCollection />
-            <div className="mt-5">
-              <Link to="/addUser">
-                <button type="button" class="btn btn-dark">
-                  Add User
-                </button>
-              </Link>
-            </div>
-          </div>
+        <UsersCollection />
+        <div className="mt-5">
+          <Link to="/addUser">
+            <button type="button" class="btn btn-dark">
+              Add User
+            </button>
+          </Link>
+        </div>
+      </div>
     </form>
   );
 };

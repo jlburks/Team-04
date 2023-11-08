@@ -154,97 +154,152 @@ const ChangeUserTime = () => {
 
   return (
     <>
-      <d1>Change User Time</d1>
+      <div>
+        <h1 style={{ textAlign: "center" }}>Change User Time</h1>
+        <br />
 
-      <div>
-        <h1>Start Time</h1>
-        <input
-          type="text"
-          maxLength="4"
-          defaultValue={sYear}
-          onChange={handleSYear}
-        />
-        <span>-</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={sMonth}
-          onChange={handleSMonth}
-        />
-        <span>-</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={sDay}
-          onChange={handleSDay}
-        />
-        <span> </span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={sHour}
-          onChange={handleSHour}
-        />
-        <span>:</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={sMinute}
-          onChange={handleSMinute}
-        />
-        <span>:</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={sSecond}
-          onChange={handleSSecond}
-        />
+        <form>
+          <h3 style={{ textAlign: "center" }}>Start Time</h3>
+          <div style={{ display: "-webkit-inline-box" }}>
+            <div className="col-4">
+              <h6>Y</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Year"
+                maxLength="4"
+                defaultValue={sYear}
+                onChange={handleSYear}
+              />
+            </div>
+            <div className="col-2">
+              <h6>M</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Month"
+                maxLength="2"
+                defaultValue={sMonth}
+                onChange={handleSMonth}
+              />
+            </div>
+            <div className="col-2">
+              <h6>DD</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Day"
+                maxLength="2"
+                defaultValue={sDay}
+                onChange={handleSDay}
+              />
+            </div>
+            <div className="col-1">
+              <h6>Hr</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Hour"
+                maxLength="2"
+                defaultValue={sHour}
+                onChange={handleSHour}
+              />
+            </div>
+            <div className="col-1">
+              <h6>Min</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Minute"
+                maxLength="2"
+                defaultValue={sMinute}
+                onChange={handleSMinute}
+              />
+            </div>
+            <div className="col-2">
+              <h6>Sec</h6>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Second"
+                maxLength="2"
+                defaultValue={sSecond}
+                onChange={handleSSecond}
+              />
+            </div>
+          </div>
+        </form>
+
+        <form>
+          <h3 style={{ textAlign: "center" }}>End Time</h3>
+          <div className="form-row" style={{ display: "-webkit-inline-box" }}>
+            <div className="col-4">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Year"
+                maxLength="4"
+                defaultValue={eYear}
+                onChange={handleEYear}
+              />
+            </div>
+            <div className="col-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Month"
+                maxLength="2"
+                defaultValue={eMonth}
+                onChange={handleEMonth}
+              />
+            </div>
+            <div className="col-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Day"
+                maxLength="2"
+                defaultValue={eDay}
+                onChange={handleEDay}
+              />
+            </div>
+            <div className="col-1">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Hour"
+                maxLength="2"
+                defaultValue={eHour}
+                onChange={handleEHour}
+              />
+            </div>
+            <div className="col-1">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Minute"
+                maxLength="2"
+                defaultValue={eMinute}
+                onChange={handleEMinute}
+              />
+            </div>
+            <div className="col-2">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Second"
+                maxLength="2"
+                defaultValue={eSecond}
+                onChange={handleESecond}
+              />
+            </div>
+          </div>
+        </form>
+        <br />
+        <button onClick={changeTime} className="btn btn-dark">
+          Submit
+        </button>
       </div>
-      <div>
-        <h1>End Time</h1>
-        <input
-          type="text"
-          maxLength="4"
-          defaultValue={eYear}
-          onChange={handleEYear}
-        />
-        <span>-</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={eMonth}
-          onChange={handleEMonth}
-        />
-        <span>-</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={eDay}
-          onChange={handleEDay}
-        />
-        <span> </span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={eHour}
-          onChange={handleEHour}
-        />
-        <span>:</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={eMinute}
-          onChange={handleEMinute}
-        />
-        <span>:</span>
-        <input
-          type="text"
-          maxLength="2"
-          defaultValue={eSecond}
-          onChange={handleESecond}
-        />
-      </div>
-      <button onClick={changeTime}>Submit</button>
     </>
   );
 };
