@@ -28,7 +28,7 @@ const EditUser = (props) => {
       .put(`http://127.0.0.1:3000/users/editPassword/${userId}`, data, config)
       .then((data) => {
         console.log(data);
-        navigate("/reports");
+        navigate("/admin/Users");
       })
       .catch((e) => {
         console.log(e);

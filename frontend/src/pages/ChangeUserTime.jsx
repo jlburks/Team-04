@@ -145,7 +145,7 @@ const ChangeUserTime = () => {
       )
       .then((data) => {
         console.log(data);
-        navigate("/admin/Users");
+        navigate("/reports");
       })
       .catch((e) => {
         console.log(e);
