@@ -9,16 +9,29 @@ import UserDropDown from "../componets/UserDropDown";
 const Reports = (props) => {
   console.log("REPORT PROPS", props);
   const [chartData, setChartData] = useState({});
+  const [jobChart, setJobChart] = useState({});
   const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedJob, setSelectedJob] = useState(0);
   const [reportType, setReportType] = useState("userReports");
+
+  const [activeChart, setActiveChart] = useState(null); // To keep track of the active chart
 
   const getSelectedUser = (sUser, sUserId) => {
     setSelectedUser(sUser);
   };
 
+  const getSelectedJob = (sUser) => {
+    setSelectedJob(sUser);
+  };
+
   useEffect(() => {
     fetchData();
-  }, [selectedUser]);
+    return () => {
+      if (activeChart) {
+        activeChart.destroy();
+      }
+    };
+  }, [selectedUser, reportType]);
 
   const fetchData = async () => {
     try {
@@ -46,6 +59,7 @@ const Reports = (props) => {
         requestData,
         config
       );
+      setJobChart(response2);
       return console.log("Response 2 =>>>", response2);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -54,38 +68,44 @@ const Reports = (props) => {
 
   const changeUserReports = () => {
     setReportType("userReports");
+    setActiveChart(null);
   };
   const changeJobReports = () => {
     setReportType("jobReports");
+    setActiveChart(null);
   };
 
   return (
     <form>
+      <div style={{ textAlign: "center" }}>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg"
+          onClick={changeUserReports}
+          disabled={props.isAdmin != true}
+        >
+          User Reports
+        </button>
+        {props.isAdmin && (
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            onClick={changeJobReports}
+          >
+            Job Reports
+          </button>
+        )}
+      </div>
+      <br />
       {reportType === "userReports" && (
         <div>
-          <div style={{ textAlign: "center" }}>
-            <button
-              type="button"
-              class="btn btn-primary btn-lg"
-              onClick={changeUserReports}
-              disabled={props.isAdmin != true}
-            >
-              User Reports
-            </button>
-            {props.isAdmin && (
-              <button
-                type="button"
-                class="btn btn-primary btn-lg"
-                onClick={changeJobReports}
-              >
-                Job Reports
-              </button>
-            )}
-          </div>
-          <br />
           <div>
             {props.isAdmin && (
-              <UserDropDown setUser={setSelectedUser} adminId={props.adminId} />
+              <UserDropDown
+                setUser={setSelectedUser}
+                adminId={props.adminId}
+                page={0}
+              />
             )}
             {Object.keys(chartData).length > 0 && (
               <BarChart
@@ -100,36 +120,20 @@ const Reports = (props) => {
       )}
       {reportType === "jobReports" && (
         <div>
-          <div style={{ textAlign: "center" }}>
-            <button
-              type="button"
-              class="btn btn-primary btn-lg"
-              onClick={changeUserReports}
-              disabled={props.isAdmin != true}
-            >
-              User Reports
-            </button>
-            {props.isAdmin && (
-              <button
-                type="button"
-                class="btn btn-primary btn-lg"
-                onClick={changeJobReports}
-              >
-                Job Reports
-              </button>
-            )}
-          </div>
-          <br />
           <div>
             {props.isAdmin && (
-              <UserDropDown setUser={setSelectedUser} adminId={props.adminId} />
+              <UserDropDown
+                setJob={getSelectedJob}
+                adminId={props.adminId}
+                page={1}
+              />
             )}
             {Object.keys(chartData).length > 0 && (
               <JobChart
-                times={chartData}
-                selectedUser={selectedUser}
+                data={jobChart}
                 isAdmin={props.isAdmin}
-                setUser={selectedUser}
+                currentJob={selectedJob}
+                selectedJob={selectedJob}
               />
             )}
           </div>

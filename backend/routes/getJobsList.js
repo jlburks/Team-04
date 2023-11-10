@@ -36,6 +36,8 @@ Route.get("/", verifyUser, (req, res) => {
   });
 });
 
+// /jobs/allJobs
+
 Route.get("/allJobs", verifyAdmin, (req, res) => {
   console.log(req.headers.authorization);
   const token = req.headers.authorization.replace("Bearer ", "").trim();

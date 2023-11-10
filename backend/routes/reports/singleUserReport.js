@@ -390,16 +390,16 @@ ORDER BY
 Route.post("/compJobs", verifyUser, (req, res) => {
   connection.query(
     `SELECT
-  w.project_id,
-  w.user_id,
-  u.username,
-  SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) AS total_time_lapse_seconds,
-  u.hourly_pay,
-  (SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600) * u.hourly_pay AS total_amount
+    w.project_id,
+    j.name AS job_name,  -- Select the job name from the jobs table
+    u.username AS user_name,
+    SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) AS total_time_lapse_seconds,
+    SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_amount
 FROM workHours w
 JOIN users u ON w.user_id = u.id
+JOIN jobs j ON w.project_id = j.id  -- Join the jobs table using the job_id column
 WHERE w.end_time > w.start_time
-GROUP BY w.project_id, w.user_id, u.username, u.hourly_pay`,
+GROUP BY w.project_id, j.name, u.username;`,
     (err, data) => {
       if (err) {
         console.log(err);
