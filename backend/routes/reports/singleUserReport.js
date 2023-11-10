@@ -387,4 +387,27 @@ ORDER BY
   );
 });
 
+Route.post("/compJobs", verifyUser, (req, res) => {
+  connection.query(
+    `SELECT
+  w.project_id,
+  w.user_id,
+  u.username,
+  SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) AS total_time_lapse_seconds,
+  u.hourly_pay,
+  (SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600) * u.hourly_pay AS total_amount
+FROM workHours w
+JOIN users u ON w.user_id = u.id
+WHERE w.end_time > w.start_time
+GROUP BY w.project_id, w.user_id, u.username, u.hourly_pay`,
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(data);
+      res.json({ data });
+    }
+  );
+});
+
 module.exports = Route;
