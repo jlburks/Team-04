@@ -390,22 +390,41 @@ ORDER BY
 Route.post("/compJobs", verifyUser, (req, res) => {
   connection.query(
     `SELECT
-    w.project_id,
-    j.name AS job_name,  -- Select the job name from the jobs table
-    u.username AS user_name,
-    SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) AS total_time_lapse_seconds,
-    SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_amount
+    j.id AS id,
+    j.name AS job_name,
+    j.active AS job_active,
+    SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600 AS total_hours,
+    SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_cost
 FROM workHours w
 JOIN users u ON w.user_id = u.id
-JOIN jobs j ON w.project_id = j.id  -- Join the jobs table using the job_id column
+JOIN jobs j ON w.project_id = j.id
 WHERE w.end_time > w.start_time
-GROUP BY w.project_id, j.name, u.username;`,
-    (err, data) => {
+GROUP BY job_name
+ORDER BY total_hours DESC;`,
+    (err, overallGroupByHours) => {
       if (err) {
         console.log(err);
       }
-      console.log(data);
-      res.json({ data });
+      connection.query(
+        `SELECT
+      j.id AS id,
+      j.name AS job_name,
+      j.active AS job_active,
+      SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600 AS total_hours,
+      SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_cost
+  FROM workHours w
+  JOIN users u ON w.user_id = u.id
+  JOIN jobs j ON w.project_id = j.id
+  WHERE w.end_time > w.start_time
+  GROUP BY job_name
+  ORDER BY total_cost DESC;`,
+        (err, overallGroupByCost) => {
+          if (err) {
+            console.log(err);
+          }
+          res.json({ overallGroupByHours, overallGroupByCost });
+        }
+      );
     }
   );
 });

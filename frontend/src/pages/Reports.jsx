@@ -134,6 +134,7 @@ const Reports = (props) => {
                 isAdmin={props.isAdmin}
                 currentJob={selectedJob}
                 selectedJob={selectedJob}
+                setSelectedJob={setSelectedJob}
               />
             )}
           </div>
