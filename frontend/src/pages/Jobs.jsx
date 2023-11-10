@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Jobs = () => {
   return (
     <form>
-      <h1 style={{ textAlign: "center" }}>Jobs</h1>
+      <h2 style={{ textAlign: "center" }}>Jobs</h2>
       <div class="d-flex flex-column align-items-center">
         {/* <input
           className="form-control"
