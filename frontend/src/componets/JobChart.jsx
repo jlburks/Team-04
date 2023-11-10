@@ -108,23 +108,17 @@ const JobChart = (props) => {
         </div>
       ) : (
         <div>
-          {/* <h1>Job Name: </h1>
-          <h1>Total # hours:</h1>
-          <h1>Total # cost:</h1>
-          <h1>Ordered List of top HOURS employees: with ranking</h1> */}
           <br></br>
           <div class="card">
             <div class="card-header">Team Name</div>
             <div class="card-body">
               <h5 class="card-title">reports</h5>
-              <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
-              </p>
+              <p class="card-text">Job Name:</p>
+              <p class="card-text">Total # hours:</p>
+              <p class="card-text">Total # cost::</p>
               <h5 class="card-title">Employees</h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                orderd list of user with info like hours and money
               </p>
             </div>
           </div>
