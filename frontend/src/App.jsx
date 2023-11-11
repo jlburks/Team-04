@@ -15,6 +15,7 @@ import EditJob from "./pages/EditJob";
 import DeleteJobButton from "./componets/DeleteJobButton";
 import AssignJob from "./pages/AssignJob";
 import ChangeUserTime from "./pages/ChangeUserTime";
+import Documentation from "./pages/Documentation";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -33,6 +34,7 @@ function App() {
             <Route path="/" element={<CheckInCheckOut />} />
             <Route path="/addJob" element={<AddJob />} />
             <Route path="/addUser" element={<AddUser />} />
+            <Route path="/documentation" element={<Documentation />} />
             <Route
               path="/reports"
               element={<Reports isAdmin={isAdmin} adminId={adminId} />}
