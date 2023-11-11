@@ -83,6 +83,7 @@ const Reports = (props) => {
           class="btn btn-primary btn-lg"
           onClick={changeUserReports}
           disabled={props.isAdmin != true}
+          style={{ marginRight: "5px" }}
         >
           User Reports
         </button>

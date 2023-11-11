@@ -429,4 +429,51 @@ ORDER BY total_hours DESC;`,
   );
 });
 
+Route.get("/UserJobsReport/:jobId", (req, res) => {
+  const jobId = req.params.jobId;
+  connection.query(
+    `SELECT
+      u.id AS user_id,
+      u.username AS user_username,
+      SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600 AS total_hours,
+      SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_cost
+    FROM workHours w
+    JOIN users u ON w.user_id = u.id
+    JOIN jobs j ON w.project_id = j.id
+    WHERE w.end_time > w.start_time
+      AND j.id = ?
+    GROUP BY u.id, u.username
+    ORDER BY total_hours DESC`,
+    [jobId],
+    (err, jobSortHours) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      connection.query(
+        `SELECT
+          u.id AS user_id,
+          u.username AS user_name,
+          SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600 AS total_hours,
+          SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_cost
+        FROM workHours w
+        JOIN users u ON w.user_id = u.id
+        JOIN jobs j ON w.project_id = j.id
+        WHERE w.end_time > w.start_time
+          AND j.id = ?
+        GROUP BY u.id, u.username
+        ORDER BY total_cost DESC`,
+        [jobId],
+        (err, jobSortCost) => {
+          if (err) {
+            return res.status(500).json({ error: err.message });
+          }
+
+          res.json({ jobSortHours, jobSortCost });
+        }
+      );
+    }
+  );
+});
+
 module.exports = Route;
