@@ -230,27 +230,27 @@ const BarChart = (props) => {
           className={`nav-link ${activeTab === "Daily" ? "active" : ""}`}
           onClick={() => setActiveTab("Daily")}
         >
-          <h4>Daily</h4>
+          <h5>Daily</h5>
         </div>
         <div
           className={`nav-link ${activeTab === "Weekly" ? "active" : ""}`}
           onClick={() => setActiveTab("Weekly")}
         >
-          <h4>Weekly</h4>
+          <h5>Weekly</h5>
         </div>
 
         <div
           className={`nav-link ${activeTab === "Monthly" ? "active" : ""}`}
           onClick={() => setActiveTab("Monthly")}
         >
-          <h4>Monthly</h4>
+          <h5>Monthly</h5>
         </div>
 
         <div
           className={`nav-link ${activeTab === "Yearly" ? "active" : ""}`}
           onClick={() => setActiveTab("Yearly")}
         >
-          <h4>Yearly</h4>
+          <h5>Yearly</h5>
         </div>
       </div>
       <div>

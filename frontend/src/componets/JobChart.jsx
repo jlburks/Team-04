@@ -27,14 +27,11 @@ const JobChart = (props) => {
     <div>
       {props.currentJob == 0 ? (
         <div>
-          <div className="btn-group">
-            <label
-              className={`btn btn-secondary ${
-                selectActive === 1 ? "active" : ""
-              }`}
-            >
+          <div class="form-check form-check-inline">
+            <label class="form-check-label">
               <input
                 type="radio"
+                class="form-check-input"
                 name="options"
                 id="option1"
                 autoComplete="off"
@@ -43,10 +40,12 @@ const JobChart = (props) => {
                 defaultChecked
               />{" "}
               Active
-            </label>
-            <label className="btn btn-secondary">
+            </label></div>
+            <div class="form-check form-check-inline">
+            <label class="form-check-label">
               <input
                 type="radio"
+                class="form-check-input"
                 name="options"
                 id="option2"
                 value={0}
@@ -56,8 +55,8 @@ const JobChart = (props) => {
               All
             </label>
           </div>
-          <h1 style={{ justifyContent: "center" }}>All Jobs</h1>
-          <h7>orderd by hours</h7>
+          <h4 style={{ justifyContent: "center" }}>All Jobs</h4>
+          <h7>Ordered by hours</h7>
           <table className="table table-striped">
             <thead>
               <tr>
@@ -124,9 +123,6 @@ const JobChart = (props) => {
             </div>
             <div className="card-body">
               <h5 className="card-title">Reports</h5>
-              <p className="card-text">
-                {currentJobNums.length > 0 && currentJobNums[0].job_name}
-              </p>
               <p className="card-text">
                 Total # hours:{" "}
                 {currentJobNums.length > 0 && currentJobNums[0].total_hours}
