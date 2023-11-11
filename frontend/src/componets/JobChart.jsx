@@ -5,9 +5,13 @@ import JobChartRank from "../componets/JobChartRankList";
 const JobChart = (props) => {
   const [selectActive, setSelectActive] = useState(1);
   const [currentJobNums, setCurrentJobNums] = useState([]);
+  const [activeJobsStats, setActiveJobsStats] = useState([]);
 
   useEffect(() => {
     const selectedJob = props.data.data.overallGroupByCost.find(
+      (job) => job.id == props.currentJob
+    );
+    const selectedActiveJob = props.data.data.overallGroupByCost.find(
       (job) => job.id == props.currentJob
     );
     console.log("Selected valueeeee", typeof selectedJob); //object
@@ -40,8 +44,9 @@ const JobChart = (props) => {
                 defaultChecked
               />{" "}
               Active
-            </label></div>
-            <div class="form-check form-check-inline">
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
             <label class="form-check-label">
               <input
                 type="radio"
@@ -128,9 +133,14 @@ const JobChart = (props) => {
                 {currentJobNums.length > 0 && currentJobNums[0].total_hours}
               </p>
               <p className="card-text">
-                Total # cost: $
+                Total % cuurently active projects: $
                 {currentJobNums.length > 0 &&
                   Number(currentJobNums[0].total_cost).toFixed(2)}
+              </p>
+              <p className="card-text">Total % cost: ${45}</p>
+              <p className="card-text">
+                Total % of currently active project hours:
+                {45}
               </p>
               <h5 className="card-title">Employees</h5>
               <div>
