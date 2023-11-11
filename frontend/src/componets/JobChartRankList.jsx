@@ -32,6 +32,7 @@ const JobCHartRankList = (props) => {
   return (
     <div className="row">
       <div className="col">
+        <h5>ranked by cost</h5>
         <ul className="list-group">
           {hourList.map((user, index) => (
             <li
@@ -51,6 +52,7 @@ const JobCHartRankList = (props) => {
         </ul>
       </div>
       <div className="col">
+        <h5>ranked by cost</h5>
         <ul className="list-group">
           {hourList.map((user, index) => (
             <li

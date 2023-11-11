@@ -56,7 +56,7 @@ const JobChart = (props) => {
               All
             </label>
           </div>
-          <h1>All Jobs</h1>
+          <h1 style={{ justifyContent: "center" }}>All Jobs</h1>
           <h7>orderd by hours</h7>
           <table className="table table-striped">
             <thead>
