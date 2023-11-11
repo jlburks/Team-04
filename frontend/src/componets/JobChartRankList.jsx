@@ -6,6 +6,7 @@ const JobCHartRankList = (props) => {
   const [costList, setCostList] = useState([]);
 
   useEffect(() => {
+    console.log("LOOK =>>", props.totalActiveHours, props.totalActiveCost);
     const config = {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -54,16 +55,14 @@ const JobCHartRankList = (props) => {
       <div className="col">
         <h6>ranked by cost</h6>
         <ul className="list-group">
-          {hourList.map((user, index) => (
+          {costList.map((user, index) => (
             <li
               key={index}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              <span>{`${index + 1} Username: ${
-                user.user_username
-              }, Total Hours: ${user.total_hours}, Total Cost: ${
-                user.total_cost
-              }`}</span>
+              <span>{`${index + 1} Username: ${user.user_name}, Total Hours: ${
+                user.total_hours
+              }, Total Cost: ${user.total_cost}`}</span>
               <span className="badge badge-primary badge-pill">
                 {user.total_cost}
               </span>

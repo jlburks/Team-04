@@ -5,15 +5,28 @@ import JobChartRank from "../componets/JobChartRankList";
 const JobChart = (props) => {
   const [selectActive, setSelectActive] = useState(1);
   const [currentJobNums, setCurrentJobNums] = useState([]);
-  const [activeJobsStats, setActiveJobsStats] = useState([]);
+  const [totalActiveHours, setTotalActiveHours] = useState(0);
+  const [totalActiveCost, setTotalActiveCost] = useState(0);
 
   useEffect(() => {
     const selectedJob = props.data.data.overallGroupByCost.find(
       (job) => job.id == props.currentJob
     );
-    const selectedActiveJob = props.data.data.overallGroupByCost.find(
-      (job) => job.id == props.currentJob
-    );
+    console.log("+++0", selectedJob);
+
+    if (selectedJob != undefined) {
+      const activeHours = props.data.data.overallGroupByCost.reduce(
+        (sum, job) => sum + Number(job.total_hours),
+        0
+      );
+      const activeCost = props.data.data.overallGroupByCost.reduce(
+        (sum, job) => sum + Number(job.total_cost),
+        0
+      );
+      setTotalActiveCost(activeCost);
+      setTotalActiveHours(activeHours);
+    }
+
     console.log("Selected valueeeee", typeof selectedJob); //object
     setCurrentJobNums(selectedJob ? [selectedJob] : []);
   }, [props.currentJob]);
@@ -133,18 +146,38 @@ const JobChart = (props) => {
                 {currentJobNums.length > 0 && currentJobNums[0].total_hours}
               </p>
               <p className="card-text">
-                Total % cuurently active projects: $
+                Total # cost: $
                 {currentJobNums.length > 0 &&
                   Number(currentJobNums[0].total_cost).toFixed(2)}
               </p>
-              <p className="card-text">Total % cost: ${45}</p>
+              <p className="card-text">
+                Total % of currently active cost:
+                {currentJobNums.length > 0 &&
+                  (
+                    (Number(currentJobNums[0].total_cost).toFixed(2) /
+                      Number(totalActiveCost)) *
+                    100
+                  ).toFixed(2)}
+                %
+              </p>
               <p className="card-text">
                 Total % of currently active project hours:
-                {45}
+                {currentJobNums.length > 0 &&
+                  (
+                    (Number(currentJobNums[0].total_hours).toFixed(2) /
+                      Number(totalActiveHours)) *
+                    100
+                  ).toFixed(2)}
+                %
               </p>
               <h5 className="card-title">Employees</h5>
               <div>
-                <JobChartRank selectedJob={props.selectedJob} />
+                <JobChartRank
+                  selectedJob={props.selectedJob}
+                  // activeJobsStats={activeJobsStats}
+                  totalActiveHours={totalActiveHours}
+                  totalActiveCost={totalActiveCost}
+                />
               </div>
             </div>
           </div>

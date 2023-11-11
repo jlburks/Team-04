@@ -435,6 +435,7 @@ Route.get("/UserJobsReport/:jobId", (req, res) => {
     `SELECT
       u.id AS user_id,
       u.username AS user_username,
+      j.active AS active,
       SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600 AS total_hours,
       SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_cost
     FROM workHours w
@@ -454,6 +455,7 @@ Route.get("/UserJobsReport/:jobId", (req, res) => {
         `SELECT
           u.id AS user_id,
           u.username AS user_name,
+          j.active AS active,
           SUM(TIMESTAMPDIFF(SECOND, w.start_time, w.end_time)) / 3600 AS total_hours,
           SUM((TIMESTAMPDIFF(SECOND, w.start_time, w.end_time) / 3600) * u.hourly_pay) AS total_cost
         FROM workHours w
