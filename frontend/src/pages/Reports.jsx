@@ -77,28 +77,33 @@ const Reports = (props) => {
 
   return (
     <form>
-      <div style={{ textAlign: 'center' }}>
-      <h2>Reports</h2>
-      <div class="btn-group shadow-0" role="group">
-        <button
-          type="button"
-          class="btn btn-outline-dark" data-mdb-color="dark"
-          onClick={changeUserReports}
-          disabled={props.isAdmin != true}
-          style={{ marginRight: "5px" }}
-        >
-          User Reports
-        </button>
-        {props.isAdmin && (
-          <button
-            type="button"
-            class="btn btn-outline-dark" data-mdb-color="dark"
-            onClick={changeJobReports}
-          >
-            Job Reports
-          </button>
-        )}
-      </div></div>
+      <div style={{ textAlign: "center" }}>
+        <h2>Reports</h2>
+        <div class="btn-group shadow-0" role="group">
+          {props.isAdmin && (
+            <>
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-mdb-color="dark"
+                onClick={changeUserReports}
+                disabled={props.isAdmin != true}
+                style={{ marginRight: "5px" }}
+              >
+                User Reports
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-mdb-color="dark"
+                onClick={changeJobReports}
+              >
+                Job Reports
+              </button>
+            </>
+          )}
+        </div>
+      </div>
       <br />
       {reportType === "userReports" && (
         <div>
