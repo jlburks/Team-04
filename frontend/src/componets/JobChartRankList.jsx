@@ -65,7 +65,7 @@ const JobCHartRankList = (props) => {
                 user.total_cost
               }`}</span>
               <span className="badge badge-primary badge-pill">
-                {user.total_hours}
+                {user.total_cost}
               </span>
             </li>
           ))}
