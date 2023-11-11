@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import questionIcon from "../icons/question.png";
 
 const NavBar = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -90,7 +91,13 @@ const NavBar = (props) => {
         </Link>
 
         <ul className="navbar-nav ms-auto d-flex flex-row">
-          {/* for other navbar items if needed */}
+        {props.isLoggedIn && (
+            <li className="nav-item">
+              <Link to="/documentation" className="nav-link">
+                <img src={questionIcon} alt="Help" style={{ width: "24px", height: "24px" }} />
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
