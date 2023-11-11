@@ -91,7 +91,7 @@ const JobChart = (props) => {
             </tbody>
             <br></br>
             <br></br>
-            <h7>orderd by cost</h7>
+            <h7>Ordered by cost</h7>
             {/* <h1>orderd by cost</h1> */}
             <tbody>
               {props.data.data.overallGroupByCost

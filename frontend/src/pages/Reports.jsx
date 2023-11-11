@@ -77,10 +77,12 @@ const Reports = (props) => {
 
   return (
     <form>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: 'center' }}>
+      <h2>Reports</h2>
+      <div class="btn-group shadow-0" role="group">
         <button
           type="button"
-          class="btn btn-primary btn-lg"
+          class="btn btn-outline-dark" data-mdb-color="dark"
           onClick={changeUserReports}
           disabled={props.isAdmin != true}
           style={{ marginRight: "5px" }}
@@ -90,13 +92,13 @@ const Reports = (props) => {
         {props.isAdmin && (
           <button
             type="button"
-            class="btn btn-primary btn-lg"
+            class="btn btn-outline-dark" data-mdb-color="dark"
             onClick={changeJobReports}
           >
             Job Reports
           </button>
         )}
-      </div>
+      </div></div>
       <br />
       {reportType === "userReports" && (
         <div>

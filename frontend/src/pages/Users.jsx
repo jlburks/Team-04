@@ -4,7 +4,7 @@ import UsersCollection from "../componets/UsersCollection.jsx";
 const Users = () => {
   return (
     <form>
-      <h1 style={{ textAlign: "center" }}>Users</h1>
+      <h2 style={{ textAlign: "center" }}>Users</h2>
       <div class="d-flex flex-column align-items-center">
         {/* <input
               className="form-control"
