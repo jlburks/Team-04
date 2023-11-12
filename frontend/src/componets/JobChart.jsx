@@ -82,7 +82,6 @@ const JobChart = (props) => {
                 <th scope="col">Job Name</th>
                 <th scope="col">Total Hours</th>
                 <th scope="col">Total Cost</th>
-                <th scope="col">Active</th>
               </tr>
             </thead>
 
@@ -102,7 +101,6 @@ const JobChart = (props) => {
                     <td>{row.job_name}</td>
                     <td>{row.total_hours}</td>
                     <td>${Number(row.total_cost).toFixed(2)}</td>
-                    <td>{row.job_active === 1 ? "Yes" : "No"}</td>
                   </tr>
                 ))}
             </tbody>
@@ -126,7 +124,6 @@ const JobChart = (props) => {
                     <td>{row.job_name}</td>
                     <td>{row.total_hours}</td>
                     <td>${Number(row.total_cost).toFixed(2)}</td>
-                    <td>{row.job_active === 1 ? "Yes" : "No"}</td>
                   </tr>
                 ))}
             </tbody>

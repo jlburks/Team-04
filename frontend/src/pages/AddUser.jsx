@@ -60,7 +60,7 @@ const AddUser = () => {
 
   return (
     <>
-      <h3>Add New User</h3>
+      <h3 style={{ textAlign: "center" }}>Add New User</h3>
       <div class="form-outline mb-4">
         <input
           class="form-control"

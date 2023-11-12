@@ -37,12 +37,13 @@ const EditUser = (props) => {
 
   return (
     <>
-      <h3>Change Password</h3>
+      <h3 style={{ textAlign: "center" }}>Change Password</h3>
+      <br />
 
       <div class="form-outline mb-4">
         <input
           class="form-control"
-          placeholder="type new password.."
+          placeholder="type new password..."
           onChange={handlePassword}
         />
       </div>

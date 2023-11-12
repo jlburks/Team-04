@@ -71,7 +71,10 @@ const NavBar = (props) => {
       </nav>
 
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg bg-shortlightblue fixed-top">
+      <nav
+        className="navbar navbar-expand-lg bg-shortlightblue fixed-top"
+        style={{ right: "auto" }}
+      >
         <button
           className="navbar-toggler"
           type="button"

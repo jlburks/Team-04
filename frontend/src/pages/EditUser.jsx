@@ -78,8 +78,11 @@ const EditUser = (props) => {
 
   return (
     <>
-      <h3>Edit User</h3>
+      <h3 style={{ textAlign: "center" }}>Edit User</h3>
       <div class="form-outline mb-4">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">
+          username
+        </label>
         <input
           class="form-control"
           value={dUsername}
@@ -88,6 +91,9 @@ const EditUser = (props) => {
       </div>
 
       <div class="form-outline mb-4">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">
+          hourly wage
+        </label>
         <input
           class="form-control"
           value={dHourlyPay}

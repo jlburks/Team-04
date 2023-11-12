@@ -50,7 +50,8 @@ const AddJob = () => {
   return (
     <>
       <form onSubmit={openJobActions}>
-        <h3>Add New Job</h3>
+        <h3 style={{ textAlign: "center" }}>Add New Job</h3>
+        <br />
         <div class="form-outline mb-4">
           <input
             class="form-control"

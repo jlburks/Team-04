@@ -8,12 +8,11 @@ const AssignJob = (props) => {
   const { userId } = useParams();
   console.log("ASSIGN JOBS PARAMS====>>>", userId);
   return (
-        <div className="container">
-          <h3>Assign Job</h3>
-          <form className="d-flex">
-          </form>
-          <JobCollection action="add" currentUserId={userId} />
-        </div>
+    <div className="container">
+      <h3 style={{ textAlign: "center" }}>Assign Job</h3>
+      <form className="d-flex"></form>
+      <JobCollection action="add" currentUserId={userId} />
+    </div>
   );
 };
 
