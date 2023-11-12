@@ -93,7 +93,7 @@ const EditJob = (props) => {
 
   return (
     <>
-      <h1>Edit Information</h1>
+      <h1 style={{ textAlign: "center" }}>Edit Information</h1>
       <form>
         <div class="form-outline mb-4">
           <label for="inputEmail3" class="col-sm-2 col-form-label">
@@ -122,6 +122,7 @@ const EditJob = (props) => {
         <fieldset class="form-group">
           <div class="row">
             <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+
             <div class="col-sm-10">
               <div class="form-check form-check-inline">
                 <input

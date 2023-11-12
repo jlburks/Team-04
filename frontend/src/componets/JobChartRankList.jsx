@@ -33,18 +33,23 @@ const JobCHartRankList = (props) => {
   return (
     <div className="row">
       <div className="col">
-        <h6>ranked by hours</h6>
+        <h6 style={{ textAlign: "center" }}>ranked by hours</h6>
         <ul className="list-group">
           {hourList.map((user, index) => (
             <li
               key={index}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              <span>{`${index + 1} Username: ${
-                user.user_username
-              }, Total Hours: ${Number(user.total_hours).toFixed(
-                2
-              )}, Total Cost: $${Number(user.total_cost).toFixed(2)}`}</span>
+              <span>
+                <div>{`${index + 1})`}</div>
+                <div>{`Username: ${user.user_username}`}</div>
+                <div>{`Total Hours: ${Number(user.total_hours).toFixed(
+                  2
+                )}`}</div>
+                <div>{`Total Wages: $${Number(user.total_cost).toFixed(
+                  2
+                )}`}</div>
+              </span>
               <span className="badge badge-primary badge-pill">
                 {user.total_hours}
               </span>
@@ -53,18 +58,23 @@ const JobCHartRankList = (props) => {
         </ul>
       </div>
       <div className="col">
-        <h6>ranked by cost</h6>
+        <h6 style={{ textAlign: "center" }}>ranked by wages</h6>
         <ul className="list-group">
           {costList.map((user, index) => (
             <li
               key={index}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              <span>{`${index + 1} Username: ${
-                user.user_name
-              }, Total Hours: ${Number(user.total_hours).toFixed(
-                2
-              )}, Total Cost: $${Number(user.total_cost).toFixed(2)}`}</span>
+              <span>
+                <div>{`${index + 1})`}</div>
+                <div>{`Username: ${user.user_name}`}</div>
+                <div>{`Total Hours: ${Number(user.total_hours).toFixed(
+                  2
+                )}`}</div>
+                <div>{`Total Wages: $${Number(user.total_cost).toFixed(
+                  2
+                )}`}</div>
+              </span>
               <span className="badge badge-primary badge-pill">
                 {user.total_cost}
               </span>

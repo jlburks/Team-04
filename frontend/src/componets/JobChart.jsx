@@ -138,41 +138,51 @@ const JobChart = (props) => {
             </div>
             <div className="card-body">
               <h4 className="card-title" style={{ textAlign: "center" }}>
-                Reports
+                Statistics
               </h4>
-              <p className="card-text">
-                Total # hours:{" "}
-                {currentJobNums.length > 0 && currentJobNums[0].total_hours}
+              <p className="card-text" style={{ textAlign: "center" }}>
+                Total amount of hours:{" "}
+                <b>
+                  {currentJobNums.length > 0 && currentJobNums[0].total_hours}
+                </b>
               </p>
-              <p className="card-text">
-                Total # cost: $
-                {currentJobNums.length > 0 &&
-                  Number(currentJobNums[0].total_cost).toFixed(2)}
+              <p className="card-text" style={{ textAlign: "center" }}>
+                Total cost of wages:{" "}
+                <b>
+                  $
+                  {currentJobNums.length > 0 &&
+                    Number(currentJobNums[0].total_cost).toFixed(2)}
+                </b>
               </p>
-              <p className="card-text">
-                Total % of currently active cost:
-                {currentJobNums.length > 0 &&
-                  (
-                    (Number(currentJobNums[0].total_cost).toFixed(2) /
-                      Number(totalActiveCost)) *
-                    100
-                  ).toFixed(2)}
-                %
+              <p className="card-text" style={{ textAlign: "center" }}>
+                Total % of currently active wages:{" "}
+                <b>
+                  {currentJobNums.length > 0 &&
+                    (
+                      (Number(currentJobNums[0].total_cost).toFixed(2) /
+                        Number(totalActiveCost)) *
+                      100
+                    ).toFixed(2)}
+                  %
+                </b>
               </p>
-              <p className="card-text">
-                Total % of currently active project hours:
-                {currentJobNums.length > 0 &&
-                  (
-                    (Number(currentJobNums[0].total_hours).toFixed(2) /
-                      Number(totalActiveHours)) *
-                    100
-                  ).toFixed(2)}
-                %
+              <p className="card-text" style={{ textAlign: "center" }}>
+                Total % of currently active project hours:{" "}
+                <b>
+                  {currentJobNums.length > 0 &&
+                    (
+                      (Number(currentJobNums[0].total_hours).toFixed(2) /
+                        Number(totalActiveHours)) *
+                      100
+                    ).toFixed(2)}
+                  %
+                </b>
               </p>
               <br />
               <h4 className="card-title" style={{ textAlign: "center" }}>
                 Employees
               </h4>
+              <br />
               <div>
                 <JobChartRank
                   selectedJob={props.selectedJob}

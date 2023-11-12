@@ -154,8 +154,8 @@ const ChangeUserTime = () => {
 
   return (
     <>
-      <div>
-        <h1 style={{ textAlign: "center" }}>Change User Time</h1>
+      <div style={{ textAlign: "center", width: "60%", marginLeft: "16%" }}>
+        <h1>Change User Time</h1>
         <br />
 
         <form>
