@@ -137,16 +137,16 @@ const JobChart = (props) => {
               {currentJobNums.length > 0 && currentJobNums[0].job_name}
             </div>
             <div className="card-body">
-              <h4 className="card-title" style={{ textAlign: "center" }}>
+              <h4 className="card-title">
                 Statistics
               </h4>
-              <p className="card-text" style={{ textAlign: "center" }}>
+              <p className="card-text">
                 Total amount of hours:{" "}
                 <b>
                   {currentJobNums.length > 0 && currentJobNums[0].total_hours}
                 </b>
               </p>
-              <p className="card-text" style={{ textAlign: "center" }}>
+              <p className="card-text">
                 Total cost of wages:{" "}
                 <b>
                   $
@@ -154,7 +154,7 @@ const JobChart = (props) => {
                     Number(currentJobNums[0].total_cost).toFixed(2)}
                 </b>
               </p>
-              <p className="card-text" style={{ textAlign: "center" }}>
+              <p className="card-text">
                 Total % of currently active wages:{" "}
                 <b>
                   {currentJobNums.length > 0 &&
@@ -166,7 +166,7 @@ const JobChart = (props) => {
                   %
                 </b>
               </p>
-              <p className="card-text" style={{ textAlign: "center" }}>
+              <p className="card-text">
                 Total % of currently active project hours:{" "}
                 <b>
                   {currentJobNums.length > 0 &&
@@ -179,7 +179,7 @@ const JobChart = (props) => {
                 </b>
               </p>
               <br />
-              <h4 className="card-title" style={{ textAlign: "center" }}>
+              <h4 className="card-title">
                 Employees
               </h4>
               <br />

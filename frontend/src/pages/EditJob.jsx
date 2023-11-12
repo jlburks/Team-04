@@ -93,7 +93,7 @@ const EditJob = (props) => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Edit Information</h1>
+      <h3 style={{ textAlign: "center" }}>Edit Information</h3>
       <form>
         <div class="form-outline mb-4">
           <label for="inputEmail3" class="col-sm-2 col-form-label">

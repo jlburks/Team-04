@@ -155,11 +155,11 @@ const ChangeUserTime = () => {
   return (
     <>
       <div style={{ textAlign: "center", width: "60%", marginLeft: "16%" }}>
-        <h1>Change User Time</h1>
+        <h3>Change User Time</h3>
         <br />
 
         <form>
-          <h3 style={{ textAlign: "center" }}>Start Time</h3>
+          <h5 style={{ textAlign: "center" }}>Start Time</h5>
           <div style={{ display: "-webkit-inline-box" }}>
             <div className="col-4">
               <h6>Y</h6>
@@ -231,7 +231,7 @@ const ChangeUserTime = () => {
         </form>
 
         <form>
-          <h3 style={{ textAlign: "center" }}>End Time</h3>
+          <h5 style={{ textAlign: "center" }}>End Time</h5>
           <div className="form-row" style={{ display: "-webkit-inline-box" }}>
             <div className="col-4">
               <input

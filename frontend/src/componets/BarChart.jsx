@@ -438,7 +438,7 @@ const BarChart = (props) => {
           )}
         </>
       </div>
-      <h2>hourly wage: ${props.times.payRate[0].hourly_pay}</h2>
+      <h5>hourly wage: ${props.times.payRate[0].hourly_pay}</h5>
       <div>
         <Tables
           data={props.times}
