@@ -91,10 +91,14 @@ const NavBar = (props) => {
         </Link>
 
         <ul className="navbar-nav ms-auto d-flex flex-row">
-        {props.isLoggedIn && (
+          {props.isLoggedIn && (
             <li className="nav-item">
               <Link to="/documentation" className="nav-link">
-                <img src={questionIcon} alt="Help" style={{ width: "24px", height: "24px" }} />
+                <img
+                  src={questionIcon}
+                  alt="Help"
+                  style={{ width: "24px", height: "24px" }}
+                />
               </Link>
             </li>
           )}

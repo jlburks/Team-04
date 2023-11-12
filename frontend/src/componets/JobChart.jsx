@@ -140,7 +140,9 @@ const JobChart = (props) => {
               {currentJobNums.length > 0 && currentJobNums[0].job_name}
             </div>
             <div className="card-body">
-              <h5 className="card-title">Reports</h5>
+              <h4 className="card-title" style={{ textAlign: "center" }}>
+                Reports
+              </h4>
               <p className="card-text">
                 Total # hours:{" "}
                 {currentJobNums.length > 0 && currentJobNums[0].total_hours}
@@ -170,7 +172,10 @@ const JobChart = (props) => {
                   ).toFixed(2)}
                 %
               </p>
-              <h5 className="card-title">Employees</h5>
+              <br />
+              <h4 className="card-title" style={{ textAlign: "center" }}>
+                Employees
+              </h4>
               <div>
                 <JobChartRank
                   selectedJob={props.selectedJob}

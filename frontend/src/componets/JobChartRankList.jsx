@@ -42,9 +42,9 @@ const JobCHartRankList = (props) => {
             >
               <span>{`${index + 1} Username: ${
                 user.user_username
-              }, Total Hours: ${user.total_hours}, Total Cost: ${
-                user.total_cost
-              }`}</span>
+              }, Total Hours: ${Number(user.total_hours).toFixed(
+                2
+              )}, Total Cost: $${Number(user.total_cost).toFixed(2)}`}</span>
               <span className="badge badge-primary badge-pill">
                 {user.total_hours}
               </span>
@@ -60,9 +60,11 @@ const JobCHartRankList = (props) => {
               key={index}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              <span>{`${index + 1} Username: ${user.user_name}, Total Hours: ${
-                user.total_hours
-              }, Total Cost: ${user.total_cost}`}</span>
+              <span>{`${index + 1} Username: ${
+                user.user_name
+              }, Total Hours: ${Number(user.total_hours).toFixed(
+                2
+              )}, Total Cost: $${Number(user.total_cost).toFixed(2)}`}</span>
               <span className="badge badge-primary badge-pill">
                 {user.total_cost}
               </span>

@@ -78,7 +78,7 @@ const Reports = (props) => {
   return (
     <form>
       <div style={{ textAlign: "center" }}>
-        <h2>Reports</h2>
+        <h2 style={{ textAlign: "center" }}>Reports</h2>
         <div class="btn-group shadow-0" role="group">
           {props.isAdmin && (
             <>
