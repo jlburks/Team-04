@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import IncomeUser from "./IncomeUser";
 import DownloadIcons from "../icons/box-arrow-down.svg";
 import EditIcons from "../icons/edit.svg";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const ReportTable = (props) => {
   console.log("PROPS FOUND IN REPORT TABLE", props);
@@ -39,7 +41,7 @@ const ReportTable = (props) => {
   const openEditTimes = (data) => {
     console.log(data);
     axios
-      .put(`http://127.0.0.1:3000/users/editTime/10`)
+      .put(`${API_BASE_URL}/users/editTime/10`)
       .then((data) => {
         console.log(data);
       })

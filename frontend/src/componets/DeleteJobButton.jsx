@@ -4,6 +4,9 @@ import axios from "axios";
 
 import DeleteIcon from "../icons/trash.svg";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
+
 const DeleteJobButton = (props) => {
   const buttonStyling = {
     color: "red",
@@ -26,7 +29,7 @@ const DeleteJobButton = (props) => {
         },
       };
       const response = await axios.delete(
-        `http://127.0.0.1:3000/jobs/deleteJob/${props.jobId}`,
+        `${API_BASE_URL}/jobs/deleteJob/${props.jobId}`,
         config
       );
       if (response.status === 200 || response.status === 204) {

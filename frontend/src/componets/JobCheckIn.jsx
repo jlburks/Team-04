@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const JobCheckIn = (props) => {
   // console.log(props.projectID);
@@ -48,7 +50,7 @@ const JobCheckIn = (props) => {
 
       axios
         .post(
-          "http://127.0.0.1:3000/checkIn",
+          `${API_BASE_URL}/checkIn`,
           { startTime: startTime, pId: props.projectID },
           config
         )
@@ -93,7 +95,7 @@ const JobCheckIn = (props) => {
 
       axios
         .post(
-          "http://127.0.0.1:3000/checkOut",
+          `${API_BASE_URL}/checkOut`,
           { endTime: endTime, wTimeId: workTimeId },
           config
         )

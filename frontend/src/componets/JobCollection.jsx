@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 import JobProfile from "./JobProfile";
 
@@ -22,7 +24,7 @@ const JobCollection = (props) => {
     const fetchJobs = async () => {
       try {
         const jobsData = await axios.get(
-          "http://127.0.1:3000/jobs/allJobs",
+          `${API_BASE_URL}/jobs/allJobs`,
           config
         );
         console.log("Jobs Data", jobsData);

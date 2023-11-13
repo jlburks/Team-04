@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const AddJob = () => {
   const [name, setName] = useState("");
@@ -21,7 +23,7 @@ const AddJob = () => {
 
     axios
       .post(
-        "http://127.0.1:3000/jobs/addJob",
+        `${API_BASE_URL}/jobs/addJob`,
         { name, description, active },
         config
       )

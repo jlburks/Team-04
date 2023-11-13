@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const Login = (props) => {
   const [username, setUsername] = useState("");
@@ -17,7 +19,7 @@ const Login = (props) => {
     e.preventDefault();
     const data = { username, password };
     axios
-      .post("http://127.0.0.1:3000/login", data)
+      .post(`${API_BASE_URL}/login`, data)
       .then((data) => {
         console.log("+.....", data.data);
         localStorage.setItem("token", data.data.token);

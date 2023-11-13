@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
+
 
 const EditUser = (props) => {
   const { userId } = useParams();
@@ -25,7 +28,7 @@ const EditUser = (props) => {
       },
     };
     axios
-      .put(`http://127.0.0.1:3000/users/editPassword/${userId}`, data, config)
+      .put(`${API_BASE_URL}/users/editPassword/${userId}`, data, config)
       .then((data) => {
         console.log(data);
         navigate("/admin/Users");

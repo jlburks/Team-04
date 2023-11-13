@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const AddToJob = (props) => {
   const [responseMessage, setResponseMessage] = useState("");
@@ -22,7 +24,7 @@ const AddToJob = (props) => {
       };
 
       const response = await axios.post(
-        `http://127.0.0.1:3000/jobs/addJob/${props.jobId}/${props.userId}`,
+        `${API_BASE_URL}/jobs/addJob/${props.jobId}/${props.userId}`,
         config
       );
       console.log(response);

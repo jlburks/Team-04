@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const UserDropDown = (props) => {
   console.log("current props!!!", props);
@@ -16,7 +18,7 @@ const UserDropDown = (props) => {
       },
     };
     axios
-      .get("http://127.0.0.1:3000/users/allUsers", config)
+      .get(`${API_BASE_URL}/users/allUsers`, config)
       .then((data) => {
         console.log(data.data.userList);
         setUserList(data.data.userList);
@@ -27,7 +29,7 @@ const UserDropDown = (props) => {
 
     // Fetch the list of jobs
     axios
-      .get("http://127.0.0.1:3000/jobs/allJobs", config)
+      .get(`${API_BASE_URL}/jobs/allJobs`, config)
       .then((jobs) => {
         console.log("List of Jobs ==> ", jobs.data.jobs);
         setJobsList(jobs.data.jobs);

@@ -4,6 +4,9 @@ import axios from "axios";
 
 import JobCheckIn from "../componets/JobCheckIn";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
+
 const CheckInOut = () => {
   const [jobsArr, setJobsArr] = useState([]);
   const [jobInProgress, setJobInProgress] = useState(0);
@@ -16,7 +19,7 @@ const CheckInOut = () => {
       },
     };
     axios
-      .get("http://127.0.0.1:3000/jobs", config)
+      .get(`${API_BASE_URL}/jobs`, config)
       .then((response) => {
         console.log("response =>", response);
         setJobsArr(response.data.jobs);

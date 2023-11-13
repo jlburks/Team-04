@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
 
 const ChangeUserTime = () => {
   const { workday, userId, project_id, workEndDay } = useParams();
@@ -47,7 +48,7 @@ const ChangeUserTime = () => {
     };
     axios
       .put(
-        `http://127.0.0.1:3000/users/editTime/${userId}/${workday}/${project_id}`,
+        `${API_BASE_URL}/users/editTime/${userId}/${workday}/${project_id}`,
         config
       )
       .then((res) => {
@@ -141,7 +142,7 @@ const ChangeUserTime = () => {
     const finish = `${newEYear}-${newEMonth}-${newEDay} ${newEHour}:${newEMinute}:${newESecond}`;
     axios
       .put(
-        `http://127.0.0.1:3000/users/insertNewTime/${workHourRecord}/${start}/${finish}`
+        `${API_BASE_URL}/users/insertNewTime/${workHourRecord}/${start}/${finish}`
       )
       .then((data) => {
         console.log(data);

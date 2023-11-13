@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
 
 import UsersProfile from "./UsersProfile";
 
@@ -22,7 +23,7 @@ const UserCollection = () => {
     const fetchUsers = async () => {
       try {
         const usersData = await axios.get(
-          "http://127.0.1:3000/users/allUsers",
+          `${API_BASE_URL}/users/allUsers`,
           config
         );
         console.log("Here =>>>", usersData.data);

@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
+
 const EditJob = (props) => {
   const { jobId } = useParams();
   const navigate = useNavigate();
@@ -26,7 +29,7 @@ const EditJob = (props) => {
     const getInfo = async () => {
       try {
         const currJobInfo = await axios.post(
-          "http://127.0.0.1:3000/jobs/getJob",
+          `${API_BASE_URL}/jobs/getJob`,
           { jobId },
           config
         );
@@ -59,7 +62,7 @@ const EditJob = (props) => {
       };
 
       const response = await axios.post(
-        "http://127.0.0.1:3000/jobs/editJob",
+        `${API_BASE_URL}/jobs/editJob`,
         { name: editedName, description: editedDescription, active, jobId },
         config
       );

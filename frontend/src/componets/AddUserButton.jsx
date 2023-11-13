@@ -1,4 +1,6 @@
 import axios from "axios";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const AddUserJobButton = () => {
   const buttonStyling = {
@@ -15,7 +17,7 @@ const AddUserJobButton = () => {
         },
       };
       const response = await axios.delete(
-        `http://127.0.0.1:3000/jobs/addJob/${props.jobId}`,
+        `${API_BASE_URL}/jobs/addJob/${props.jobId}`,
         config
       );
       if (response.status === 200 || response.status === 204) {

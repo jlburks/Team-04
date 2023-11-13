@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const JobCHartRankList = (props) => {
   const [hourList, setHourList] = useState([]);
@@ -16,7 +18,7 @@ const JobCHartRankList = (props) => {
 
     axios
       .get(
-        `http://127.0.0.1:3000/reports/UserJobsReport/${props.selectedJob}`,
+        `${API_BASE_URL}/reports/UserJobsReport/${props.selectedJob}`,
         config
       )
       .then((response) => {

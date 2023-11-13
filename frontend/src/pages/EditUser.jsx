@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const EditUser = (props) => {
   console.log("PROPS", props);
@@ -25,7 +27,7 @@ const EditUser = (props) => {
       },
     };
     axios
-      .get(`http://127.0.0.1:3000/users/getUser/${userId}`, config)
+      .get(`${API_BASE_URL}/users/getUser/${userId}`, config)
       .then((data) => {
         console.log(data.data.user[0]);
         const userInfo = data.data.user[0];
@@ -67,7 +69,7 @@ const EditUser = (props) => {
     };
     console.log(data);
     axios
-      .put(`http://127.0.0.1:3000/users/editUser/${userId}`, data, config)
+      .put(`${API_BASE_URL}/users/editUser/${userId}`, data, config)
       .then((res) => {
         navigate("/admin/Users");
       })

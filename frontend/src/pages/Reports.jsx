@@ -5,6 +5,8 @@ import BarChart from "../componets/BarChart";
 import JobChart from "../componets/JobChart";
 import ReportTable from "../componets/Tables";
 import UserDropDown from "../componets/UserDropDown";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
 
 const Reports = (props) => {
   console.log("REPORT PROPS", props);
@@ -46,7 +48,7 @@ const Reports = (props) => {
         selectedUser: selectedUser,
       };
       const response = await axios.post(
-        "http://127.0.0.1:3000/reports/userTimes",
+        `${API_BASE_URL}/reports/userTimes`,
         requestData,
         config
       );
@@ -55,7 +57,7 @@ const Reports = (props) => {
       console.log("Here lies dailyTimes ==>", dailyTimes);
       setChartData(response.data);
       const response2 = await axios.post(
-        "http://127.0.0.1:3000/reports/compJobs",
+        `${API_BASE_URL}/reports/compJobs`,
         requestData,
         config
       );

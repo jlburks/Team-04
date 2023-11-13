@@ -4,6 +4,9 @@ import axios from "axios";
 
 import DeleteIcon from "../icons/trash.svg";
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+
+
 const DeleteUserButton = (props) => {
   const buttonStyling = {
     color: "red",
@@ -26,7 +29,7 @@ const DeleteUserButton = (props) => {
         },
       };
       const response = await axios.delete(
-        `http://127.0.0.1:3000/users/deleteUser/${props.userId}`,
+        `${API_BASE_URL}/users/deleteUser/${props.userId}`,
         config
       );
       console.log("ENTERED>>");
