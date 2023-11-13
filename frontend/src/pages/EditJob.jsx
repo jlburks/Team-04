@@ -84,7 +84,7 @@ const EditJob = (props) => {
 
   const handleDescription = (e) => {
     console.log(e.target.value);
-    return setDescription("Inserted   ", e.target.value);
+    return setDescription(e.target.value);
   };
   const handleName = (e) => {
     console.log("Inserted  ", e.target.value);
