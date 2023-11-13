@@ -10,14 +10,25 @@ const saltRounds = 10;
 Route.delete("/deleteUser/:userId", (req, res) => {
   console.log("PARAMS =>", req.params.userId);
   connection.query(
-    `DELETE FROM users WHERE id = ?`,
+    "DELETE FROM workHours WHERE user_id = ?",
     [req.params.userId],
-    (e, data) => {
-      if (e) {
-        return console.log(e);
-      } else {
-        return res.json({ delete: "successful" });
+    (err, result) => {
+      if (err) {
+        return console.log(err);
       }
+
+      // Now that associated records are deleted, delete the user
+      connection.query(
+        "DELETE FROM users WHERE id = ?",
+        [req.params.userId],
+        (error, data) => {
+          if (error) {
+            return console.log(error);
+          } else {
+            return res.json({ delete: "successful" });
+          }
+        }
+      );
     }
   );
   return;
