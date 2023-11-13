@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require('path');
 
 const connection = require("./connection");
 const login = require("./routes/login");
@@ -42,5 +43,14 @@ app.use("/reports", weekly);
 app.use("/reports", monthly);
 app.use("/reports", yearly);
 app.use("/reports", singleUserReport);
+
+// Serve static files from the React app's dist folder
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'dist')));
+
+// The "catchall" handler: for any requests that don't
+// match the ones above, send back the React app's index.html file from the dist folder.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html'));
+});
 
 app.listen(PORT, () => console.log("running on port 3000"));
