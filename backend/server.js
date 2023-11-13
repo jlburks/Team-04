@@ -3,6 +3,15 @@ const app = express();
 const cors = require("cors");
 const path = require('path');
 
+// CORS configuration to allow only a specific origin
+ const corsOptions = {
+  origin: 'http://ec2-23-20-246-112.compute-1.amazonaws.com:3000',
+optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+// Use CORS with specified options before all route handlers
+ app.use(cors(corsOptions));
+
 const connection = require("./connection");
 const login = require("./routes/login");
 const jobs = require("./routes/getJobsList");
@@ -21,9 +30,8 @@ const deleteJob = require("./routes/admin/Jobs/deleteJob");
 const editJob = require("./routes/admin/Jobs/editJob");
 const deleteUser = require("./routes/admin/User/deleteUser");
 
-const PORT = 3000;
 
-app.use(cors());
+// Apply JSON parsing middleware
 app.use(express.json());
 
 app.use("/login", login);
@@ -53,12 +61,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'frontend', 'dist', 'index.html'));
 });
 
-app.listen(PORT, () => console.log("running on port 3000"));
+// Start the server
+const PORT = 3000;
+app.listen(PORT, '0.0.0.0', () => console.log(`running on port ${PORT}`));
 
-// CORS configuration to allow only a specific origin
-const corsOptions = {
-  origin: 'http://ec2-23-20-246-112.compute-1.amazonaws.com:3000',
-  optionsSuccessStatus: 200 // For legacy browser support
-};
 
-app.use(cors(corsOptions));

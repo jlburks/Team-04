@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
 
 const ChangeUserTime = () => {
   const { workday, userId, project_id, workEndDay } = useParams();

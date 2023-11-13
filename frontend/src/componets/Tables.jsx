@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import IncomeUser from "./IncomeUser";
 import DownloadIcons from "../icons/box-arrow-down.svg";
 import EditIcons from "../icons/edit.svg";
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
+const API_BASE_URL = import.meta.env.VITE_REACT_APP_API_BASE_URL || 'http://127.0.0.1:3000';
 
 
 const ReportTable = (props) => {
