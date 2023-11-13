@@ -54,3 +54,11 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => console.log("running on port 3000"));
+
+// CORS configuration to allow only a specific origin
+const corsOptions = {
+  origin: 'http://ec2-23-20-246-112.compute-1.amazonaws.com:3000',
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+
+app.use(cors(corsOptions));
